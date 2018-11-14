@@ -1,0 +1,153 @@
+{% extends 'explore.html' %}
+{% load i18n %}
+{% load cove_tags %}
+{% block header_button %}
+  <a href="{% url 'index' %}" class="btn btn-large btn-success">{% trans 'Load New File' %}</a>
+{% endblock %}
+
+{% block explore_content %}
+    <div class="row">
+
+            <div class="panel panel-success">
+                <div id="download-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="downloadData" data-toggle="collapse" data-target="#downloadData">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Download Data' %}
+                  </h4>
+                </div>
+                <div id="downloadData" class="collapse in">
+
+                     {% if conversion == 'flatten' %}
+                        <p>We have tried to convert your JSON into a spreadsheet format.</p><p>The results can be seen below.</p>
+                        <ul class="list-unstyled left-space">
+                          <li>
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{original_file.url}}">{{JSON}} <small>({{original}})</small></a> <small>{{original_file.size|filesizeformat }}</small>
+                          </li>
+                          {% if not conversion_error %}
+                            <li>
+                              <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{converted_url}}.xlsx">{{xlsx}} <small>({{converted}})</small></a> <small>{{converted_file_size|filesizeformat }}</small>
+                            </li>
+                          {% endif %}
+                        </ul>
+                        {% if conversion_error %}
+                            <p>{% blocktrans %}The JSON could not be converted to Spreadsheet due to the error:{% endblocktrans %} {{ conversion_error }}</p>
+
+                            {% include 'error_extra.html' %}
+                        {% endif %}
+
+                    {% elif conversion == 'unflatten' %}
+                        <p>We have tried to convert your data into JSON format.</p><p>The results can be seen below.</p>
+                        <ul class="list-unstyled">
+                          <li>
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                            <a href="{{original_file.url}}">
+                              {% if file_type == 'xlsx' %}
+                                {{xlsx}} <small>({{original}})</small>
+                              {% elif file_type == 'csv' %}
+                                {{csv}} <small>({{original}})</small>
+                              {% endif %}
+                              </a>
+                              <small>{{original_file.size|filesizeformat }}</small>
+                            </li>
+                            <li>
+                              <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{converted_url}}">{{JSON}} <small>({{converted}})</small></a> <small>{{converted_file_size|filesizeformat }}</small>
+                            </li>
+                        </ul>
+
+                    {% else %}
+                        <ul class="list-unstyled">
+                          <li>
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{original_file.url}}">{{JSON}} <small>({{original}})</small></a> <small>{{original_file.size|filesizeformat }}</small>
+                            {% if conversion == 'flattenable' %}
+                              <br/>
+                              <br/>
+                              <form method="post">
+                                <button name="flatten" value="true" type="submit" class="btn btn-success btn-sm">{% blocktrans %}Convert to Spreadsheet{% endblocktrans %}</button>
+                                {% csrf_token %}
+                              </form>
+                            {% endif %}
+                          </li>
+                        </ul>
+                    {% endif %}
+
+
+                </div>
+              </div>
+    </div>
+
+    <div class="row">
+
+        {% block key_facts %}
+        {% endblock %}
+
+        {% if validation_errors %}
+              {% for error_json, values in validation_errors %}
+                {% with error=error_json|json_decode %}
+                  {% cove_modal_errors className="validation-errors-"|concat:forloop.counter modalTitle=error.message errorList=values file_type=file_type full_table=True %}
+                {% endwith %}
+              {% endfor %}
+
+
+              <a name="validation-errors" class="anchor"></a>
+              <div class="panel panel-danger">
+                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
+                  </h4>
+                </div>
+                <div id="validationTable" class="collapse in">
+                  {% include "validation_table.html" %}
+                </div>
+              </div>
+        {% else %}
+             <div class="panel panel-success">
+                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
+                  </h4>
+                </div>
+                <div id="validationTable" class="collapse in">
+                    <p>{% trans 'There were no validation errors!' %}</p>
+                </div>
+              </div>
+        {% endif %}
+
+    </div>
+
+
+
+    <div class="row">
+
+        {% if additional_fields_count %}
+
+              <a name="additional-fields" class="anchor"></a>
+              <div class="panel panel-danger">
+                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalFieldsTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
+                  </h4>
+                </div>
+                <div id="additionalFieldsTable" class="collapse in">
+                  {% include "additional_fields_table.html" %}
+                </div>
+              </div>
+        {% else %}
+             <div class="panel panel-success">
+                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalFieldsTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
+                  </h4>
+                </div>
+                <div id="additionalFieldsTable" class="collapse in">
+                    <p>{% trans 'There were no additional fields!' %}</p>
+                </div>
+              </div>
+        {% endif %}
+
+    </div>
+{% endblock explore_content %}
+
+
+{% block bottomcontent1 %}
+{% endblock %}
+{% block bottomcontent2 %}
+{% endblock %}

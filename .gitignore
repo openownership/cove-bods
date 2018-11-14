@@ -1,0 +1,5 @@
+/*.sqlite3
+/.ve
+*.pyc
+__pycache__
+/media

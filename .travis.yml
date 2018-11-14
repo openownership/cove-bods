@@ -1,0 +1,14 @@
+language: python
+addons:
+    chrome: stable
+
+python:
+  - "3.5"
+
+install: 
+  - "pip install -r requirements_dev.txt"
+  - "wget https://chromedriver.storage.googleapis.com/2.36/chromedriver_linux64.zip; unzip chromedriver_linux64.zip -d chromedriver; export PATH=$PATH:`pwd`/chromedriver"
+
+script:
+  - "DJANGO_SETTINGS_MODULE=cove_project.settings python -m pytest cove_bods/"
+  - "flake8 cove_project/ cove_bods/"
