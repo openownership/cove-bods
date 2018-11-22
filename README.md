@@ -16,6 +16,6 @@ You may need to pass `0.0.0.0:8000` to `runserver` in the last step, depending o
 Note: requires `gettext` to be installed. This should come by default with Ubuntu, but just in case:
 
 ```
-  apt-get upgrade && apt-get install gettext
+apt-get update && apt-get install gettext
 ```
 
