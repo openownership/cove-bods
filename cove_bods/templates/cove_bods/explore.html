@@ -144,6 +144,32 @@
         {% endif %}
 
     </div>
+
+
+    <div class="row">
+        <div class="panel panel-success">
+            <div id="statistics-panel" class="panel-heading pointer" role="region" aria-expanded="true"
+                 aria-controls="validationTable" data-toggle="collapse" data-target="#statisticsTable">
+                <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics' %}
+                </h4>
+            </div>
+            <div id="statisticsTable" class="collapse in">
+
+                <p>
+                    Entity Statements: {{ statistics.count_entity_statements }}
+                </p>
+                <p>
+                    Person Statements: {{ statistics.count_person_statements }}
+                </p>
+                <p>
+                    Ownership or Control Statements: {{ statistics.count_ownership_or_control_statement }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+
 {% endblock explore_content %}
 
 
