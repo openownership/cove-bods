@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest
+pytest-django
+flake8
+pytest-localserver
+selenium
