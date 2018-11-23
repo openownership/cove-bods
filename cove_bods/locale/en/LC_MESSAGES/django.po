@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-11-23 17:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Translators: Label of a button that triggers search
+#: cove_bods/templates/cove_bods/base.html:44
+msgid "Go"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:51
+msgid " Data Review Tool"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:54
+msgid " Standard Documentation "
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:77
+msgid "Open Ownership"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:78
+msgid "Beneficial Ownership Data Standard"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:87
+msgid "About BODS "
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:96
+msgid "Check and Review"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:110
+msgid "Using the data review tool"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:5
+msgid "Load New File"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:14
+msgid "Download Data"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:32
+msgid "The JSON could not be converted to Spreadsheet due to the error:"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:64
+msgid "Convert to Spreadsheet"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:94
+#: cove_bods/templates/cove_bods/explore.html:105
+msgid "Validation Errors"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:109
+msgid "There were no validation errors!"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:126
+#: cove_bods/templates/cove_bods/explore.html:137
+msgid "Additional Fields"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:141
+msgid "There were no additional fields!"
+msgstr ""
+
+#: cove_bods/views.py:55 cove_bods/views.py:66
+#: src/libcove/libcove/lib/converters.py:179
+#: src/libcove/libcove/lib/exceptions.py:21
+#: src/libcove/libcove/lib/exceptions.py:38
+msgid "Sorry, we can't process that data"
+msgstr ""
+
+#: cove_bods/views.py:57 cove_bods/views.py:68
+#: src/libcove/libcove/lib/converters.py:181
+#: src/libcove/libcove/lib/exceptions.py:23
+#: src/libcove/libcove/lib/exceptions.py:40
+msgid "Try Again"
+msgstr ""
+
+#: cove_bods/views.py:69
+msgid ""
+"BODS JSON should have an list as the top level, the JSON you supplied does "
+"not."
+msgstr ""
+
+#: src/libcove/libcove/lib/converters.py:182
+msgid ""
+"We think you tried to upload a JSON file, but it is not well formed JSON.\n"
+"\n"
+"Error message: {}"
+msgstr ""
+
+#: src/libcove/libcove/lib/exceptions.py:24
+msgid ""
+"We did not recognise the file type.\n"
+"\n"
+"We can only process json, csv and xlsx files."
+msgstr ""
+
+#: src/libcove/libcove/lib/exceptions.py:41
+msgid ""
+"We think you tried to supply a spreadsheet, but we failed to convert it.\n"
+"\n"
+"Error message: {}"
+msgstr ""
