@@ -4,7 +4,6 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-PREFIX_OCDS = os.environ.get('PREFIX_OCDS', '/review/')
 
 BROWSER = os.environ.get('BROWSER', 'ChromeHeadless')
 
@@ -25,9 +24,9 @@ def browser(request):
 @pytest.fixture(scope='module')
 def server_url(request, live_server):
     if 'CUSTOM_SERVER_URL' in os.environ:
-        return os.environ['CUSTOM_SERVER_URL'] + PREFIX_OCDS
+        return os.environ['CUSTOM_SERVER_URL']
     else:
-        return live_server.url + PREFIX_OCDS
+        return live_server.url
 
 
 @pytest.mark.parametrize(('link_text', 'expected_text', 'css_selector', 'url'), [
