@@ -25,18 +25,10 @@ GOOGLE_ANALYTICS_ID = settings.GOOGLE_ANALYTICS_ID
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '77mjwmr6u9n%r%h12ge90x!$&$441c=y!#$(*(g!z-75##fz+z'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+DEALER_TYPE = settings.DEALER_TYPE
+SECRET_KEY = settings.SECRET_KEY
+DEBUG = settings.DEBUG
+ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
 # Application definition
 
@@ -75,17 +67,7 @@ TEMPLATES = settings.TEMPLATES
 
 WSGI_APPLICATION = 'cove_project.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+DATABASES = settings.DATABASES
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -109,15 +91,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
+LANGUAGE_CODE = settings.LANGUAGE_CODE
+TIME_ZONE = settings.TIME_ZONE
+USE_I18N = settings.USE_I18N
+USE_L10N = settings.USE_L10N
+USE_TZ = settings.USE_TZ
 
 USE_I18N = True
 
@@ -133,9 +111,19 @@ LOCALE_PATHS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# We can't take STATIC_URL and STATIC_ROOT from cove settings,
+# ... otherwise the files appear under the BASE_DIR that is the Cove library install.
+# and that doesn't work with our standard Apache setup.
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATIC_URL = settings.STATIC_URL
-STATIC_ROOT = settings.STATIC_ROOT
+# Misc
+
+LANGUAGES = settings.LANGUAGES
+LOCALE_PATHS = settings.LOCALE_PATHS
+LOGGING = settings.LOGGING
+
+# BODS Config
 
 COVE_CONFIG = {
     'app_name': 'cove_bods',
