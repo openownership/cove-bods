@@ -12,9 +12,15 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 from cove import settings
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+env = environ.Env(  # set default values and casting
+    DB_NAME=(str, os.path.join(BASE_DIR, 'db.sqlite3')),
+)
+
 
 PIWIK = settings.PIWIK
 GOOGLE_ANALYTICS_ID = settings.GOOGLE_ANALYTICS_ID
@@ -67,7 +73,15 @@ TEMPLATES = settings.TEMPLATES
 
 WSGI_APPLICATION = 'cove_project.wsgi.application'
 
-DATABASES = settings.DATABASES
+# We can't take DATABASES from cove settings,
+# ... otherwise the files appear under the BASE_DIR that is the Cove library install.
+# That could get messy. We want them to appear in our directory.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': env('DB_NAME'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -110,7 +124,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Misc
 
 LANGUAGES = settings.LANGUAGES
+
 LOCALE_PATHS = settings.LOCALE_PATHS
+LOCALE_PATHS += os.path.join(BASE_DIR, 'cove_bods', 'locale'),
+
 LOGGING = settings.LOGGING
 
 # BODS Config
