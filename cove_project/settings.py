@@ -140,8 +140,9 @@ LANGUAGES = (
     ('es', 'Spanish'),
 )
 
-LOCALE_PATHS = settings.LOCALE_PATHS
-LOCALE_PATHS += os.path.join(BASE_DIR, 'cove_bods', 'locale'),
+LOCALE_PATHS = (settings.LOCALE_PATHS,
+                os.path.join(BASE_DIR, 'cove_bods', 'locale')
+)
 
 LOGGING = settings.LOGGING
 
