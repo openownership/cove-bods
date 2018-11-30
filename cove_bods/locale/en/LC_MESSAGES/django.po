@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 17:22+0000\n"
+"POT-Creation-Date: 2018-11-30 13:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,6 +82,10 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/explore.html:141
 msgid "There were no additional fields!"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:154
+msgid "Statistics"
 msgstr ""
 
 #: cove_bods/views.py:55 cove_bods/views.py:66

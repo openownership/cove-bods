@@ -2,26 +2,31 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Ben Webb <ben.webb@opendataservices.coop>, 2018
+# Eduardo Gomez <eduardo.gomez@hotmail.co.uk>, 2018
+# Bibiana Cristòfol <bcristofol@gmail.com>, 2018
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-23 19:08+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2018-11-30 13:03+0000\n"
+"PO-Revision-Date: 2018-11-30 13:12+0000\n"
+"Last-Translator: Bibiana Cristòfol <bcristofol@gmail.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/OpenDataServices/teams/59127/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Translators: Label of a button that triggers search
 #: cove_bods/templates/cove_bods/base.html:44
 msgid "Go"
-msgstr ""
+msgstr "Ir"
 
 #: cove_bods/templates/cove_bods/base.html:51
 msgid " Data Review Tool"
@@ -29,7 +34,7 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/base.html:54
 msgid " Standard Documentation "
-msgstr ""
+msgstr "Documentación del Estándar"
 
 #: cove_bods/templates/cove_bods/base.html:77
 msgid "Open Ownership"
@@ -45,15 +50,15 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/base.html:96
 msgid "Check and Review"
-msgstr ""
+msgstr "Comprobar y revisar"
 
 #: cove_bods/templates/cove_bods/base.html:110
 msgid "Using the data review tool"
-msgstr ""
+msgstr "Uso de la herramienta de revisión de datos"
 
 #: cove_bods/templates/cove_bods/explore.html:5
 msgid "Load New File"
-msgstr ""
+msgstr "Cargar archivo nuevo"
 
 #: cove_bods/templates/cove_bods/explore.html:14
 msgid "Download Data"
@@ -61,16 +66,16 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/explore.html:32
 msgid "The JSON could not be converted to Spreadsheet due to the error:"
-msgstr ""
+msgstr "El JSON no se pudo convertir a hoja de cálculo debido al error:"
 
 #: cove_bods/templates/cove_bods/explore.html:64
 msgid "Convert to Spreadsheet"
-msgstr ""
+msgstr "Convertir a hoja de cálculo"
 
 #: cove_bods/templates/cove_bods/explore.html:94
 #: cove_bods/templates/cove_bods/explore.html:105
 msgid "Validation Errors"
-msgstr ""
+msgstr "Errores de validación"
 
 #: cove_bods/templates/cove_bods/explore.html:109
 msgid "There were no validation errors!"
@@ -79,10 +84,14 @@ msgstr ""
 #: cove_bods/templates/cove_bods/explore.html:126
 #: cove_bods/templates/cove_bods/explore.html:137
 msgid "Additional Fields"
-msgstr ""
+msgstr "Campos adicionales"
 
 #: cove_bods/templates/cove_bods/explore.html:141
 msgid "There were no additional fields!"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:154
+msgid "Statistics"
 msgstr ""
 
 #: cove_bods/views.py:55 cove_bods/views.py:66
@@ -90,14 +99,14 @@ msgstr ""
 #: src/libcove/libcove/lib/exceptions.py:21
 #: src/libcove/libcove/lib/exceptions.py:38
 msgid "Sorry, we can't process that data"
-msgstr ""
+msgstr "Lo sentimos, no podemos procesar esos datos"
 
 #: cove_bods/views.py:57 cove_bods/views.py:68
 #: src/libcove/libcove/lib/converters.py:181
 #: src/libcove/libcove/lib/exceptions.py:23
 #: src/libcove/libcove/lib/exceptions.py:40
 msgid "Try Again"
-msgstr ""
+msgstr "Inténtelo de nuevo"
 
 #: cove_bods/views.py:69
 msgid ""
@@ -111,6 +120,9 @@ msgid ""
 "\n"
 "Error message: {}"
 msgstr ""
+"Creemos que ha intentado subir un archivo JSON, pero el archivo no es JSON bien formado.\n"
+"\n"
+"Mensaje del error: {}"
 
 #: src/libcove/libcove/lib/exceptions.py:24
 msgid ""
@@ -118,6 +130,9 @@ msgid ""
 "\n"
 "We can only process json, csv and xlsx files."
 msgstr ""
+"No hemos podido reconocer ese tipo de archivo.\n"
+"\n"
+"Sólo podemos procesar archivos json, csv y xlsx."
 
 #: src/libcove/libcove/lib/exceptions.py:41
 msgid ""
@@ -125,3 +140,6 @@ msgid ""
 "\n"
 "Error message: {}"
 msgstr ""
+"Creemos que ha tratado de suministrar una hoja de cálculo, pero no hemos podido convertirla.\n"
+"\n"
+"Mensaje del error: {}"
