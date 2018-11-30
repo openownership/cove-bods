@@ -11,7 +11,7 @@ from libcovebods.common_checks import common_checks_bods
 from libcovebods.schema import SchemaBODS
 from libcovebods.config import LibCoveBODSConfig
 from libcove.lib.exceptions import CoveInputDataError
-from cove.views import explore_data_context
+from cove.views import explore_data_context, get_schema_validation_errors_text
 from libcove.lib.converters import convert_spreadsheet, convert_json
 from cove_project import settings
 
@@ -84,6 +84,7 @@ def explore_bods(request, pk):
             json_data = json.load(fp, parse_float=Decimal)
 
     context = common_checks_bods(context, upload_dir, json_data, schema_bods)
+    context = get_schema_validation_errors_text(context)
 
     if not db_data.rendered:
         db_data.rendered = True
