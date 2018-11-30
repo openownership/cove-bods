@@ -133,17 +133,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Misc
 
-USE_I18N = True
-
-LANGUAGES = (
-    ('en', 'English'),
-    ('es', 'Spanish'),
-)
-
-LOCALE_PATHS = (settings.LOCALE_PATHS,
-                os.path.join(BASE_DIR, 'cove_bods', 'locale')
-)
-
 LOGGING = settings.LOGGING
 
 # BODS Config
