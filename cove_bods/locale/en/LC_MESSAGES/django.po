@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-05 12:06+0000\n"
+"POT-Creation-Date: 2018-12-05 13:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,73 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:6
+msgid "Check"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:7
+msgid "Information"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:8
+msgid "Where problem occurs"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:16
+msgid "The statement has an identifier scheme which is not valid."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:19
+msgid "Invalid Scheme"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:28
+msgid ""
+"This statement references an entity but that entity is defined after this "
+"statement."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:31
+#: cove_bods/templates/cove_bods/additional_checks_table.html:43
+msgid "Entity that is out of order"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:40
+msgid ""
+"This statement references a person but that person is defined after this "
+"statement."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:52
+msgid ""
+"This entity statement is not used in any ownership or control statements."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:63
+msgid ""
+"This person statement is not used in any ownership or control statements."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:74
+msgid ""
+"This entity statement is referenced from an ownership or control statement, "
+"but it is missing."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:77
+msgid "Entity that is missing"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:86
+msgid ""
+"This person statement is referenced from an ownership or control statement, "
+"but it is missing."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:89
+msgid "Person that is missing"
+msgstr ""
 
 #. Translators: Label of a button that triggers search
 #: cove_bods/templates/cove_bods/base.html:44
@@ -84,27 +151,36 @@ msgstr ""
 msgid "There were no additional fields!"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:154
+#: cove_bods/templates/cove_bods/explore.html:156
+#: cove_bods/templates/cove_bods/explore.html:167
+msgid "Additional Checks"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:171
+msgid "All checks passed!"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:183
 msgid "Statistics"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:160
+#: cove_bods/templates/cove_bods/explore.html:189
 msgid "Entity Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:163
+#: cove_bods/templates/cove_bods/explore.html:192
 msgid "Person Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:166
+#: cove_bods/templates/cove_bods/explore.html:195
 msgid "Ownership or Control Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:169
+#: cove_bods/templates/cove_bods/explore.html:198
 msgid "Ownership or Control Statements where interested party is a person"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:173
+#: cove_bods/templates/cove_bods/explore.html:202
 msgid "Ownership or Control Statements where interested party is a entity"
 msgstr ""
 
