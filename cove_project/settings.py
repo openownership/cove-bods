@@ -112,7 +112,7 @@ USE_L10N = settings.USE_L10N
 USE_TZ = settings.USE_TZ
 
 LANGUAGES = settings.LANGUAGES
- 
+
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'cove_bods', 'locale'),)
 
 # Static files (CSS, JavaScript, Images)
