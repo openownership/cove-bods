@@ -145,6 +145,35 @@
 
     </div>
 
+    <div class="row">
+
+        {% if additional_checks_count %}
+
+              <a name="additional-checks" class="anchor"></a>
+              <div class="panel panel-danger">
+                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalChecksTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
+                  </h4>
+                </div>
+                <div id="additionalChecksTable" class="collapse in">
+                  {% include "cove_bods/additional_checks_table.html" %}
+                </div>
+              </div>
+        {% else %}
+             <div class="panel panel-success">
+                <div id="checks-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalChecksTable">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
+                  </h4>
+                </div>
+                <div id="additionalChecksTable" class="collapse in">
+                    <p>{% trans 'All checks passed!' %}</p>
+                </div>
+              </div>
+        {% endif %}
+
+    </div>
 
     <div class="row">
         <div class="panel panel-success">

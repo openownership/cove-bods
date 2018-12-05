@@ -1,0 +1,98 @@
+{% load i18n %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th class="">{% trans 'Check' %}</th>
+        <th class="">{% trans 'Information' %}</th>
+        <th class="">{% trans 'Where problem occurs' %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for additional_check in additional_checks %}
+        {% if additional_check.type == 'entity_identifier_scheme_not_known' %}
+            <tr>
+                <td>
+                    {% trans 'The statement has an identifier scheme which is not valid.'  %}
+                </td>
+                <td>
+                    {% trans 'Invalid Scheme' %}: {{ additional_check.scheme }}
+                </td>
+                <td>
+                    {{ additional_check.entity_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'entity_statement_out_of_order' %}
+            <tr>
+                <td>
+                    {% trans 'This statement references an entity but that entity is defined after this statement.' %}
+                </td>
+                <td>
+                    {% trans 'Entity that is out of order' %}: {{ additional_check.entity_statement_out_of_order }}
+                </td>
+                <td>
+                    {{ additional_check.seen_in_ownership_or_control_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'person_statement_out_of_order' %}
+            <tr>
+                <td>
+                    {% trans 'This statement references a person but that person is defined after this statement.' %}
+                </td>
+                <td>
+                    {% trans 'Entity that is out of order' %}: {{ additional_check.person_statement_out_of_order }}
+                </td>
+                <td>
+                    {{ additional_check.seen_in_ownership_or_control_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
+            <tr>
+                <td>
+                    {% trans 'This entity statement is not used in any ownership or control statements.' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.entity_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'person_statement_not_used_in_ownership_or_control_statement' %}
+            <tr>
+                <td>
+                    {% trans 'This person statement is not used in any ownership or control statements.' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.person_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'entity_statement_missing' %}
+            <tr>
+                <td>
+                    {% trans 'This entity statement is referenced from an ownership or control statement, but it is missing.' %}
+                </td>
+                <td>
+                    {% trans 'Entity that is missing' %}: {{ additional_check.entity_statement_missing }}
+                </td>
+                <td>
+                    {{ additional_check.seen_in_ownership_or_control_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'person_statement_missing' %}
+            <tr>
+                <td>
+                    {% trans 'This person statement is referenced from an ownership or control statement, but it is missing.' %}
+                </td>
+                <td>
+                    {% trans 'Person that is missing' %}: {{ additional_check.entity_statement_missing }}
+                </td>
+                <td>
+                    {{ additional_check.seen_in_ownership_or_control_statement }}
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
