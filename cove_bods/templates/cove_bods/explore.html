@@ -157,18 +157,26 @@
             <div id="statisticsTable" class="collapse in">
 
                 <p>
-                    Entity Statements: {{ statistics.count_entity_statements }}
+                    {% trans 'Entity Statements' %}: {{ statistics.count_entity_statements }}
                 </p>
                 <p>
-                    Person Statements: {{ statistics.count_person_statements }}
+                    {% trans 'Person Statements' %}: {{ statistics.count_person_statements }}
                 </p>
                 <p>
-                    Ownership or Control Statements: {{ statistics.count_ownership_or_control_statement }}
+                    {% trans 'Ownership or Control Statements' %}: {{ statistics.count_ownership_or_control_statement }}
                 </p>
-
+                <p>
+                    {% trans 'Ownership or Control Statements where interested party is a person' %}:
+                    {{ statistics.count_ownership_or_control_statement_interested_party_with_person }}
+                </p>
+                <p>
+                    {% trans 'Ownership or Control Statements where interested party is a entity' %}:
+                    {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
+                </p>
             </div>
         </div>
     </div>
+
 
 {% endblock explore_content %}
 

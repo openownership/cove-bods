@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-30 16:14+0000\n"
+"POT-Creation-Date: 2018-12-05 12:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,17 +88,31 @@ msgstr ""
 msgid "Statistics"
 msgstr ""
 
+#: cove_bods/templates/cove_bods/explore.html:160
+msgid "Entity Statements"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:163
+msgid "Person Statements"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:166
+msgid "Ownership or Control Statements"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:169
+msgid "Ownership or Control Statements where interested party is a person"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:173
+msgid "Ownership or Control Statements where interested party is a entity"
+msgstr ""
+
 #: cove_bods/views.py:55 cove_bods/views.py:66
-#: src/libcove/libcove/lib/converters.py:179
-#: src/libcove/libcove/lib/exceptions.py:21
-#: src/libcove/libcove/lib/exceptions.py:38
 msgid "Sorry, we can't process that data"
 msgstr ""
 
 #: cove_bods/views.py:57 cove_bods/views.py:68
-#: src/libcove/libcove/lib/converters.py:181
-#: src/libcove/libcove/lib/exceptions.py:23
-#: src/libcove/libcove/lib/exceptions.py:40
 msgid "Try Again"
 msgstr ""
 
@@ -106,25 +120,4 @@ msgstr ""
 msgid ""
 "BODS JSON should have an list as the top level, the JSON you supplied does "
 "not."
-msgstr ""
-
-#: src/libcove/libcove/lib/converters.py:182
-msgid ""
-"We think you tried to upload a JSON file, but it is not well formed JSON.\n"
-"\n"
-"Error message: {}"
-msgstr ""
-
-#: src/libcove/libcove/lib/exceptions.py:24
-msgid ""
-"We did not recognise the file type.\n"
-"\n"
-"We can only process json, csv and xlsx files."
-msgstr ""
-
-#: src/libcove/libcove/lib/exceptions.py:41
-msgid ""
-"We think you tried to supply a spreadsheet, but we failed to convert it.\n"
-"\n"
-"Error message: {}"
 msgstr ""
