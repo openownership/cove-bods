@@ -1,18 +1,18 @@
 # Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
 dealer==2.0.5
-Django==1.11.16
+Django==1.11.17
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
--e git+https://github.com/OpenDataServices/lib-cove.git@7c8d2ff0bbb8d9c0f2a124eacfa2058b0eee3a9a#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@19aa61e7b869540e4d7d4df8788b41bdebab7791#egg=libcovebods
--e git+https://github.com/OpenDataServices/lib-cove-web.git@9cb90e075a868cd3b8bfd4a2a6f3bd2ab7753d91#egg=libcoveweb
+-e git+https://github.com/OpenDataServices/lib-cove.git@7bcec77f9289e405499d871c131b78289d9316cc#egg=libcove
+-e git+https://github.com/openownership/lib-cove-bods.git@8540497ca482155babea64ed096ac47697b97e90#egg=libcovebods
+-e git+https://github.com/OpenDataServices/lib-cove-web.git@394b1ec89cc2cbd8840278cf1be125ee39db8442#egg=libcoveweb
 ## The following requirements were added by pip freeze:
 bleach==3.0.2
 cached-property==1.5.1
-certifi==2018.10.15
+certifi==2018.11.29
 chardet==3.0.4
 commonmark==0.8.1
 django-bootstrap3==11.0.0
-django-debug-toolbar==1.10.1
+django-debug-toolbar==1.11
 django-environ==0.4.5
 et-xmlfile==1.0.1
 future==0.17.1
@@ -23,7 +23,7 @@ jsonref==0.2
 jsonschema==2.6.0
 LEPL==5.1.3
 lxml==4.2.5
-openpyxl==2.5.11
+openpyxl==2.5.12
 python-dateutil==2.7.5
 pytz==2018.7
 raven==6.9.0
