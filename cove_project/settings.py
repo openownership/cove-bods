@@ -111,6 +111,9 @@ USE_I18N = settings.USE_I18N
 USE_L10N = settings.USE_L10N
 USE_TZ = settings.USE_TZ
 
+LANGUAGES = settings.LANGUAGES
+ 
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'cove_bods', 'locale'),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -122,11 +125,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Misc
-
-LANGUAGES = settings.LANGUAGES
-
-LOCALE_PATHS = settings.LOCALE_PATHS
-LOCALE_PATHS += os.path.join(BASE_DIR, 'cove_bods', 'locale'),
 
 LOGGING = settings.LOGGING
 
