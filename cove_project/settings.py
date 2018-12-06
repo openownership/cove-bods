@@ -143,3 +143,6 @@ COVE_CONFIG = {
     'input_methods': ['upload', 'url', 'text'],
     'support_email': 'data@open-contracting.org'
 }
+
+# https://github.com/OpenDataServices/cove/issues/1098
+FILE_UPLOAD_PERMISSIONS = 0o644
