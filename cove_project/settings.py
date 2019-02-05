@@ -21,6 +21,7 @@ env = environ.Env(  # set default values and casting
     DB_NAME=(str, os.path.join(BASE_DIR, 'db.sqlite3')),
 )
 
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 PIWIK = settings.PIWIK
 GOOGLE_ANALYTICS_ID = settings.GOOGLE_ANALYTICS_ID
