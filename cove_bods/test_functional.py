@@ -30,9 +30,9 @@ def server_url(request, live_server):
 
 
 @pytest.mark.parametrize(('link_text', 'expected_text', 'css_selector', 'url'), [
-    ('Open Ownership', 'Anonymous shell companies', '.site-text', 'https://openownership.org/'),
+    ('Open Ownership', 'Anonymous shell companies', '.home', 'https://openownership.org/'),
 ])
-def test_footer_ocds(server_url, browser, link_text, expected_text, css_selector, url):
+def test_footer_bods(server_url, browser, link_text, expected_text, css_selector, url):
     browser.get(server_url)
     footer = browser.find_element_by_id('footer')
     link = footer.find_element_by_link_text(link_text)
