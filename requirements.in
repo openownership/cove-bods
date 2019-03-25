@@ -4,4 +4,4 @@ Django<1.12
 -e git+https://github.com/OpenDataServices/flatten-tool.git@v0.5.0#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@cf824e8b2afafbcf38c2d52588a5048778c6ee14#egg=libcove
 -e git+https://github.com/openownership/lib-cove-bods.git@dbb3cd4f4dc1ba08dcf5d3e987decfc02fa57096#egg=libcovebods
--e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.2.0#egg=libcoveweb
+-e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.5.0#egg=libcoveweb
