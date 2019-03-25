@@ -1,4 +1,11 @@
--r requirements.txt
+# Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
+dealer==2.0.5
+Django==1.11.20
+-e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
+-e git+https://github.com/OpenDataServices/lib-cove.git@7bcec77f9289e405499d871c131b78289d9316cc#egg=libcove
+-e git+https://github.com/openownership/lib-cove-bods.git@8540497ca482155babea64ed096ac47697b97e90#egg=libcovebods
+-e git+https://github.com/OpenDataServices/lib-cove-web.git@82dbc80309a03812cc2397345a1397ee0f6da4a4#egg=libcoveweb
+
 pytest==4.2.1
 pytest-django==3.4.7
 flake8==3.7.5
@@ -12,14 +19,11 @@ cached-property==1.5.1
 certifi==2018.11.29
 chardet==3.0.4
 commonmark==0.8.1
-dealer==2.0.5
-Django==1.11.20
 django-bootstrap3==11.0.0
 django-debug-toolbar==1.11
 django-environ==0.4.5
 entrypoints==0.3
 et-xmlfile==1.0.1
--e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
 future==0.17.1
 idna==2.8
 jdcal==1.4
@@ -27,14 +31,12 @@ json-merge-patch==0.2
 jsonref==0.2
 jsonschema==2.6.0
 LEPL==5.1.3
--e git+https://github.com/OpenDataServices/lib-cove.git@7bcec77f9289e405499d871c131b78289d9316cc#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@8540497ca482155babea64ed096ac47697b97e90#egg=libcovebods
--e git+https://github.com/OpenDataServices/lib-cove-web.git@394b1ec89cc2cbd8840278cf1be125ee39db8442#egg=libcoveweb
 lxml==4.3.1
 mccabe==0.6.1
 more-itertools==6.0.0
 openpyxl==2.6.0
 pathlib2==2.3.3
+
 pluggy==0.8.1
 py==1.7.0
 pycodestyle==2.5.0
