@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-05 13:48+0000\n"
+"POT-Creation-Date: 2019-03-27 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,6 +84,27 @@ msgstr ""
 msgid "Person that is missing"
 msgstr ""
 
+#: cove_bods/templates/cove_bods/additional_checks_table.html:98
+msgid "This statement ID has been used more than once."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:101
+msgid "Statement ID"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:110
+msgid "This person statement has a birthday that is to early."
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:113
+#: cove_bods/templates/cove_bods/additional_checks_table.html:125
+msgid "Year"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/additional_checks_table.html:122
+msgid "This person statement has a birthday that is to late."
+msgstr ""
+
 #. Translators: Label of a button that triggers search
 #: cove_bods/templates/cove_bods/base.html:44
 msgid "Go"
@@ -115,6 +136,10 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/base.html:110
 msgid "Using the data review tool"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:122
+msgid "Running version "
 msgstr ""
 
 #: cove_bods/templates/cove_bods/explore.html:5
@@ -168,27 +193,48 @@ msgstr ""
 msgid "Entity Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:192
+#: cove_bods/templates/cove_bods/explore.html:194
+#: cove_bods/templates/cove_bods/explore.html:204
+#, python-format
+msgid " ... with type %(key)s"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:199
 msgid "Person Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:195
+#: cove_bods/templates/cove_bods/explore.html:209
 msgid "Ownership or Control Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:198
+#: cove_bods/templates/cove_bods/explore.html:212
 msgid "Ownership or Control Statements where interested party is a person"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:202
+#: cove_bods/templates/cove_bods/explore.html:216
 msgid "Ownership or Control Statements where interested party is a entity"
 msgstr ""
 
+#: cove_bods/templates/cove_bods/explore.html:220
+msgid "Ownership or Control Statements where interested party is unspecified"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:227
+#, python-format
+msgid " Interest statements with type %(key)s"
+msgstr ""
+
 #: cove_bods/views.py:55 cove_bods/views.py:66
+#: src/libcove/libcove/lib/converters.py:182
+#: src/libcove/libcove/lib/exceptions.py:21
+#: src/libcove/libcove/lib/exceptions.py:38
 msgid "Sorry, we can't process that data"
 msgstr ""
 
 #: cove_bods/views.py:57 cove_bods/views.py:68
+#: src/libcove/libcove/lib/converters.py:184
+#: src/libcove/libcove/lib/exceptions.py:23
+#: src/libcove/libcove/lib/exceptions.py:40
 msgid "Try Again"
 msgstr ""
 
@@ -196,4 +242,25 @@ msgstr ""
 msgid ""
 "BODS JSON should have an list as the top level, the JSON you supplied does "
 "not."
+msgstr ""
+
+#: src/libcove/libcove/lib/converters.py:185
+msgid ""
+"We think you tried to upload a JSON file, but it is not well formed JSON.\n"
+"\n"
+"Error message: {}"
+msgstr ""
+
+#: src/libcove/libcove/lib/exceptions.py:24
+msgid ""
+"We did not recognise the file type.\n"
+"\n"
+"We can only process json, csv and xlsx files."
+msgstr ""
+
+#: src/libcove/libcove/lib/exceptions.py:41
+msgid ""
+"We think you tried to supply a spreadsheet, but we failed to convert it.\n"
+"\n"
+"Error message: {}"
 msgstr ""
