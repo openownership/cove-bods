@@ -92,6 +92,42 @@
                     {{ additional_check.seen_in_ownership_or_control_statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'duplicate_statement_id' %}
+            <tr>
+                <td>
+                    {% trans 'This statement ID has been used more than once.' %}
+                </td>
+                <td>
+                    {% trans 'Statement ID' %}: {{ additional_check.id }}
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        {% elif additional_check.type == 'person_birth_year_too_early' %}
+            <tr>
+                <td>
+                    {% trans 'This person statement has a birthday that is to early.' %}
+                </td>
+                <td>
+                    {% trans 'Year' %}: {{ additional_check.year }}
+                </td>
+                <td>
+                    {{ additional_check.person_statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'person_birth_year_too_late' %}
+            <tr>
+                <td>
+                    {% trans 'This person statement has a birthday that is to late.' %}
+                </td>
+                <td>
+                    {% trans 'Year' %}: {{ additional_check.year }}
+                </td>
+                <td>
+                    {{ additional_check.person_statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
