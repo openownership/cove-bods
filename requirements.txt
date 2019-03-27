@@ -1,16 +1,19 @@
 # Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
 dealer==2.0.5
 Django==1.11.20
+# Lock this version of jsonschema, as that's what some of our libraries lock
+jsonschema==2.6.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@7bcec77f9289e405499d871c131b78289d9316cc#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@8540497ca482155babea64ed096ac47697b97e90#egg=libcovebods
+-e git+https://github.com/openownership/lib-cove-bods.git@819dcf56ff99fdb45a97cddfed0b8a3fde972e6b#egg=libcovebods
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@82dbc80309a03812cc2397345a1397ee0f6da4a4#egg=libcoveweb
 ## The following requirements were added by pip freeze:
 bleach==3.1.0
 cached-property==1.5.1
-certifi==2018.11.29
+certifi==2019.3.9
 chardet==3.0.4
 commonmark==0.8.1
+contextlib2==0.5.5
 django-bootstrap3==11.0.0
 django-debug-toolbar==1.11
 django-environ==0.4.5
@@ -20,10 +23,9 @@ idna==2.8
 jdcal==1.4
 json-merge-patch==0.2
 jsonref==0.2
-jsonschema==2.6.0
 LEPL==5.1.3
-lxml==4.3.1
-openpyxl==2.6.0
+lxml==4.3.3
+openpyxl==2.6.1
 
 python-dateutil==2.8.0
 pytz==2018.9
@@ -31,9 +33,9 @@ raven==6.10.0
 requests==2.21.0
 rfc3987==1.3.8
 rfc6266==0.0.4
-schema==0.6.8
+schema==0.7.0
 six==1.12.0
-sqlparse==0.2.4
+sqlparse==0.3.0
 strict-rfc3339==0.7
 urllib3==1.24.1
 webencodings==0.5.1
