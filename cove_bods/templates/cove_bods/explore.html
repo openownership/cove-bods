@@ -188,9 +188,23 @@
                 <p>
                     {% trans 'Entity Statements' %}: {{ statistics.count_entity_statements }}
                 </p>
+                {% for key, count in statistics.count_entity_statements_types.items %}
+                    {% if count > 0 %}
+                        <p>
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
                 <p>
                     {% trans 'Person Statements' %}: {{ statistics.count_person_statements }}
                 </p>
+                {% for key, count in statistics.count_person_statements_types.items %}
+                    {% if count > 0 %}
+                        <p>
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
                 <p>
                     {% trans 'Ownership or Control Statements' %}: {{ statistics.count_ownership_or_control_statement }}
                 </p>
@@ -201,6 +215,21 @@
                 <p>
                     {% trans 'Ownership or Control Statements where interested party is a entity' %}:
                     {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
+                </p>
+                <p>
+                    {% trans 'Ownership or Control Statements where interested party is unspecified' %}:
+                    {{ statistics.count_ownership_or_control_statement_interested_party_with_unspecified }}
+                </p>
+
+                {% for key, count in statistics.count_ownership_or_control_statement_interest_statement_types.items %}
+                    {% if count > 0 %}
+                        <p>
+                            {% blocktrans %} Interest statements with type {{ key }}{% endblocktrans %}: {{ count }}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+
+                <p>
                 </p>
             </div>
         </div>

@@ -1,7 +1,9 @@
 # Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
 dealer==2.0.5
 Django<1.12
+# Lock this version of jsonschema, as that's what some of our libraries lock
+jsonschema<2.7
 -e git+https://github.com/OpenDataServices/flatten-tool.git@v0.5.0#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@v0.3.1#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@v0.2.0#egg=libcovebods
+-e git+https://github.com/openownership/lib-cove-bods.git@v0.3.0#egg=libcovebods
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.5.0#egg=libcoveweb
