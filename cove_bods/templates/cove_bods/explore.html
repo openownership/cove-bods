@@ -177,60 +177,110 @@
 
     <div class="row">
         <div class="panel panel-success">
-            <div id="statistics-panel" class="panel-heading pointer" role="region" aria-expanded="true"
-                 aria-controls="validationTable" data-toggle="collapse" data-target="#statisticsTable">
+            <div id="statistics-entities-panel" class="panel-heading pointer" role="region" aria-expanded="true"
+                 aria-controls="validationTable" data-toggle="collapse" data-target="#statisticsEntitiesTable">
                 <h4 class="panel-title">
-                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics' %}
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics: Entity Statements' %}
                 </h4>
             </div>
-            <div id="statisticsTable" class="collapse in">
+            <div id="statisticsEntitiesTable" class="collapse in">
 
                 <p>
-                    {% trans 'Entity Statements' %}: {{ statistics.count_entity_statements }}
+                    {% trans 'Total Statements' %}: {{ statistics.count_entity_statements }}
                 </p>
                 {% for key, count in statistics.count_entity_statements_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            (XX %)
                         </p>
                     {% endif %}
                 {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-success">
+            <div id="statistics-people-panel" class="panel-heading pointer" role="region" aria-expanded="true"
+                 aria-controls="validationTable" data-toggle="collapse" data-target="#statisticsPeopleTable">
+                <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics: People Statements' %}
+                </h4>
+            </div>
+            <div id="statisticsPeopleTable" class="collapse in">
+
+
                 <p>
-                    {% trans 'Person Statements' %}: {{ statistics.count_person_statements }}
+                    {% trans 'Total Statements' %}: {{ statistics.count_person_statements }}
                 </p>
                 {% for key, count in statistics.count_person_statements_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            (XX %)
                         </p>
                     {% endif %}
                 {% endfor %}
-                <p>
-                    {% trans 'Ownership or Control Statements' %}: {{ statistics.count_ownership_or_control_statement }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is a person' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_person }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is a entity' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is unspecified' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_unspecified }}
-                </p>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-success">
+            <div id="statistics-ownership-or-control-panel" class="panel-heading pointer" role="region" aria-expanded="true"
+                 aria-controls="validationTable" data-toggle="collapse" data-target="#statisticsOwnershipOrControlTable">
+                <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics: Ownership or Control Statements' %}
+                </h4>
+            </div>
+            <div id="statisticsOwnershipOrControlTable" class="collapse in">
+
+                <p>
+                    {% trans 'Total Statements' %}: {{ statistics.count_ownership_or_control_statement }}
+                </p>
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_person %}
+                    <p>
+                        {% trans ' ... where interested party is a person' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_person }}
+                        (XX %)
+                    </p>
+                {% endif %}
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_entity %}
+                    <p>
+                        {% trans ' ... where interested party is a entity' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
+                        (XX %)
+                    </p>
+                {% endif %}
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_unspecified %}
+                    <p>
+                        {% trans ' ... where interested party is unspecified' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_unspecified }}
+                        (XX %)
+                    </p>
+                {% endif %}
+
+
+                <p>
+                     {% trans 'Total Interest Statements' %}: YYY
+                </p>
+                </p>
                 {% for key, count in statistics.count_ownership_or_control_statement_interest_statement_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} Interest statements with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ...  with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            (XX %)
                         </p>
                     {% endif %}
                 {% endfor %}
 
-                <p>
-                </p>
+
             </div>
         </div>
     </div>
