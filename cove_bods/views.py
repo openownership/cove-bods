@@ -66,7 +66,7 @@ def explore_bods(request, pk):
                     'sub_title': _("Sorry, we can't process that data"),
                     'link': 'index',
                     'link_text': _('Try Again'),
-                    'msg': _('BODS JSON should have an list as the top level, the JSON you supplied does not.'),
+                    'msg': _('BODS JSON should have a list as the top level, the JSON you supplied does not.'),
                 })
 
         schema_bods = SchemaBODS(lib_cove_bods_config=lib_cove_bods_config)
