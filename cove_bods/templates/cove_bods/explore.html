@@ -200,6 +200,18 @@
                     {% endif %}
                 {% endfor %}
 
+                {% if statistics.count_entities_registeredEntity_legalEntity %}
+                    <p>
+                        {% blocktrans %}% of registered or legal entities with any identifier{% endblocktrans %}:
+                        {% widthratio statistics.count_entities_registeredEntity_legalEntity_with_any_identifier statistics.count_entities_registeredEntity_legalEntity 100 %}%
+                    </p>
+
+                    <p>
+                        {% blocktrans %}% of registered or legal entities with an identifier that have a 'strict' identifier{% endblocktrans %}:
+                        {% widthratio statistics.count_entities_registeredEntity_legalEntity_with_any_identifier_with_id_and_scheme statistics.count_entities_registeredEntity_legalEntity_with_any_identifier 100 %}%
+                    </p>
+                {% endif %}
+
                 <h4>{% trans 'Person Statements' %}</h4>
 
                 <p>{% trans 'Total Statements' %}: {{ statistics.count_person_statements }}</p>
@@ -251,6 +263,16 @@
                         </p>
                     {% endif %}
                 {% endfor %}
+
+                {% if statistics.count_replaces_statements_missing %}
+                    <h4>{% trans 'Misc' %}</h4>
+
+                    <p>
+                        {% trans 'Count of previous statements that are referenced from replacesStatement and are missing' %}:
+                        {{ statistics.count_replaces_statements_missing }}
+                    </p>
+                {% endif %}
+
             </div>
         </div>
     </div>

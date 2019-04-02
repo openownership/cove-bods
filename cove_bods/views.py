@@ -95,6 +95,18 @@ def explore_bods(request, pk):
         total_ownership_or_control_interest_statements += count
     context['statistics']['count_ownership_or_control_interest_statement'] = total_ownership_or_control_interest_statements # noqa
 
+    # The use of r_e_type is to stop flake8 complaining about line length
+    r_e_type = 'registeredEntity'
+    context['statistics']['count_entities_registeredEntity_legalEntity_with_any_identifier'] = (
+        context['statistics']['count_entity_statements_types_with_any_identifier'][r_e_type] +
+        context['statistics']['count_entity_statements_types_with_any_identifier']['legalEntity'])
+    context['statistics']['count_entities_registeredEntity_legalEntity_with_any_identifier_with_id_and_scheme'] = (
+        context['statistics']['count_entity_statements_types_with_any_identifier_with_id_and_scheme'][r_e_type] +
+        context['statistics']['count_entity_statements_types_with_any_identifier_with_id_and_scheme']['legalEntity'])
+    context['statistics']['count_entities_registeredEntity_legalEntity'] = (
+        context['statistics']['count_entity_statements_types'][r_e_type] +
+        context['statistics']['count_entity_statements_types']['legalEntity'])
+
     template = 'cove_bods/explore.html'
 
     return render(request, template, context)
