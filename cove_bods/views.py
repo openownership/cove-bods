@@ -89,6 +89,12 @@ def explore_bods(request, pk):
         db_data.rendered = True
     db_data.save()
 
+    # We need to calculate some stats for showing in the view
+    total_ownership_or_control_interest_statements = 0
+    for key, count in context['statistics']['count_ownership_or_control_statement_interest_statement_types'].items():
+        total_ownership_or_control_interest_statements += count
+    context['statistics']['count_ownership_or_control_interest_statement'] = total_ownership_or_control_interest_statements # noqa
+
     template = 'cove_bods/explore.html'
 
     return render(request, template, context)
