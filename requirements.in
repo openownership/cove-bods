@@ -5,5 +5,5 @@ Django<1.12
 jsonschema<2.7
 -e git+https://github.com/OpenDataServices/flatten-tool.git@v0.5.0#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@v0.5.0#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@v0.3.0#egg=libcovebods
+-e git+https://github.com/openownership/lib-cove-bods.git@v0.4.0#egg=libcovebods
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.7.0#egg=libcoveweb

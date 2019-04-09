@@ -5,10 +5,10 @@ Django==1.11.20
 jsonschema==2.6.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@fe3746eee2e695e94d551ce5bb19f02d8305e6f8#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@819dcf56ff99fdb45a97cddfed0b8a3fde972e6b#egg=libcovebods
+-e git+https://github.com/openownership/lib-cove-bods.git@9de318c1d76cfc6f5d6ab670fc96f1ae56b581eb#egg=libcovebods
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@6d4f9437c513fc38057ff9dd928eb0ea32a86f9a#egg=libcoveweb
 
-pytest==4.3.1
+pytest==4.4.0
 pytest-django==3.4.8
 flake8==3.7.7
 pytest-localserver==0.5.0
@@ -35,10 +35,9 @@ jsonref==0.2
 LEPL==5.1.3
 lxml==4.3.3
 mccabe==0.6.1
-more-itertools==6.0.0
-openpyxl==2.6.1
+more-itertools==7.0.0
+openpyxl==2.6.2
 pathlib2==2.3.3
-
 pluggy==0.9.0
 py==1.8.0
 pycodestyle==2.5.0
@@ -55,5 +54,5 @@ sqlparse==0.3.0
 strict-rfc3339==0.7
 urllib3==1.24.1
 webencodings==0.5.1
-Werkzeug==0.15.1
+Werkzeug==0.15.2
 xmltodict==0.12.0
