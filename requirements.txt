@@ -6,7 +6,7 @@ jsonschema==2.6.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
 -e git+https://github.com/OpenDataServices/lib-cove.git@fe3746eee2e695e94d551ce5bb19f02d8305e6f8#egg=libcove
 -e git+https://github.com/openownership/lib-cove-bods.git@819dcf56ff99fdb45a97cddfed0b8a3fde972e6b#egg=libcovebods
--e git+https://github.com/OpenDataServices/lib-cove-web.git@82dbc80309a03812cc2397345a1397ee0f6da4a4#egg=libcoveweb
+-e git+https://github.com/OpenDataServices/lib-cove-web.git@6d4f9437c513fc38057ff9dd928eb0ea32a86f9a#egg=libcoveweb
 ## The following requirements were added by pip freeze:
 bleach==3.1.0
 cached-property==1.5.1
