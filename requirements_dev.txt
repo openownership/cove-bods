@@ -13,6 +13,7 @@ pytest-django==3.4.8
 flake8==3.7.7
 pytest-localserver==0.5.0
 selenium==3.141.0
+transifex-client==0.13.6
 ## The following requirements were added by pip freeze:
 atomicwrites==1.3.0
 attrs==19.1.0
@@ -43,6 +44,7 @@ py==1.8.0
 pycodestyle==2.5.0
 pyflakes==2.1.1
 python-dateutil==2.8.0
+python-slugify==1.2.6
 pytz==2018.9
 raven==6.10.0
 requests==2.21.0
@@ -52,6 +54,7 @@ schema==0.7.0
 six==1.12.0
 sqlparse==0.3.0
 strict-rfc3339==0.7
+Unidecode==1.0.23
 urllib3==1.24.1
 webencodings==0.5.1
 Werkzeug==0.15.2

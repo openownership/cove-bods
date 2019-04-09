@@ -4,3 +4,4 @@ pytest-django
 flake8
 pytest-localserver
 selenium
+transifex-client
