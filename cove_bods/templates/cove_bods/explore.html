@@ -14,7 +14,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Download Data' %}
                   </h4>
                 </div>
-                <div id="downloadData" class="collapse in">
+                <div id="downloadData" class="collapse in panel-body">
 
                      {% if conversion == 'flatten' %}
                         <p>We have tried to convert your JSON into a spreadsheet format.</p><p>The results can be seen below.</p>
@@ -94,7 +94,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
                   </h4>
                 </div>
-                <div id="validationTable" class="collapse in">
+                <div id="validationTable" class="collapse in panel-body">
                   {% include "validation_table.html" %}
                 </div>
               </div>
@@ -105,7 +105,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
                   </h4>
                 </div>
-                <div id="validationTable" class="collapse in">
+                <div id="validationTable" class="collapse in panel-body">
                     <p>{% trans 'There were no validation errors!' %}</p>
                 </div>
               </div>
@@ -126,7 +126,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
                   </h4>
                 </div>
-                <div id="additionalFieldsTable" class="collapse in">
+                <div id="additionalFieldsTable" class="collapse in panel-body">
                   {% include "additional_fields_table.html" %}
                 </div>
               </div>
@@ -137,7 +137,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
                   </h4>
                 </div>
-                <div id="additionalFieldsTable" class="collapse in">
+                <div id="additionalFieldsTable" class="collapse in panel-body">
                     <p>{% trans 'There were no additional fields!' %}</p>
                 </div>
               </div>
@@ -156,7 +156,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
                   </h4>
                 </div>
-                <div id="additionalChecksTable" class="collapse in">
+                <div id="additionalChecksTable" class="collapse in panel-body">
                   {% include "cove_bods/additional_checks_table.html" %}
                 </div>
               </div>
@@ -167,7 +167,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
                   </h4>
                 </div>
-                <div id="additionalChecksTable" class="collapse in">
+                <div id="additionalChecksTable" class="collapse in panel-body">
                     <p>{% trans 'All checks passed!' %}</p>
                 </div>
               </div>
@@ -183,7 +183,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics' %}
                 </h4>
             </div>
-            <div id="statisticsTable" class="collapse in">
+            <div id="statisticsTable" class="collapse in panel-body">
 
 
                 <h4>{% trans 'Entity Statements' %}</h4>
