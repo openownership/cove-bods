@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-27 17:26+0000\n"
+"POT-Creation-Date: 2019-04-09 08:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -139,6 +139,38 @@ msgid "Using the data review tool"
 msgstr ""
 
 #: cove_bods/templates/cove_bods/base.html:122
+msgid "Built by"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:122
+msgid "Open Data Services"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "The code for this site is available on"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "GitHub"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "Licence"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "AGPLv3"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "Report/View issues"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:123
+msgid "cove-bods issues"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/base.html:128
 msgid "Running version "
 msgstr ""
 
@@ -193,74 +225,75 @@ msgstr ""
 msgid "Entity Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:194
-#: cove_bods/templates/cove_bods/explore.html:204
+#: cove_bods/templates/cove_bods/explore.html:191
+#: cove_bods/templates/cove_bods/explore.html:217
+#: cove_bods/templates/cove_bods/explore.html:231
+msgid "Total Statements"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:196
+#: cove_bods/templates/cove_bods/explore.html:222
+#: cove_bods/templates/cove_bods/explore.html:260
 #, python-format
 msgid " ... with type %(key)s"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:199
+#: cove_bods/templates/cove_bods/explore.html:205
+#, python-format
+msgid "%% of registered or legal entities with any identifier"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:210
+#, python-format
+msgid ""
+"%% of registered or legal entities with an identifier that have a 'strict' "
+"identifier"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:215
 msgid "Person Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:209
+#: cove_bods/templates/cove_bods/explore.html:229
 msgid "Ownership or Control Statements"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:212
-msgid "Ownership or Control Statements where interested party is a person"
+#: cove_bods/templates/cove_bods/explore.html:235
+msgid " ... where interested party is a person"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:216
-msgid "Ownership or Control Statements where interested party is a entity"
+#: cove_bods/templates/cove_bods/explore.html:242
+msgid " ... where interested party is a entity"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:220
-msgid "Ownership or Control Statements where interested party is unspecified"
+#: cove_bods/templates/cove_bods/explore.html:249
+msgid " ... where interested party is unspecified"
 msgstr ""
 
-#: cove_bods/templates/cove_bods/explore.html:227
-#, python-format
-msgid " Interest statements with type %(key)s"
+#: cove_bods/templates/cove_bods/explore.html:255
+msgid "Total Interest Statements"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:268
+msgid "Misc"
+msgstr ""
+
+#: cove_bods/templates/cove_bods/explore.html:271
+msgid ""
+"Count of previous statements that are referenced from replacesStatement and "
+"are missing"
 msgstr ""
 
 #: cove_bods/views.py:55 cove_bods/views.py:66
-#: src/libcove/libcove/lib/converters.py:182
-#: src/libcove/libcove/lib/exceptions.py:21
-#: src/libcove/libcove/lib/exceptions.py:38
 msgid "Sorry, we can't process that data"
 msgstr ""
 
 #: cove_bods/views.py:57 cove_bods/views.py:68
-#: src/libcove/libcove/lib/converters.py:184
-#: src/libcove/libcove/lib/exceptions.py:23
-#: src/libcove/libcove/lib/exceptions.py:40
 msgid "Try Again"
 msgstr ""
 
 #: cove_bods/views.py:69
 msgid ""
-"BODS JSON should have an list as the top level, the JSON you supplied does "
+"BODS JSON should have a list as the top level, the JSON you supplied does "
 "not."
-msgstr ""
-
-#: src/libcove/libcove/lib/converters.py:185
-msgid ""
-"We think you tried to upload a JSON file, but it is not well formed JSON.\n"
-"\n"
-"Error message: {}"
-msgstr ""
-
-#: src/libcove/libcove/lib/exceptions.py:24
-msgid ""
-"We did not recognise the file type.\n"
-"\n"
-"We can only process json, csv and xlsx files."
-msgstr ""
-
-#: src/libcove/libcove/lib/exceptions.py:41
-msgid ""
-"We think you tried to supply a spreadsheet, but we failed to convert it.\n"
-"\n"
-"Error message: {}"
 msgstr ""

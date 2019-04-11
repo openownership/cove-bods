@@ -14,7 +14,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Download Data' %}
                   </h4>
                 </div>
-                <div id="downloadData" class="collapse in">
+                <div id="downloadData" class="collapse in panel-body">
 
                      {% if conversion == 'flatten' %}
                         <p>We have tried to convert your JSON into a spreadsheet format.</p><p>The results can be seen below.</p>
@@ -94,7 +94,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
                   </h4>
                 </div>
-                <div id="validationTable" class="collapse in">
+                <div id="validationTable" class="collapse in panel-body">
                   {% include "validation_table.html" %}
                 </div>
               </div>
@@ -105,7 +105,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Validation Errors' %}
                   </h4>
                 </div>
-                <div id="validationTable" class="collapse in">
+                <div id="validationTable" class="collapse in panel-body">
                     <p>{% trans 'There were no validation errors!' %}</p>
                 </div>
               </div>
@@ -126,7 +126,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
                   </h4>
                 </div>
-                <div id="additionalFieldsTable" class="collapse in">
+                <div id="additionalFieldsTable" class="collapse in panel-body">
                   {% include "additional_fields_table.html" %}
                 </div>
               </div>
@@ -137,7 +137,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Fields' %}
                   </h4>
                 </div>
-                <div id="additionalFieldsTable" class="collapse in">
+                <div id="additionalFieldsTable" class="collapse in panel-body">
                     <p>{% trans 'There were no additional fields!' %}</p>
                 </div>
               </div>
@@ -156,7 +156,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
                   </h4>
                 </div>
-                <div id="additionalChecksTable" class="collapse in">
+                <div id="additionalChecksTable" class="collapse in panel-body">
                   {% include "cove_bods/additional_checks_table.html" %}
                 </div>
               </div>
@@ -167,7 +167,7 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
                   </h4>
                 </div>
-                <div id="additionalChecksTable" class="collapse in">
+                <div id="additionalChecksTable" class="collapse in panel-body">
                     <p>{% trans 'All checks passed!' %}</p>
                 </div>
               </div>
@@ -183,54 +183,96 @@
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Statistics' %}
                 </h4>
             </div>
-            <div id="statisticsTable" class="collapse in">
+            <div id="statisticsTable" class="collapse in panel-body">
 
-                <p>
-                    {% trans 'Entity Statements' %}: {{ statistics.count_entity_statements }}
-                </p>
+
+                <h4>{% trans 'Entity Statements' %}</h4>
+
+                <p>{% trans 'Total Statements' %}: {{ statistics.count_entity_statements }}</p>
+
                 {% for key, count in statistics.count_entity_statements_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            ({% widthratio count statistics.count_entity_statements 100 %}%)
                         </p>
                     {% endif %}
                 {% endfor %}
-                <p>
-                    {% trans 'Person Statements' %}: {{ statistics.count_person_statements }}
-                </p>
+
+                {% if statistics.count_entities_registeredEntity_legalEntity %}
+                    <p>
+                        {% blocktrans %}% of registered or legal entities with any identifier{% endblocktrans %}:
+                        {% widthratio statistics.count_entities_registeredEntity_legalEntity_with_any_identifier statistics.count_entities_registeredEntity_legalEntity 100 %}%
+                    </p>
+
+                    <p>
+                        {% blocktrans %}% of registered or legal entities with an identifier that have a 'strict' identifier{% endblocktrans %}:
+                        {% widthratio statistics.count_entities_registeredEntity_legalEntity_with_any_identifier_with_id_and_scheme statistics.count_entities_registeredEntity_legalEntity_with_any_identifier 100 %}%
+                    </p>
+                {% endif %}
+
+                <h4>{% trans 'Person Statements' %}</h4>
+
+                <p>{% trans 'Total Statements' %}: {{ statistics.count_person_statements }}</p>
+
                 {% for key, count in statistics.count_person_statements_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            ({% widthratio count statistics.count_person_statements 100 %}%)
                         </p>
                     {% endif %}
                 {% endfor %}
-                <p>
-                    {% trans 'Ownership or Control Statements' %}: {{ statistics.count_ownership_or_control_statement }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is a person' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_person }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is a entity' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
-                </p>
-                <p>
-                    {% trans 'Ownership or Control Statements where interested party is unspecified' %}:
-                    {{ statistics.count_ownership_or_control_statement_interested_party_with_unspecified }}
-                </p>
+
+                <h4>{% trans 'Ownership or Control Statements' %}</h4>
+
+                <p>{% trans 'Total Statements' %}: {{ statistics.count_ownership_or_control_statement }}</p>
+
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_person %}
+                    <p>
+                        {% trans ' ... where interested party is a person' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_person }}
+                        ({% widthratio statistics.count_ownership_or_control_statement_interested_party_with_person statistics.count_ownership_or_control_statement 100 %}%)
+                    </p>
+                {% endif %}
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_entity %}
+                    <p>
+                        {% trans ' ... where interested party is a entity' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_entity }}
+                        ({% widthratio statistics.count_ownership_or_control_statement_interested_party_with_entity statistics.count_ownership_or_control_statement 100 %}%)
+                    </p>
+                {% endif %}
+                {% if statistics.count_ownership_or_control_statement_interested_party_with_unspecified %}
+                    <p>
+                        {% trans ' ... where interested party is unspecified' %}:
+                        {{ statistics.count_ownership_or_control_statement_interested_party_with_unspecified }}
+                        ({% widthratio statistics.count_ownership_or_control_statement_interested_party_with_unspecified statistics.count_ownership_or_control_statement 100 %}%)
+                    </p>
+                {% endif %}
+
+                <p>{% trans 'Total Interest Statements' %}: {{ statistics.count_ownership_or_control_interest_statement }}</p>
 
                 {% for key, count in statistics.count_ownership_or_control_statement_interest_statement_types.items %}
                     {% if count > 0 %}
                         <p>
-                            {% blocktrans %} Interest statements with type {{ key }}{% endblocktrans %}: {{ count }}
+                            {% blocktrans %} ... with type {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            ({% widthratio count statistics.count_ownership_or_control_interest_statement 100 %}%)
                         </p>
                     {% endif %}
                 {% endfor %}
 
-                <p>
-                </p>
+                {% if statistics.count_replaces_statements_missing %}
+                    <h4>{% trans 'Misc' %}</h4>
+
+                    <p>
+                        {% trans 'Count of previous statements that are referenced from replacesStatement and are missing' %}:
+                        {{ statistics.count_replaces_statements_missing }}
+                    </p>
+                {% endif %}
+
             </div>
         </div>
     </div>
