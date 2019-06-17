@@ -22,7 +22,7 @@
       <div class="row border-bottom">
         <div class="col-xs-10">
           <a href="http://standard.openownership.org/">
-            <h1>Beneficial Ownership Data Standard</h1>
+            <h1>Beneficial Ownership Data Standard (BODS)</h1>
           </a>
         </div>
         <div class="col-xs-2">
@@ -51,7 +51,7 @@
           {% block h1 %}<h1 class="application-name"><a href="{% url 'index' %}">{% blocktrans %} Data Review Tool{% endblocktrans %} </a></h1> <h2 class="beta"><small>beta</small></h2>{% endblock %}
         </div><!--col-md-8-->
         <div class="col-xs-5">
-          <a href="http://standard.openownership.org/"><h3 class="docs-link pull-right">{% blocktrans %} Standard Documentation {% endblocktrans %}</h3></a>
+          <a href="http://standard.openownership.org/"><h3 class="docs-link pull-right">{% blocktrans %} BODS Documentation {% endblocktrans %}</h3></a>
         </div><!--col-md-8-->
       </div><!--row-->
     </div><!--page-header-->
@@ -85,7 +85,8 @@
       <div class="panel-body">
 
         <h1 class="heading-in-panel"> <small> {% blocktrans %}About BODS {%endblocktrans%}</small> </h1>
-        <p> TODO CONTENT HERE </p>
+        <p>{% blocktrans %}Increasingly governments across the globe require companies to disclose information about who ultimately owns and controls them (their beneficial owners). These efforts to increase corporate transparency  and counter corruption require information to be shared across institutions, sectors  and borders.{%endblocktrans%}</p>
+        <p>{% blocktrans %}The Beneficial Ownership Data Standard (BODS) enables people and institutions to publish information about beneficial ownership in a standardised way. The resulting beneficial ownership data is interoperable, more easily reused, and higher quality. Learn more at the <a href="http://standard.openownership.org">BODS documentation website</a>.{%endblocktrans%}</p>
       </div>
     </div>
   </div>
@@ -93,8 +94,16 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <h1 class="heading-in-panel"> <small>{% blocktrans %}Check and Review{%endblocktrans%}</small> </h1>
-        <p> TODO CONTENT HERE </p>
+        <h1 class="heading-in-panel"> <small>{% blocktrans %}Checking and reviewing your data{%endblocktrans%}</small> </h1>
+        <p>{% blocktrans %}After submitting your data you will be presented with the results of your data review:{%endblocktrans%}</p>
+        <ul>
+            <li>{% blocktrans %}<b>Download data</b>. A chance to save your data in an alternative format.{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Validation errors</b>. A list of standard JSON validation errors.{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Additional fields</b>. If your data contains unrecognised fields, they will be listed.{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Additional checks</b>. A list of BODS-specific problems in the data.{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Statistics</b>. A breakdown of the make-up of your data and indicators of its quality.{%endblocktrans%}</li>
+        </ul>
+        <p>{% blocktrans %}Amend your data to address errors and problems, or to improve its quality.{%endblocktrans%}</p>
       </div>
     </div>
   </div>
@@ -108,7 +117,20 @@
       <div class="panel-body">
 
         <h1 class="heading-in-panel"> <small> {% blocktrans %}Using the data review tool{%endblocktrans%}</small> </h1>
-        <p> TODO CONTENT HERE </p>
+        <p>{% blocktrans %}Use one of the links below to check that your data complies with the <a href="#introduction">Beneficial Ownership Data Standard</a> (BODS).{%endblocktrans%}</p>
+        <ul>
+            <li>{% blocktrans %}<b>Upload</b> a BODS file;{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Link</b> to BODS data on the web using a URL; or{%endblocktrans%}</li>
+            <li>{% blocktrans %}<b>Paste</b> in your BODS JSON data{%endblocktrans%}</li>
+        </ul>
+
+        <p>{% blocktrans %}After submitting your data, use the information provided on the Results page to <a href="#introduction">check and review</a> the data’s quality and compliance with BODS. Your data can also be downloaded in alternative BODS-compliant formats from the Results page.{%endblocktrans%}</p>
+
+        <b>{% blocktrans %}Accepted BODS formats:{%endblocktrans%}</b>
+        <ul>
+            <li>{% blocktrans %}JSON built to the <a href="#introduction">Beneficial Ownership Data Standard</a> (UTF-8 encoding supported){%endblocktrans%}</li>
+            <li>{% blocktrans %}Multi-table data package - Excel (.xlsx) (UTF-8, Windows-1252 and ISO-8859-1 encodings supported){%endblocktrans%}</li>
+        </ul>
       </div>
     </div>
   </div>
