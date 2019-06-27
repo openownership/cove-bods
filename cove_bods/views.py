@@ -1,6 +1,7 @@
 import json
 import logging
 import functools
+import datetime
 from decimal import Decimal
 
 from django.shortcuts import render
@@ -39,6 +40,9 @@ def explore_bods(request, pk):
     lib_cove_bods_config.config['root_id'] = settings.COVE_CONFIG['root_id']
     lib_cove_bods_config.config['id_name'] = settings.COVE_CONFIG['id_name']
     lib_cove_bods_config.config['root_is_list'] = settings.COVE_CONFIG['root_is_list']
+    lib_cove_bods_config.config['bods_additional_checks_person_birthdate_max_year'] = datetime.datetime.now().year
+    lib_cove_bods_config.config['bods_additional_checks_person_birthdate_min_year'] = \
+        datetime.datetime.now().year - 120
 
     upload_dir = db_data.upload_dir()
     upload_url = db_data.upload_url()
@@ -83,7 +87,8 @@ def explore_bods(request, pk):
         with open(context['converted_path'], encoding='utf-8') as fp:
             json_data = json.load(fp, parse_float=Decimal)
 
-    context = common_checks_bods(context, upload_dir, json_data, schema_bods)
+    context = common_checks_bods(context, upload_dir, json_data, schema_bods,
+                                 lib_cove_bods_config=lib_cove_bods_config)
 
     if not db_data.rendered:
         db_data.rendered = True
