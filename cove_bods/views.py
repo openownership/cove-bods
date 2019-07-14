@@ -94,6 +94,9 @@ def explore_bods(request, pk):
         db_data.rendered = True
     db_data.save()
 
+    # Some extra info from the Schema
+    context['schema_version_used'] = schema_bods.schema_version
+
     # We need to calculate some stats for showing in the view
     total_ownership_or_control_interest_statements = 0
     for key, count in context['statistics']['count_ownership_or_control_statement_interest_statement_types'].items():
