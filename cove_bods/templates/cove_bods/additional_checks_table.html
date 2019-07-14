@@ -232,6 +232,39 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'person'  %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'entity'  %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'ownership_or_control'  %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Ownership-or-control Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
