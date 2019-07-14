@@ -6,6 +6,24 @@
 {% endblock %}
 
 {% block explore_content %}
+
+
+
+    <div class="row">
+
+         <div class="panel panel-success">
+            <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
+              <h4 class="panel-title">
+                <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Schema Version' %}
+              </h4>
+            </div>
+            <div id="validationTable" class="collapse in panel-body">
+                <p>{% trans 'Schema Version Used' %}: {{  schema_version_used  }}</p>
+            </div>
+          </div>
+    </div>
+
+
     <div class="row">
 
             <div class="panel panel-success">
