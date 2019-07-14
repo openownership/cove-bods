@@ -199,6 +199,39 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'person'  %}
+            <tr>
+                <td>
+                    {% trans 'This Person Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'entity'  %}
+            <tr>
+                <td>
+                    {% trans 'This Entity Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'ownership_or_control'  %}
+            <tr>
+                <td>
+                    {% trans 'This Ownership-or-control Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
