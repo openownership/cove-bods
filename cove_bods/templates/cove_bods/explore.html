@@ -226,6 +226,14 @@
                     {% endif %}
                 {% endfor %}
 
+                {% if statistics.count_person_statements_have_pep_status_and_reason_missing_info %}
+                    <p>
+                        {% trans '... where PEP status is declared AND (erroneously) a reason for missing PEP information is given' %}:
+                        {{  statistics.count_person_statements_have_pep_status_and_reason_missing_info }}
+                        ({% widthratio statistics.count_person_statements_have_pep_status_and_reason_missing_info statistics.count_person_statements 100 %}%)
+                    </p>
+                {% endif %}
+
                 <h4>{% trans 'Ownership or Control Statements' %}</h4>
 
                 <p>{% trans 'Total Statements' %}: {{ statistics.count_ownership_or_control_statement }}</p>
