@@ -176,6 +176,18 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'component_statement_id_not_in_package' %}
+            <tr>
+                <td>
+                    {% trans 'This Ownership-or-control Statement has a component statement that is not in this package.' %}
+                </td>
+                <td>
+                    {% trans 'Component Statement ID' %}: {{ additional_check.component_statement_id }}
+                </td>
+                <td>
+                    {{ additional_check.seen_in_ownership_or_control_statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
