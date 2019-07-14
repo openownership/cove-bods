@@ -185,7 +185,6 @@
             </div>
             <div id="statisticsTable" class="collapse in panel-body">
 
-
                 <h4>{% trans 'Entity Statements' %}</h4>
 
                 <p>{% trans 'Total Statements' %}: {{ statistics.count_entity_statements }}</p>
@@ -225,6 +224,14 @@
                         </p>
                     {% endif %}
                 {% endfor %}
+
+                {% if statistics.count_person_statements_have_pep_status %}
+                    <p>
+                        {% trans '... where PEP status is declared' %}:
+                        {{  statistics.count_person_statements_have_pep_status }}
+                        ({% widthratio statistics.count_person_statements_have_pep_status statistics.count_person_statements 100 %}%)
+                    </p>
+                {% endif %}
 
                 {% if statistics.count_person_statements_have_pep_status_and_reason_missing_info %}
                     <p>
