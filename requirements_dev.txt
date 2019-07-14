@@ -1,16 +1,16 @@
 # Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
 dealer==2.0.5
-Django==1.11.20
+Django==1.11.22
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema==2.6.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
--e git+https://github.com/OpenDataServices/lib-cove.git@fe3746eee2e695e94d551ce5bb19f02d8305e6f8#egg=libcove
--e git+https://github.com/openownership/lib-cove-bods.git@9de318c1d76cfc6f5d6ab670fc96f1ae56b581eb#egg=libcovebods
+-e git+https://github.com/OpenDataServices/lib-cove.git@213e5fe3145ab186e34db325d4f40fe051755b84#egg=libcove
+-e git+https://github.com/openownership/lib-cove-bods.git@6d6497beeb76d80e02114506c34326e06355d704#egg=libcovebods
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@6d4f9437c513fc38057ff9dd928eb0ea32a86f9a#egg=libcoveweb
 
-pytest==4.4.0
-pytest-django==3.4.8
-flake8==3.7.7
+pytest==5.0.1
+pytest-django==3.5.1
+flake8==3.7.8
 pytest-localserver==0.5.0
 selenium==3.141.0
 transifex-client==0.13.6
@@ -19,43 +19,49 @@ atomicwrites==1.3.0
 attrs==19.1.0
 bleach==3.1.0
 cached-property==1.5.1
-certifi==2019.3.9
+certifi==2019.6.16
 chardet==3.0.4
-commonmark==0.8.1
+commonmark==0.9.0
 contextlib2==0.5.5
-django-bootstrap3==11.0.0
-django-debug-toolbar==1.11
+django-bootstrap3==11.1.0
+django-debug-toolbar==2.0
 django-environ==0.4.5
 entrypoints==0.3
 et-xmlfile==1.0.1
 future==0.17.1
 idna==2.8
-jdcal==1.4
+importlib-metadata==0.18
+jdcal==1.4.1
 json-merge-patch==0.2
 jsonref==0.2
 LEPL==5.1.3
-lxml==4.3.3
+lxml==4.3.4
 mccabe==0.6.1
-more-itertools==7.0.0
+more-itertools==7.1.0
 openpyxl==2.6.2
-pathlib2==2.3.3
-pluggy==0.9.0
+packaging==19.0
+pathlib2==2.3.4
+
+pluggy==0.12.0
 py==1.8.0
 pycodestyle==2.5.0
 pyflakes==2.1.1
+pyparsing==2.4.0
 python-dateutil==2.8.0
 python-slugify==1.2.6
-pytz==2018.9
+pytz==2019.1
 raven==6.10.0
-requests==2.21.0
+requests==2.22.0
 rfc3987==1.3.8
 rfc6266==0.0.4
 schema==0.7.0
 six==1.12.0
 sqlparse==0.3.0
 strict-rfc3339==0.7
-Unidecode==1.0.23
-urllib3==1.24.1
+Unidecode==1.1.1
+urllib3==1.25.3
+wcwidth==0.1.7
 webencodings==0.5.1
-Werkzeug==0.15.2
+Werkzeug==0.15.4
 xmltodict==0.12.0
+zipp==0.5.2
