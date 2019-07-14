@@ -188,6 +188,17 @@
                     {{ additional_check.seen_in_ownership_or_control_statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'ownership_or_control_statement_has_is_compontent_and_component_statement_ids' %}
+            <tr>
+                <td>
+                    {% trans 'An Ownership-or-control Statement cannot both be a component statement (isComponent) and have component statements (componentStatementIDs).' %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
