@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-26 14:32+0000\n"
+"POT-Creation-Date: 2019-07-17 16:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,17 +56,17 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:52
 msgid ""
-"This entity statement is not used in any ownership or control statements."
+"This Entity Statement is not used in any ownership or control statements."
 msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:63
 msgid ""
-"This person statement is not used in any ownership or control statements."
+"This Person Statement is not used in any ownership or control statements."
 msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:74
 msgid ""
-"This entity statement is referenced from an ownership or control statement, "
+"This Entity Statement is referenced from an ownership or control statement, "
 "but it is missing."
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:86
 msgid ""
-"This person statement is referenced from an ownership or control statement, "
+"This Person Statement is referenced from an ownership or control statement, "
 "but it is missing."
 msgstr ""
 
@@ -93,7 +93,7 @@ msgid "Statement ID"
 msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:110
-msgid "This person statement has a birthday that is to early."
+msgid "This Person Statement has a birthday that is to early."
 msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:113
@@ -102,7 +102,7 @@ msgid "Year"
 msgstr ""
 
 #: cove_bods/templates/cove_bods/additional_checks_table.html:122
-msgid "This person statement has a birthday that is to late."
+msgid "This Person Statement has a birthday that is to late."
 msgstr ""
 
 #. Translators: Label of a button that triggers search
@@ -380,21 +380,21 @@ msgid ""
 "are missing"
 msgstr ""
 
-#: cove_bods/views.py:55 cove_bods/views.py:66
+#: cove_bods/views.py:59 cove_bods/views.py:70
 #: src/libcove/libcove/lib/converters.py:182
 #: src/libcove/libcove/lib/exceptions.py:21
 #: src/libcove/libcove/lib/exceptions.py:38
 msgid "Sorry, we can't process that data"
 msgstr ""
 
-#: cove_bods/views.py:57 cove_bods/views.py:68
+#: cove_bods/views.py:61 cove_bods/views.py:72
 #: src/libcove/libcove/lib/converters.py:184
 #: src/libcove/libcove/lib/exceptions.py:23
 #: src/libcove/libcove/lib/exceptions.py:40
 msgid "Try Again"
 msgstr ""
 
-#: cove_bods/views.py:69
+#: cove_bods/views.py:73
 msgid ""
 "BODS JSON should have a list as the top level, the JSON you supplied does "
 "not."
