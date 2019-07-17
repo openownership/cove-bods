@@ -49,7 +49,7 @@
         {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This entity statement is not used in any ownership or control statements.' %}
+                    {% trans 'This Entity Statement is not used in any ownership or control statements.' %}
                 </td>
                 <td>
                 </td>
@@ -60,7 +60,7 @@
         {% elif additional_check.type == 'person_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This person statement is not used in any ownership or control statements.' %}
+                    {% trans 'This Person Statement is not used in any ownership or control statements.' %}
                 </td>
                 <td>
                 </td>
@@ -71,7 +71,7 @@
         {% elif additional_check.type == 'entity_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This entity statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% trans 'This Entity Statement is referenced from an ownership or control statement, but it is missing.' %}
                 </td>
                 <td>
                     {% trans 'Entity that is missing' %}: {{ additional_check.entity_statement_missing }}
@@ -83,7 +83,7 @@
         {% elif additional_check.type == 'person_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This person statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% trans 'This Person Statement is referenced from an ownership or control statement, but it is missing.' %}
                 </td>
                 <td>
                     {% trans 'Person that is missing' %}: {{ additional_check.person_statement_missing }}
@@ -107,7 +107,7 @@
         {% elif additional_check.type == 'person_birth_year_too_early' %}
             <tr>
                 <td>
-                    {% trans 'This person statement has a birthday that is to early.' %}
+                    {% trans 'This Person Statement has a birthday that is to early.' %}
                 </td>
                 <td>
                     {% trans 'Year' %}: {{ additional_check.year }}
@@ -119,7 +119,7 @@
         {% elif additional_check.type == 'person_birth_year_too_late' %}
             <tr>
                 <td>
-                    {% trans 'This person statement has a birthday that is to late.' %}
+                    {% trans 'This Person Statement has a birthday that is to late.' %}
                 </td>
                 <td>
                     {% trans 'Year' %}: {{ additional_check.year }}
