@@ -73,7 +73,7 @@ def explore_bods(request, pk):
                     'msg': _('BODS JSON should have a list as the top level, the JSON you supplied does not.'),
                 })
 
-        schema_bods = SchemaBODS(lib_cove_bods_config=lib_cove_bods_config)
+        schema_bods = SchemaBODS(json_data=json_data, lib_cove_bods_config=lib_cove_bods_config)
 
         context.update(convert_json(upload_dir, upload_url, file_name, lib_cove_bods_config,
                                     schema_url=schema_bods.release_pkg_schema_url, replace=True,
@@ -93,6 +93,9 @@ def explore_bods(request, pk):
     if not db_data.rendered:
         db_data.rendered = True
     db_data.save()
+
+    # Some extra info from the Schema
+    context['schema_version_used'] = schema_bods.schema_version
 
     # We need to calculate some stats for showing in the view
     total_ownership_or_control_interest_statements = 0

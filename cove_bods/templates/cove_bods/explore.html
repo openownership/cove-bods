@@ -6,6 +6,26 @@
 {% endblock %}
 
 {% block explore_content %}
+
+
+    {# TEMPORARY Until 0.2 is officially released, we only show this block if the data is 0.2 #}
+    {% if schema_version_used != '0.1' %}
+    <div class="row">
+
+         <div class="panel panel-success">
+            <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
+              <h4 class="panel-title">
+                <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Schema Version' %}
+              </h4>
+            </div>
+            <div id="validationTable" class="collapse in panel-body">
+                <p>{% trans 'Schema Version Used' %}: {{  schema_version_used  }}</p>
+            </div>
+          </div>
+    </div>
+    {% endif %}
+
+
     <div class="row">
 
             <div class="panel panel-success">
@@ -185,7 +205,6 @@
             </div>
             <div id="statisticsTable" class="collapse in panel-body">
 
-
                 <h4>{% trans 'Entity Statements' %}</h4>
 
                 <p>{% trans 'Total Statements' %}: {{ statistics.count_entity_statements }}</p>
@@ -225,6 +244,22 @@
                         </p>
                     {% endif %}
                 {% endfor %}
+
+                {% if statistics.count_person_statements_have_pep_status %}
+                    <p>
+                        {% trans '... where PEP status is declared' %}:
+                        {{  statistics.count_person_statements_have_pep_status }}
+                        ({% widthratio statistics.count_person_statements_have_pep_status statistics.count_person_statements 100 %}%)
+                    </p>
+                {% endif %}
+
+                {% if statistics.count_person_statements_have_pep_status_and_reason_missing_info %}
+                    <p>
+                        {% trans '... where PEP status is declared AND (erroneously) a reason for missing PEP information is given' %}:
+                        {{  statistics.count_person_statements_have_pep_status_and_reason_missing_info }}
+                        ({% widthratio statistics.count_person_statements_have_pep_status_and_reason_missing_info statistics.count_person_statements 100 %}%)
+                    </p>
+                {% endif %}
 
                 <h4>{% trans 'Ownership or Control Statements' %}</h4>
 
