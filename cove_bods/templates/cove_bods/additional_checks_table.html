@@ -265,6 +265,42 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'person' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement is a different version of the schema than the file.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'entity' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement is a different version of the schema than the file.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'ownership_or_control' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Ownership-or-control Statement is a different version of the schema than the file.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
