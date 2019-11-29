@@ -1,6 +1,6 @@
 # Lock this version of dealer because later versions have a problem - middleware is of wrong style to use with MIDDLEWARE_CLASSES
 dealer==2.0.5
-Django==1.11.22
+Django==1.11.26
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema==2.6.0
 -e git+https://github.com/OpenDataServices/flatten-tool.git@4c13ef0b32a59e810919a3de09bc8f64ce8f9392#egg=flattentool
