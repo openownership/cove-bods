@@ -2,6 +2,5 @@ dealer
 Django>2.2,<2.3
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema<2.7
--e git+https://github.com/OpenDataServices/flatten-tool.git@v0.5.0#egg=flattentool
-libcovebods>=0.7.0
+libcovebods>=0.8.0
 -e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.14.0#egg=libcoveweb
