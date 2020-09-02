@@ -86,6 +86,15 @@ def explore_bods(request, pk):
                                            schema_url=schema_bods.release_pkg_schema_url))
         with open(context['converted_path'], encoding='utf-8') as fp:
             json_data = json.load(fp, parse_float=Decimal)
+        # Create schema_bods again now that we have json_data (this will pick
+        # up the appropriate schema)
+        schema_bods = SchemaBODS(json_data=json_data, lib_cove_bods_config=lib_cove_bods_config)
+        # Run the conversion again now that we have the correct schema
+        context.update(convert_spreadsheet(upload_dir, upload_url, file_name, file_type, lib_cove_bods_config,
+                                           schema_url=schema_bods.release_pkg_schema_url,
+                                           cache=False, replace=True))
+        with open(context['converted_path'], encoding='utf-8') as fp:
+            json_data = json.load(fp, parse_float=Decimal)
 
     context = common_checks_bods(context, upload_dir, json_data, schema_bods,
                                  lib_cove_bods_config=lib_cove_bods_config)
