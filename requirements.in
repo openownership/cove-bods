@@ -3,4 +3,4 @@ Django>2.2,<2.3
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema<2.7
 libcovebods>=0.8.0
--e git+https://github.com/OpenDataServices/lib-cove-web.git@v0.14.0#egg=libcoveweb
+libcoveweb>=0.16.0

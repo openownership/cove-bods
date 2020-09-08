@@ -3,7 +3,7 @@ Django==2.2.16
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema==2.6.0
 libcovebods==0.8.0
--e git+https://github.com/OpenDataServices/lib-cove-web.git@73654b76161dabe1d406cd28f8aca7fd94dceafb#egg=libcoveweb
+libcoveweb==0.16.0
 ## The following requirements were added by pip freeze:
 bleach==3.1.5
 cached-property==1.5.1
@@ -16,7 +16,7 @@ django-bootstrap3==14.1.0
 django-debug-toolbar==2.2
 django-environ==0.4.5
 et-xmlfile==1.0.1
-flattentool==0.11.0
+flattentool==0.12.0
 idna==2.10
 importlib-metadata==1.7.0
 jdcal==1.4.1
