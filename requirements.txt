@@ -1,5 +1,5 @@
 dealer==2.1.0
-Django==2.2.20
+Django==2.2.21
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema==2.6.0
 libcovebods==0.10.0
