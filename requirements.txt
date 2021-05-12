@@ -11,7 +11,9 @@ btrees==4.7.2
 cached-property==1.5.2
     # via libcove
 certifi==2020.12.5
-    # via requests
+    # via
+    #   requests
+    #   sentry-sdk
 cffi==1.14.5
     # via persistent
 chardet==4.0.0
@@ -91,6 +93,8 @@ rfc3987==1.3.8
     # via libcove
 schema==0.7.4
     # via flattentool
+sentry-sdk==1.1.0
+    # via -r requirements.in
 six==1.15.0
     # via
     #   python-dateutil
@@ -104,7 +108,9 @@ transaction==3.0.1
 uc-rfc6266-parser==0.1.0
     # via libcoveweb
 urllib3==1.26.4
-    # via requests
+    # via
+    #   requests
+    #   sentry-sdk
 werkzeug==1.0.1
     # via uc-rfc6266-parser
 xmltodict==0.12.0
