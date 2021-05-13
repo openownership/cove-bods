@@ -1,4 +1,5 @@
 dealer
+sentry-sdk
 Django>2.2,<2.3
 # Lock this version of jsonschema, as that's what some of our libraries lock
 jsonschema<2.7
