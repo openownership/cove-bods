@@ -79,13 +79,6 @@ ijson==3.1.4
     # via
     #   -r requirements.txt
     #   flattentool
-importlib-metadata==2.1.1
-    # via
-    #   -r requirements.txt
-    #   django-bootstrap3
-    #   flake8
-    #   pluggy
-    #   pytest
 iniconfig==1.1.1
     # via pytest
 jsonref==0.2
@@ -206,13 +199,11 @@ transaction==3.0.1
     #   zodb
 transifex-client==0.14.2
     # via -r requirements_dev.in
-typing-extensions==3.10.0.0
-    # via gitpython
 uc-rfc6266-parser==0.1.0
     # via
     #   -r requirements.txt
     #   libcoveweb
-urllib3==1.26.4
+urllib3==1.26.5
     # via
     #   -r requirements.txt
     #   requests
@@ -240,10 +231,6 @@ zconfig==3.5.0
     # via
     #   -r requirements.txt
     #   zodb
-zipp==3.4.1
-    # via
-    #   -r requirements.txt
-    #   importlib-metadata
 zodb==5.6.0
     # via
     #   -r requirements.txt
