@@ -1,0 +1,28 @@
+name: Test
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Python 3.6 is used by the BODS live cove servers
+        python-version: [ '3.6']
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+        architecture: x64
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements_dev.txt') }}-${{ matrix.python-version }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install requirements_dev.txt
+      run: pip install -r requirements_dev.txt
+    - name: Test
+      run: DJANGO_SETTINGS_MODULE=cove_project.settings python -m pytest cove_bods/
