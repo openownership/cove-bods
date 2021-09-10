@@ -45,8 +45,6 @@ idna==2.10
     # via requests
 ijson==3.1.4
     # via flattentool
-importlib-metadata==2.1.1
-    # via django-bootstrap3
 jsonref==0.2
     # via
     #   flattentool
@@ -97,7 +95,7 @@ six==1.16.0
     # via
     #   python-dateutil
     #   zodb
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via django
 strict-rfc3339==0.7
     # via libcove
@@ -119,8 +117,6 @@ zc.zlibstorage==1.2.0
     # via flattentool
 zconfig==3.6.0
     # via zodb
-zipp==3.4.1
-    # via importlib-metadata
 zodb==5.6.0
     # via
     #   flattentool

@@ -81,15 +81,6 @@ ijson==3.1.4
     # via
     #   -r requirements.txt
     #   flattentool
-importlib-metadata==2.1.1
-    # via
-    #   -r requirements.txt
-    #   click
-    #   django-bootstrap3
-    #   flake8
-    #   pep517
-    #   pluggy
-    #   pytest
 iniconfig==1.1.1
     # via pytest
 jsonref==0.2
@@ -196,7 +187,7 @@ six==1.16.0
     #   zodb
 smmap==4.0.0
     # via gitdb
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements.txt
     #   django
@@ -216,8 +207,6 @@ transaction==3.0.1
     #   zodb
 transifex-client==0.14.3
     # via -r requirements_dev.in
-typing-extensions==3.10.0.0
-    # via gitpython
 uc-rfc6266-parser==0.1.0
     # via
     #   -r requirements.txt
@@ -252,11 +241,6 @@ zconfig==3.6.0
     # via
     #   -r requirements.txt
     #   zodb
-zipp==3.4.1
-    # via
-    #   -r requirements.txt
-    #   importlib-metadata
-    #   pep517
 zodb==5.6.0
     # via
     #   -r requirements.txt
