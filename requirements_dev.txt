@@ -126,7 +126,7 @@ odfpy==1.4.1
     # via
     #   -r requirements.txt
     #   flattentool
-openpyxl==3.0.8
+openpyxl==3.0.7
     # via
     #   -r requirements.txt
     #   flattentool
