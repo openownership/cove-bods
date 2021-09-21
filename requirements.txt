@@ -73,7 +73,7 @@ lxml==4.6.3
     # via flattentool
 odfpy==1.4.1
     # via flattentool
-openpyxl==3.0.8
+openpyxl==3.0.7
     # via flattentool
 persistent==4.7.0
     # via
