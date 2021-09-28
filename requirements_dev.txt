@@ -110,7 +110,7 @@ libcove==0.26.0
     #   -r requirements.txt
     #   libcovebods
     #   libcoveweb
-libcovebods==0.10.1
+libcovebods==0.11.0
     # via -r requirements.txt
 libcoveweb==0.24.1
     # via

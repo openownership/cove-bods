@@ -123,6 +123,11 @@ def explore_bods(request, pk):
     context['statistics']['count_entities_registeredEntity_legalEntity'] = (
         context['statistics']['count_entity_statements_types'][r_e_type] +
         context['statistics']['count_entity_statements_types']['legalEntity'])
+    unknown_schema_version_used = \
+        [i for i in context['additional_checks'] if i['type'] == 'unknown_schema_version_used']
+    context['unknown_schema_version_used'] = unknown_schema_version_used[0] if unknown_schema_version_used else None
+    context['inconsistent_schema_version_used_count'] = \
+        len([i for i in context['additional_checks'] if i['type'] == 'inconsistent_schema_version_used'])
 
     template = 'cove_bods/explore.html'
 

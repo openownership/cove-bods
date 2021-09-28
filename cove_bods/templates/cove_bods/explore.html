@@ -8,14 +8,35 @@
 {% block explore_content %}
 
     <div class="row">
-         <div class="panel panel-success">
+         <div class="panel {% if unknown_schema_version_used or inconsistent_schema_version_used_count %}panel-danger{% else %}panel-success{% endif %}">
             <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
               <h4 class="panel-title">
                 <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Schema Version' %}
               </h4>
             </div>
             <div id="validationTable" class="collapse in panel-body">
-                <p>{% trans 'Schema Version Used' %}: {{  schema_version_used  }}</p>
+                {% if unknown_schema_version_used or inconsistent_schema_version_used_count %}
+                    <p>
+                        {% blocktrans %} The first statement of the submitted data has a BODS version of: {% endblocktrans %}
+                        {% if unknown_schema_version_used %}
+                            {{ unknown_schema_version_used.schema_version }}
+                        {% else %}
+                            {{ schema_version_used }}
+                        {% endif %}
+                    </p>
+
+                    {% if unknown_schema_version_used %}
+                        <p>{% blocktrans %}This is not a valid BODS version.{% endblocktrans %}</p>
+                    {% endif %}
+
+                    {% if inconsistent_schema_version_used_count %}
+                        <p>{% blocktrans %}A subsequent statement (or statements) specify a different BODS version.{% endblocktrans %}</p>
+                    {% endif %}
+
+                    <p>{% blocktrans %}All statements in the submitted data will therefore be validated against BODS version:{% endblocktrans %} {{  schema_version_used  }}</p>
+                {% else %}
+                    <p>{% trans 'Schema Version Used' %}: {{  schema_version_used  }}</p>
+                {% endif %}
             </div>
           </div>
     </div>
