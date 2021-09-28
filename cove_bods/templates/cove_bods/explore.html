@@ -7,11 +7,7 @@
 
 {% block explore_content %}
 
-
-    {# TEMPORARY Until 0.2 is officially released, we only show this block if the data is 0.2 #}
-    {% if schema_version_used != '0.1' %}
     <div class="row">
-
          <div class="panel panel-success">
             <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
               <h4 class="panel-title">
@@ -23,8 +19,6 @@
             </div>
           </div>
     </div>
-    {% endif %}
-
 
     <div class="row">
 
