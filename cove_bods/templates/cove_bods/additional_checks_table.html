@@ -265,6 +265,53 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+     {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'person' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'entity' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'ownership_or_control' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Ownership-or-control Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'unknown_schema_version_used' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This data attempted to use a schema version that was not recognised.{%endblocktrans%}
+                </td>
+                <td>
+                    {{ additional_check.schema_version }}
+                </td>
+                <td>
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
