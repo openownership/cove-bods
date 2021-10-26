@@ -312,6 +312,17 @@
                 <td>
                 </td>
             </tr>
+        {% elif additional_check.type == 'statement_is_beneficialOwnershipOrControl_but_no_person_specified' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This statement has beneficial ownership or control but no person is specified.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
