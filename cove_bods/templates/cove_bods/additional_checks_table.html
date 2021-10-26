@@ -312,6 +312,17 @@
                 <td>
                 </td>
             </tr>
+        {% elif additional_check.type == 'statement_is_beneficialOwnershipOrControl_but_no_person_specified' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Ownership-or-control Statement contains interests where beneficialOwnershipOrControl is true. Therefore interestedParty must reference a Person Statement.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     </tbody>
