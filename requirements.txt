@@ -63,7 +63,7 @@ libcove==0.26.0
     # via
     #   libcovebods
     #   libcoveweb
-libcovebods==0.12.0
+libcovebods==0.13.0
     # via -r requirements.in
 libcoveweb==0.24.1
     # via
@@ -75,12 +75,16 @@ odfpy==1.4.1
     # via flattentool
 openpyxl==3.0.9
     # via flattentool
+packaging==21.3
+    # via libcovebods
 persistent==4.7.0
     # via
     #   btrees
     #   zodb
 pycparser==2.20
     # via cffi
+pyparsing==3.0.9
+    # via packaging
 pyrsistent==0.18.0
     # via jsonschema
 python-dateutil==2.8.2

@@ -182,32 +182,23 @@
 
     <div class="row">
 
-        {% if additional_checks_count %}
-
-              <a name="additional-checks" class="anchor"></a>
-              <div class="panel panel-danger">
-                <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalChecksTable">
-                  <h4 class="panel-title">
+        <a name="additional-checks" class="anchor"></a>
+        <div {% if additional_checks_count or not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}class="panel panel-danger" {% else %}class="panel panel-success"{% endif %}>
+            <div id="checks-panel" class="panel-heading pointer" role="region" aria-expanded="true"
+                 aria-controls="additionalChecksTable" data-toggle="collapse" data-target="#additionalChecksTable">
+                <h4 class="panel-title">
                     <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
-                  </h4>
-                </div>
-                <div id="additionalChecksTable" class="collapse in panel-body">
-                  {% include "cove_bods/additional_checks_table.html" %}
-                </div>
-              </div>
-        {% else %}
-             <div class="panel panel-success">
-                <div id="checks-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#additionalChecksTable">
-                  <h4 class="panel-title">
-                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Additional Checks' %}
-                  </h4>
-                </div>
-                <div id="additionalChecksTable" class="collapse in panel-body">
+                </h4>
+            </div>
+            <div id="additionalChecksTable" class="collapse in panel-body">
+                {% if additional_checks_count or not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
+                    {% include "cove_bods/additional_checks_table.html" %}
+                {% else %}
                     <p>{% trans 'All checks passed!' %}</p>
-                </div>
-              </div>
-        {% endif %}
+                {% endif %}
 
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -268,13 +259,15 @@
                     </p>
                 {% endif %}
 
-                {% if statistics.count_person_statements_have_pep_status_and_reason_missing_info %}
-                    <p>
-                        {% trans '... where PEP status is declared AND (erroneously) a reason for missing PEP information is given' %}:
-                        {{  statistics.count_person_statements_have_pep_status_and_reason_missing_info }}
-                        ({% widthratio statistics.count_person_statements_have_pep_status_and_reason_missing_info statistics.count_person_statements 100 %}%)
-                    </p>
-                {% endif %}
+                {% for key, count in statistics.count_person_statements_have_pep_status_statuses.items %}
+                    {% if count > 0 %}
+                        <p>
+                            {% blocktrans %} ... with PEP status {{ key }}{% endblocktrans %}:
+                            {{ count }}
+                            ({% widthratio count statistics.count_person_statements 100 %}%)
+                        </p>
+                    {% endif %}
+                {% endfor %}
 
                 <h4>{% trans 'Ownership or Control Statements' %}</h4>
 
@@ -301,8 +294,27 @@
                         ({% widthratio statistics.count_ownership_or_control_statement_interested_party_with_unspecified statistics.count_ownership_or_control_statement 100 %}%)
                     </p>
                 {% endif %}
+                {% if statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
+                    <p>
+                        {% trans ' ... where beneficial ownership relations are disclosed' %}:
+                        {{ statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial }}
+                        ({% widthratio statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial statistics.count_ownership_or_control_statement 100 %}%)
+                    </p>
+                {% endif %}
 
-                <p>{% trans 'Total Interest Statements' %}: {{ statistics.count_ownership_or_control_interest_statement }}</p>
+                <p>{% trans 'Total Interest Objects' %}: {{ statistics.count_ownership_or_control_interest_statement }}</p>
+
+                {% if statistics.count_ownership_or_control_statement_interest_direct_or_indirect %}
+                    {% for key, count in statistics.count_ownership_or_control_statement_interest_direct_or_indirect.items %}
+                        {% if count > 0 %}
+                            <p>
+                                {% blocktrans %} ... with directOrIndirect '{{ key }}'{% endblocktrans %}:
+                                {{ count }}
+                                ({% widthratio count statistics.count_ownership_or_control_interest_statement 100 %}%)
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
 
                 {% for key, count in statistics.count_ownership_or_control_statement_interest_statement_types.items %}
                     {% if count > 0 %}
