@@ -323,7 +323,104 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == 'statement_entity_type_and_entity_sub_type_do_not_align' %}
+            <tr>
+                <td>
+                    {% blocktrans %}The specified entitySubtype is not valid for the specified entityType.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'has_public_listing_information_but_has_public_listing_is_false' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement hasPublicListing that does not exist or is false. Information has been provided under companyFilingsURLs or securitiesListings so hasPublicListing must be true.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'entity_security_listing_market_identifier_code_set_but_not_operating_market_identifier_code' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement has a security listing where marketIdentifierCode is set but operatingMarketIdentifierCode is not set.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'entity_security_listing_operating_market_identifier_code_set_but_not_market_identifier_code' %}
+            <tr>
+                <td>
+                    {% blocktrans %}This Entity Statement has a security listing where operatingMarketIdentifierCode is set but marketIdentifierCode is not set.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'has_pep_details_without_missing_info_but_incorrect_pep_status' %}
+            {# Currently this applies to 0.2 only #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement has some PEP details without missing info but their PEP status has not been declared as True.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'has_pep_details_but_incorrect_pep_status' %}
+            {# Currently this applies to 0.3+ only #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement has some PEP details but their PEP status is missing or has been declared as 'isNotPep'.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == 'has_pep_details_with_missing_info_but_incorrect_pep_status' %}
+            {# Currently this applies to 0.2 and 0.3+ #}
+            <tr>
+                <td>
+                    {% if schema_version_used == '0.2' %}
+                        {% blocktrans %}This Person Statement has some PEP details with missing info but their status has been declared as True.{%endblocktrans%}
+                    {% else %}
+                        {% blocktrans %}This Person Statement has a missingInfoReason for PEP status details, so PEP status should be declared as 'unknown'.{%endblocktrans%}
+                    {% endif %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
+    {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
+        <tr>
+            <td>
+                {% blocktrans %}No individuals are disclosed as beneficial owners. beneficialOwnershipOrControl must be set to true within an Interest object to indicate that the interested party is a beneficial owner.{%endblocktrans%}
+            </td>
+            <td>
+            </td>
+            <td>
+                {% blocktrans %}All Ownership-or-control statements{%endblocktrans%}
+            </td>
+        </tr>
+    {% endif %}
+
     </tbody>
 </table>

@@ -110,7 +110,7 @@ libcove==0.26.0
     #   -r requirements.txt
     #   libcovebods
     #   libcoveweb
-libcovebods==0.12.0
+libcovebods==0.13.0
     # via -r requirements.txt
 libcoveweb==0.24.1
     # via
@@ -130,8 +130,11 @@ openpyxl==3.0.9
     # via
     #   -r requirements.txt
     #   flattentool
-packaging==21.0
-    # via pytest
+packaging==21.3
+    # via
+    #   -r requirements.txt
+    #   libcovebods
+    #   pytest
 pep517==0.11.0
     # via pip-tools
 persistent==4.7.0
@@ -153,8 +156,10 @@ pycparser==2.20
     #   cffi
 pyflakes==2.3.1
     # via flake8
-pyparsing==2.4.7
-    # via packaging
+pyparsing==3.0.9
+    # via
+    #   -r requirements.txt
+    #   packaging
 pyrsistent==0.18.0
     # via
     #   -r requirements.txt
