@@ -4,6 +4,10 @@
 #
 #    pip-compile requirements_dev.in
 #
+asgiref==3.4.1
+    # via
+    #   -r requirements.txt
+    #   django
 attrs==21.2.0
     # via
     #   -r requirements.txt
@@ -46,7 +50,7 @@ defusedxml==0.7.1
     # via
     #   -r requirements.txt
     #   odfpy
-django==2.2.27
+django==3.2.14
     # via
     #   -r requirements.txt
     #   django-bootstrap3
@@ -110,7 +114,7 @@ libcove==0.26.0
     #   -r requirements.txt
     #   libcovebods
     #   libcoveweb
-libcovebods==0.13.0
+libcovebods==0.14.0
     # via -r requirements.txt
 libcoveweb==0.24.1
     # via
@@ -230,8 +234,11 @@ transaction==3.0.1
     #   zodb
 transifex-client==0.14.3
     # via -r requirements_dev.in
-typing-extensions==3.10.0.2
-    # via gitpython
+typing-extensions==4.1.1
+    # via
+    #   -r requirements.txt
+    #   asgiref
+    #   gitpython
 uc-rfc6266-parser==0.1.0
     # via
     #   -r requirements.txt

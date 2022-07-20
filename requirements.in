@@ -1,6 +1,6 @@
 dealer
 sentry-sdk
-Django>2.2,<2.3
+Django>3.2,<3.3
 jsonschema
-libcovebods==0.13.0
+libcovebods==0.14.0
 libcoveweb>=0.19.0
