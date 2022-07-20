@@ -4,6 +4,8 @@
 #
 #    pip-compile requirements.in
 #
+asgiref==3.4.1
+    # via django
 attrs==21.2.0
     # via jsonschema
 backports-datetime-fromisoformat==1.0.0
@@ -26,7 +28,7 @@ dealer==2.1.0
     # via -r requirements.in
 defusedxml==0.7.1
     # via odfpy
-django==2.2.27
+django==3.2.14
     # via
     #   -r requirements.in
     #   django-bootstrap3
@@ -63,7 +65,7 @@ libcove==0.26.0
     # via
     #   libcovebods
     #   libcoveweb
-libcovebods==0.13.0
+libcovebods==0.14.0
     # via -r requirements.in
 libcoveweb==0.24.1
     # via
@@ -114,6 +116,8 @@ strict-rfc3339==0.7
     # via libcove
 transaction==3.0.1
     # via zodb
+typing-extensions==4.1.1
+    # via asgiref
 uc-rfc6266-parser==0.1.0
     # via libcoveweb
 urllib3==1.26.6
