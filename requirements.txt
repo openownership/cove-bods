@@ -45,6 +45,8 @@ flattentool==0.17.1
     #   libcove
     #   libcovebods
     #   libcoveweb
+gunicorn==20.1.0
+    # via -r requirements.in
 idna==3.2
     # via requests
 ijson==3.1.4

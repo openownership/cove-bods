@@ -19,6 +19,22 @@ Note: requires `gettext` to be installed. This should come by default with Ubunt
 apt-get update && apt-get install gettext
 ```
 
+## Dev with Docker
+
+Docker is used in production, so sometimes you may want to run locally with Docker to debug issues:
+
+```
+docker compose -f docker-compose.dev.yml down # (if running)
+docker compose -f docker-compose.dev.yml build --no-cache
+docker compose -f docker-compose.dev.yml up # (to restart)
+```
+
+To run commands, make sure environment is running (see up command above) then:
+
+```
+docker compose -f docker-compose.dev.yml run bods-cove-app-dev python manage.py migrate
+```
+
 ## Translations
 
 We use Django's translation framework to provide this application in different languages.
@@ -65,3 +81,4 @@ Add a new requirements to `requirements.in` or `requirements_dev.in` depending o
 Then, run `pip-compile requirements.in && pip-compile requirements_dev.in` this will populate `requirements.txt` and `requirements_dev.txt` with pinned versions of the new requirement and its dependencies.
 
 `pip-compile --upgrade requirements.in && pip-compile --upgrade requirements_dev.in` will update all pinned requirements to the latest version. Generally we don't want to do this at the same time as adding a new dependency, to make testing any problems easier.
+
