@@ -3,7 +3,8 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # Old version of Ubuntu needed to get Python 3.6
+    runs-on: ubuntu-20.04
     strategy:
       matrix:
         # Python 3.6 is used by the BODS live cove servers
