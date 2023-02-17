@@ -1,4 +1,4 @@
-FROM python:3.6-bullseye
+FROM python:3.11-bullseye
 
 # Setup
 
@@ -9,6 +9,10 @@ RUN mkdir -p /app/static
 
 RUN apt-get update
 RUN apt-get --assume-yes install gettext nginx
+
+# Git
+
+RUN git config --global --add safe.directory /app
 
 # Python
 

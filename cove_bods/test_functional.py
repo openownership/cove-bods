@@ -33,7 +33,7 @@ def server_url(request, live_server):
 ])
 def test_footer_bods(server_url, browser, link_text, url):
     browser.get(server_url)
-    footer = browser.find_element_by_id('footer')
-    link = footer.find_element_by_link_text(link_text)
+    footer = browser.find_element('id', 'footer')
+    link = footer.find_element("link text", link_text)
     href = link.get_attribute('href')
     assert href == url
