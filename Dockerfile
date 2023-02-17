@@ -16,7 +16,11 @@ RUN git config --global --add safe.directory /app
 
 # Python
 
-RUN pip install -r requirements.txt
+# Build our own copy of lxml using Ubuntu's libxml2/libxslt
+# (don't use the prebuilt wheel)
+# https://opendataservices.plan.io/issues/36790
+RUN apt install libxml2-dev libxslt-dev
+RUN pip install --no-binary lxml -r requirements.txt
 
 RUN python manage.py collectstatic --noinput
 RUN python manage.py compilemessages
