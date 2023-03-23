@@ -4,7 +4,6 @@ on: [push]
 jobs:
   branch-deploy:
     runs-on: ubuntu-latest
-    if: github.ref != 'refs/heads/master'
     environment:  cove-bods-dev
     steps:
     - name: Install SSH key
