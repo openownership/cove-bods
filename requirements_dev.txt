@@ -217,7 +217,7 @@ sniffio==1.3.0
     # via trio
 sortedcontainers==2.4.0
     # via trio
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via
     #   -r requirements.txt
     #   django
