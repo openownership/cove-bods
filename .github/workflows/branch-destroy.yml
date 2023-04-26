@@ -4,7 +4,7 @@ on: delete
 jobs:
   branch-destroy:
     if: github.event.ref_type == 'branch' && github.event.ref != 'master'
-    environment: standards-lab-branch-deploy
+    environment: cove-bods-dev
     runs-on: ubuntu-latest
     steps:
     - name: Install SSH key
