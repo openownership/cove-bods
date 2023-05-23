@@ -91,7 +91,7 @@ pytz==2022.7.1
     # via
     #   django
     #   flattentool
-requests==2.28.2
+requests==2.31.0
     # via
     #   libcove
     #   libcoveweb
