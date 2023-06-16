@@ -33,4 +33,4 @@ COPY docker/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 80
 
-CMD /bin/bash -c "/etc/init.d/nginx start && gunicorn --bind 0.0.0.0:8000 cove_project.wsgi:application"
+# No run command - they are in Procfile and docker-compose.dev.yml

@@ -1,4 +1,4 @@
-{% extends 'explore.html' %}
+{% extends 'libcoveweb2/explore.html' %}
 {% load i18n %}
 {% load cove_tags %}
 {% block header_button %}
@@ -6,6 +6,24 @@
 {% endblock %}
 
 {% block explore_content %}
+
+
+    {% if sample_mode %}
+        <div class="row">
+             <div class="panel panel-danger">
+                <div id="sampleMode" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="sampleModeInfo" data-toggle="collapse" data-target="#sampleModeInfo">
+                  <h4 class="panel-title">
+                    <span class="glyphicon glyphicon-collapse-up"></span>{% trans 'Sample Mode' %}
+                  </h4>
+                </div>
+                <div id="sampleModeInfo" class="collapse in panel-body">
+                    <p>This data was analysed in Sample mode. Conformance tests that require processing of the complete dataset have not been run.</p>
+                    <p>The complete dataset may have validation errors that have not been caught in Sample mode.</p>
+                    <p>The sample of statements analysed is not random: if an unchanging dataset is run through the data review tool multiple times, the same statements will form the sample each time.</p>
+                </div>
+              </div>
+        </div>
+    {% endif %}
 
     <div class="row">
          <div class="panel {% if unknown_schema_version_used or inconsistent_schema_version_used_count %}panel-danger{% else %}panel-success{% endif %}">
@@ -41,6 +59,7 @@
           </div>
     </div>
 
+
     <div class="row">
 
             <div class="panel panel-success">
@@ -51,59 +70,30 @@
                 </div>
                 <div id="downloadData" class="collapse in panel-body">
 
-                     {% if conversion == 'flatten' %}
-                        <p>We have tried to convert your JSON into a spreadsheet format.</p><p>The results can be seen below.</p>
-                        <ul class="list-unstyled left-space">
-                          <li>
-                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{original_file.url}}">{{JSON}} <small>({{original}})</small></a> <small>{{original_file.size|filesizeformat }}</small>
-                          </li>
-                          {% if not conversion_error %}
-                            <li>
-                              <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{converted_url}}.xlsx">{{xlsx}} <small>({{converted}})</small></a> <small>{{converted_file_size|filesizeformat }}</small>
-                            </li>
-                          {% endif %}
-                        </ul>
-                        {% if conversion_error %}
-                            <p>{% blocktrans %}The JSON could not be converted to Spreadsheet due to the error:{% endblocktrans %} {{ conversion_error }}</p>
+                    <ul class="list-unstyled left-space">
 
-                            {% include 'error_extra.html' %}
+                        {% for supplied_data_file in supplied_data_files %}
+                            <li>
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                                <a href="{{ supplied_data_file.upload_url  }}">{{ supplied_data_file.filename }} <small>({% trans 'Original' %})</small> ({{ supplied_data_file.size|filesizeformat }})</a>
+                            </li>
+                        {% endfor %}
+
+                        {% if original_format != 'spreadsheet' and can_download_xlsx %}
+                            <li>
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                                <a href="{{ download_xlsx_url }}">Excel Spreadsheet <small>({% trans 'Converted from Original' %})</small> ({{ download_xlsx_size|filesizeformat }})</a>
+                            </li>
                         {% endif %}
 
-                    {% elif conversion == 'unflatten' %}
-                        <p>We have tried to convert your data into JSON format.</p><p>The results can be seen below.</p>
-                        <ul class="list-unstyled">
-                          <li>
-                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-                            <a href="{{original_file.url}}">
-                              {% if file_type == 'xlsx' %}
-                                {{xlsx}} <small>({{original}})</small>
-                              {% elif file_type == 'csv' %}
-                                {{csv}} <small>({{original}})</small>
-                              {% endif %}
-                              </a>
-                              <small>{{original_file.size|filesizeformat }}</small>
-                            </li>
+                        {% if original_format != 'json' and can_download_json %}
                             <li>
-                              <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{converted_url}}">{{JSON}} <small>({{converted}})</small></a> <small>{{converted_file_size|filesizeformat }}</small>
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                                <a href="{{ download_json_url }}">JSON <small>({% trans 'Converted from Original' %})</small> ({{ download_json_size|filesizeformat }})</a>
                             </li>
-                        </ul>
+                        {% endif %}
 
-                    {% else %}
-                        <ul class="list-unstyled">
-                          <li>
-                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span><a href="{{original_file.url}}">{{JSON}} <small>({{original}})</small></a> <small>{{original_file.size|filesizeformat }}</small>
-                            {% if conversion == 'flattenable' %}
-                              <br/>
-                              <br/>
-                              <form method="post">
-                                <button name="flatten" value="true" type="submit" class="btn btn-success btn-sm">{% blocktrans %}Convert to Spreadsheet{% endblocktrans %}</button>
-                                {% csrf_token %}
-                              </form>
-                            {% endif %}
-                          </li>
-                        </ul>
-                    {% endif %}
-
+                    </ul>
 
                 </div>
               </div>
@@ -115,13 +105,6 @@
         {% endblock %}
 
         {% if validation_errors %}
-              {% for error_json, values in validation_errors %}
-                {% with error=error_json|json_decode %}
-                  {% cove_modal_errors className="validation-errors-"|concat:forloop.counter modalTitle=error.message errorList=values file_type=file_type full_table=True %}
-                {% endwith %}
-              {% endfor %}
-
-
               <a name="validation-errors" class="anchor"></a>
               <div class="panel panel-danger">
                 <div id="validation-panel" class="panel-heading pointer" role="region" aria-expanded="true" aria-controls="validationTable" data-toggle="collapse" data-target="#validationTable">
@@ -130,7 +113,7 @@
                   </h4>
                 </div>
                 <div id="validationTable" class="collapse in panel-body">
-                  {% include "validation_table.html" %}
+                  {% include "cove_bods/validation_table.html" %}
                 </div>
               </div>
         {% else %}
@@ -183,7 +166,7 @@
     <div class="row">
 
         <a name="additional-checks" class="anchor"></a>
-        <div {% if additional_checks_count or not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}class="panel panel-danger" {% else %}class="panel panel-success"{% endif %}>
+        <div {% if additional_checks_count or checks_not_run_in_sample_mode or not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}class="panel panel-danger" {% else %}class="panel panel-success"{% endif %}>
             <div id="checks-panel" class="panel-heading pointer" role="region" aria-expanded="true"
                  aria-controls="additionalChecksTable" data-toggle="collapse" data-target="#additionalChecksTable">
                 <h4 class="panel-title">

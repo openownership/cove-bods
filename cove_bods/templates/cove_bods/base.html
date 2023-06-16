@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'libcoveweb2/base.html' %}
 {% load i18n %}
 {% load static %}
 
@@ -126,13 +126,26 @@
 
         <p>{% blocktrans %}After submitting your data, use the information provided on the Results page to <a href="#introduction">check and review</a> the data’s quality and compliance with BODS. Your data can also be downloaded in alternative BODS-compliant formats from the Results page.{%endblocktrans%}</p>
 
-        <p>{% blocktrans %}If your data file is larger than 10MB, this analysis may take some time. Email <a href="mailto:support@openownership.org">support@openownership.org</a> to get help from the Open Ownership helpdesk with checking large files. Alternatively you can install our <a href="https://pypi.org/project/libcovebods/">data review library</a> to analyse files via your command line interface.{%endblocktrans%}</p>
-
-        <b>{% blocktrans %}Accepted BODS formats:{%endblocktrans%}</b>
+        <b>{% blocktrans %}<strong>Accepted BODS formats{%endblocktrans%}</strong></b>
         <ul>
             <li>{% blocktrans %}JSON built to the <a href="#introduction">Beneficial Ownership Data Standard</a> (UTF-8 encoding supported){%endblocktrans%}</li>
             <li>{% blocktrans %}Multi-table data package - Excel (.xlsx) (UTF-8, Windows-1252 and ISO-8859-1 encodings supported){%endblocktrans%}</li>
         </ul>
+
+        <p><strong>Large datasets</strong></p>
+        <p>
+          If your data file is larger than 10MB, this analysis may take some time. You can process a subset of your submitted data using <em>Sample mode</em> (see below).
+          Alternatively you can install our <a href="https://pypi.org/project/libcovebods/">data review library</a> to analyse files via your command line interface.
+        </p>
+        <p>
+          <em>Sample mode</em> validates and analyses the data from a subset of the submitted BODS statements.
+          Statements of all three types (person, entity and ownership-or-control) are represented in the sample.
+          Sampling is not random: if an unchanging dataset is run through the data review tool multiple times, the same statements will form the sample each time.
+          Conformance tests that require processing of the complete dataset are not run in <em>Sample mode</em>.
+        </p>
+        <p><strong>Feedback and support</strong></p>
+        <p>{% blocktrans %}Submit feedback, issues or bugs via <a href="https://github.com/openownership/cove-bods">the cove-bods repository</a>. For further information or support email <a href="mailto:support@openownership.org">support@openownership.org</a>.{%endblocktrans%}</p>
+
       </div>
     </div>
   </div>
