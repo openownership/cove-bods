@@ -8,8 +8,6 @@ amqp==5.1.1
     # via kombu
 asgiref==3.7.2
     # via django
-async-timeout==4.0.2
-    # via redis
 attrs==23.1.0
     # via jsonschema
 backports-datetime-fromisoformat==2.0.0
@@ -46,7 +44,7 @@ dealer==2.1.0
     # via -r requirements.in
 defusedxml==0.7.1
     # via odfpy
-django==3.2.19
+django==3.2.20
     # via
     #   -r requirements.in
     #   django-bootstrap3

@@ -16,10 +16,6 @@ async-generator==1.10
     # via
     #   trio
     #   trio-websocket
-async-timeout==4.0.2
-    # via
-    #   -r requirements.txt
-    #   redis
 attrs==23.1.0
     # via
     #   -r requirements.txt
@@ -89,7 +85,7 @@ defusedxml==0.7.1
     # via
     #   -r requirements.txt
     #   odfpy
-django==3.2.19
+django==3.2.20
     # via
     #   -r requirements.txt
     #   django-bootstrap3
