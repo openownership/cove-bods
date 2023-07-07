@@ -11,5 +11,30 @@ services:
     environment:
       DEBUG: "True"
       ALLOWED_HOSTS: "localhost"
+      CELERY_BROKER_URL: "redis://bods-cove-redis-dev:6379/0"
     volumes:
       - ".:/app"
+    command: "/bin/bash -c \"/etc/init.d/nginx start && gunicorn --bind 0.0.0.0:8000 cove_project.wsgi:application\""
+    depends_on:
+      - bods-cove-redis-dev
+
+  bods-cove-worker-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost"
+      CELERY_BROKER_URL: "redis://bods-cove-redis-dev:6379/0"
+    volumes:
+      - ".:/app"
+    command: "celery -A libcoveweb2.celery worker -l info -c 1"
+    depends_on:
+      - bods-cove-redis-dev
+
+  bods-cove-redis-dev:
+    image: redis:7
+
+networks:
+  default:
+    name: bods-cove-dev

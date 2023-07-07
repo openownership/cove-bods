@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-from cove import settings
+from libcoveweb2 import settings
 import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,6 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 env = environ.Env(  # set default values and casting
     DB_NAME=(str, os.path.join(BASE_DIR, 'db.sqlite3')),
     SENTRY_DSN=(str, ''),
+    CELERY_BROKER_URL=(str, ""),
+    REDIS_URL=(str, ""),
 )
 
 # We use the setting to choose whether to show the section about Sentry in the
@@ -62,8 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
-    'cove',
-    'cove.input',
+    "libcoveweb2",
     'cove_bods',
 ]
 
@@ -78,7 +79,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'dealer.contrib.django.Middleware',
-    'cove.middleware.CoveConfigCurrentApp',
+    "libcoveweb2.middleware.CoveConfigCurrentApp",
 )
 
 
@@ -161,3 +162,50 @@ COVE_CONFIG = {
 
 # https://github.com/OpenDataServices/cove/issues/1098
 FILE_UPLOAD_PERMISSIONS = 0o644
+
+ALLOWED_JSON_CONTENT_TYPES = settings.ALLOWED_JSON_CONTENT_TYPES
+ALLOWED_JSON_EXTENSIONS = settings.ALLOWED_JSON_EXTENSIONS
+
+ALLOWED_SPREADSHEET_EXCEL_CONTENT_TYPES = (
+    settings.ALLOWED_SPREADSHEET_EXCEL_CONTENT_TYPES
+)
+ALLOWED_SPREADSHEET_EXCEL_EXTENSIONS = settings.ALLOWED_SPREADSHEET_EXCEL_EXTENSIONS
+
+ALLOWED_SPREADSHEET_OPENDOCUMENT_CONTENT_TYPES = (
+    settings.ALLOWED_SPREADSHEET_OPENDOCUMENT_CONTENT_TYPES
+)
+ALLOWED_SPREADSHEET_OPENDOCUMENT_EXTENSIONS = (
+    settings.ALLOWED_SPREADSHEET_OPENDOCUMENT_EXTENSIONS
+)
+
+ALLOWED_SPREADSHEET_CONTENT_TYPES = settings.ALLOWED_SPREADSHEET_CONTENT_TYPES
+ALLOWED_SPREADSHEET_EXTENSIONS = settings.ALLOWED_SPREADSHEET_EXTENSIONS
+
+ALLOWED_CSV_CONTENT_TYPES = settings.ALLOWED_CSV_CONTENT_TYPES
+ALLOWED_CSV_EXTENSIONS = settings.ALLOWED_CSV_EXTENSIONS
+
+
+PROCESS_TASKS = [
+    # Get data if not already on disk
+    ("libcoveweb2.process.common_tasks.download_data_task", "DownloadDataTask"),
+    # Sample
+    ("cove_bods.process", "Sample"),
+    # Guess format
+    ("cove_bods.process", "SetOrTestSuppliedDataFormat"),
+    # Make sure uploads are in primary format
+    ("cove_bods.process", "WasJSONUploaded"),
+    ("cove_bods.process", "ConvertSpreadsheetIntoJSON"),
+    # Add useful info for later
+    ("cove_bods.process", "GetDataReaderAndConfigAndSchema"),
+    # Convert into output formats
+    ("cove_bods.process", "ConvertJSONIntoSpreadsheets"),
+    # Checks and stats
+    ("cove_bods.process", "AdditionalFieldsChecksTask"),
+    ("cove_bods.process", "PythonValidateTask"),
+    ("cove_bods.process", "JsonSchemaValidateTask"),
+]
+
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL") or env("REDIS_URL")
+CELERY_TASK_EAGER_PROPAGATES = CELERY_BROKER_URL == "memory://"
+CELERY_TASK_ALWAYS_EAGER = CELERY_BROKER_URL == "memory://"

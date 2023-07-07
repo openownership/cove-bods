@@ -1,0 +1,85 @@
+{% load i18n %}
+{% load cove_tags %}
+
+<table class="table table-condensed">
+<thead>
+  <tr>
+    <th>{% trans 'Error Description' %}</th>
+    <th>{% trans 'Error Count' %}</th>
+    <th>{% trans 'First 3 Examples' %}</th>
+    <th>{% trans 'Location of first 3 errors' %}</th>
+  </tr>
+</thead>
+<tbody>
+{% for type, errors in validation_errors.items %}
+<tr>
+  <td>
+    <p>
+      {% if errors.0.validator == "required" %}
+        <strong><code>{{ errors.0.extra.required_key_which_is_missing }}</code> is missing but required. Check that the field is included and correctly spelled.</strong>
+      {% elif errors.0.validator == "maximum" %}
+        <strong><code>{{ errors.0.path_ending }}</code> is too large. The maximum allowed value is {{ errors.0.validator_value }}.</strong>
+      {% elif errors.0.validator == "minimum" %}
+        <strong><code>{{ errors.0.path_ending}}</code> is too small. The minimum allowed value is {{ errors.0.validator_value }}.</strong>
+      {% elif errors.0.validator == "enum" %}
+        <strong><code>{{ errors.0.path_ending }}</code> contains an unrecognised value. Check the related codelist for allowed code values.</strong>
+      {% elif errors.0.validator == "pattern" %}
+        <strong><code>{{ errors.0.path_ending }}</code> does not match the regex <code>{{ errors.0.validator_value }}</code></strong>
+      {% elif errors.0.validator == "format" and errors.0.validator_value == "date" %}
+        <strong>Date is not in the correct format. The correct format is YYYY-MM-DD.</strong>
+      {% elif errors.0.validator == "format" and errors.0.validator_value == "date-time" %}
+        <strong>Date is not in the correct format. The correct format is YYYY-MM-DDT00:00:00Z.</strong>
+      {% elif errors.0.validator == "format" and errors.0.validator_value == "uri" %}
+        <strong>Invalid uri found</strong>
+      {% elif errors.0.validator == "minLength" %}
+        <strong><code>{{ errors.0.path_ending }}</code> is too short. It should be at least {{ errors.0.validator_value }} characters.</strong>
+      {% elif errors.0.validator == "maxLength" %}
+        <strong><code>{{ errors.0.path_ending }}</code> is too long. It should not exceed {{ errors.0.validator_value }} characters.</strong>
+      {% elif errors.0.validator == "type" and errors.0.validator_value == "number" %}
+        <strong><code>{{ errors.0.path_ending }}</code> should be a number. Check that the value is not null, and doesn’t contain any characters other than 0-9 and dot (<code>.</code>). Number values should not be in quotes.</strong>
+      {% elif errors.0.validator == "type" and errors.0.validator_value == "array" %}
+        <strong><code>{{ errors.0.path_ending }}</code> should be a JSON array. Check that value(s) appear within square brackets, [...]</strong>
+      {% elif errors.0.validator == "type" and errors.0.validator_value == "string" %}
+        <strong><code>{{ errors.0.path_ending }}</code> should be a string. Check that the value is not null, and has quotes at the start and end. Escape any quotes in the value with <code>\</code></strong>
+      {% elif errors.0.validator == "type" and errors.0.validator_value == "boolean" %}
+        <strong><code>{{ errors.0.path_ending }}</code> should be a JSON boolean, <code>true</code> or <code>false</code>.</strong>
+      {% elif errors.0.validator == "type" and errors.0.validator_value == "object" %}
+        <strong><code>{{ errors.0.path_ending }}</code> should be a JSON object.</strong>
+      {% elif errors.0.validator == "dependencies" %}
+        <strong>{{ errors.0.message  }}</strong>
+      {% elif errors.0.validator == "anyOf" %}
+        <strong>{{ errors.0.message  }}</strong>
+      {% else %}
+        <strong>{{ errors.0.validator  }} = {{ errors.0.message  }}</strong>
+      {% endif %}
+    </p>
+  </td>
+  <td class="text-center">
+    {% if errors|length > 3 %}
+      <a data-toggle="modal" data-target=".{{"validation-errors-"|concat:forloop.counter}}">
+        {{errors|length}}
+      </a>
+    {% else %}
+        {{errors|length}}
+    {% endif %}
+  </td>
+  <td>
+    <ul class="list-unstyled">
+      {% for error in errors|slice:":3" %}
+        {% if error.instance|get_variable_type != "dict" %}<li> {{error.instance}} </li>{% endif %}
+      {% endfor %}
+    </ul>
+  </td>
+  <td>
+    <ul class="list-unstyled">
+      {% for error in errors|slice:":3" %}
+        <li>
+          {{ error.path|join:"/" }}
+        </li>
+      {% endfor %}
+    </ul>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>

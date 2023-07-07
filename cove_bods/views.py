@@ -1,134 +1,84 @@
-import json
 import logging
-import functools
-import datetime
-from decimal import Decimal
 
-from django.shortcuts import render
-from django.utils.translation import ugettext_lazy as _
-from django.utils.html import format_html
-
-from libcovebods.common_checks import common_checks_bods
-from libcovebods.schema import SchemaBODS
-from libcovebods.config import LibCoveBODSConfig
-from libcove.lib.exceptions import CoveInputDataError
-from cove.views import explore_data_context
-from libcove.lib.converters import convert_spreadsheet, convert_json
 from cove_project import settings
+from django.shortcuts import render
+from libcoveweb2.views import (
+    ExploreDataView,
+    InputDataView
+)
+from libcoveweb2.models import SuppliedDataFile
+from cove_bods.forms import NewTextForm, NewUploadForm, NewURLForm
+
 
 logger = logging.getLogger(__name__)
 
 
-def cove_web_input_error(func):
-    @functools.wraps(func)
-    def wrapper(request, *args, **kwargs):
-        try:
-            return func(request, *args, **kwargs)
-        except CoveInputDataError as err:
-            return render(request, 'error.html', context=err.context)
-    return wrapper
+JSON_FORM_CLASSES = {
+        "upload_form": NewUploadForm,
+        "text_form": NewTextForm,
+        "url_form": NewURLForm,
+    }
 
 
-@cove_web_input_error
-def explore_bods(request, pk):
-    context, db_data, error = explore_data_context(request, pk)
-    if error:
-        return error
+class NewInput(InputDataView):
+    form_classes = JSON_FORM_CLASSES
+    input_template = "cove_bods/index.html"
+    allowed_content_types = settings.ALLOWED_JSON_CONTENT_TYPES + settings.ALLOWED_SPREADSHEET_CONTENT_TYPES
+    content_type_incorrect_message = "This does not appear to be a supported file."
+    allowed_file_extensions = settings.ALLOWED_JSON_EXTENSIONS + settings.ALLOWED_SPREADSHEET_EXTENSIONS
+    file_extension_incorrect_message = "This does not appear to be a supported file."
+    supplied_data_format = "unknown"
 
-    lib_cove_bods_config = LibCoveBODSConfig()
-    lib_cove_bods_config.config['root_list_path'] = settings.COVE_CONFIG['root_list_path']
-    lib_cove_bods_config.config['root_id'] = settings.COVE_CONFIG['root_id']
-    lib_cove_bods_config.config['id_name'] = settings.COVE_CONFIG['id_name']
-    lib_cove_bods_config.config['root_is_list'] = settings.COVE_CONFIG['root_is_list']
-    lib_cove_bods_config.config['bods_additional_checks_person_birthdate_max_year'] = datetime.datetime.now().year
-    lib_cove_bods_config.config['bods_additional_checks_person_birthdate_min_year'] = \
-        datetime.datetime.now().year - 120
+    def get_active_form_key(self, forms, request_data):
+        if "paste" in request_data:
+            return "text_form"
+        elif "url" in request_data:
+            return "url_form"
+        else:
+            return "upload_form"
 
-    upload_dir = db_data.upload_dir()
-    upload_url = db_data.upload_url()
-    file_name = db_data.original_file.file.name
-    file_type = context['file_type']
+    def save_file_content_to_supplied_data(
+        self, form_name, form, request, supplied_data
+    ):
+        if form.cleaned_data["sample_mode"]:
+            supplied_data.meta["sample_mode"] = True
+            supplied_data.save()
+        if form_name == "upload_form":
+            supplied_data.save_file(request.FILES["file_upload"])
+        elif form_name == "text_form":
+            supplied_data.save_file_contents(
+                "input.json",
+                form.cleaned_data["paste"],
+                "application/json",
+                None
+            )
+        elif form_name == "url_form":
+            supplied_data.save_file_from_source_url(
+                form.cleaned_data["url"], content_type="application/json"
+            )
 
-    if file_type == 'json':
-        # open the data first so we can inspect for record package
-        with open(file_name, encoding='utf-8') as fp:
-            try:
-                json_data = json.load(fp, parse_float=Decimal)
-            except ValueError as err:
-                raise CoveInputDataError(context={
-                    'sub_title': _("Sorry, we can't process that data"),
-                    'link': 'index',
-                    'link_text': _('Try Again'),
-                    'msg': _(format_html('We think you tried to upload a JSON file, but it is not well formed JSON.'
-                                         '\n\n<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true">'
-                                         '</span> <strong>Error message:</strong> {}', err)),
-                    'error': format(err)
-                })
 
-            if not isinstance(json_data, list):
-                raise CoveInputDataError(context={
-                    'sub_title': _("Sorry, we can't process that data"),
-                    'link': 'index',
-                    'link_text': _('Try Again'),
-                    'msg': _('BODS JSON should have a list as the top level, the JSON you supplied does not.'),
-                })
+def index(request):
 
-        schema_bods = SchemaBODS(json_data=json_data, lib_cove_bods_config=lib_cove_bods_config)
+    forms = {
+        "json": {
+            form_name: form_class()
+            for form_name, form_class in JSON_FORM_CLASSES.items()
+        },
+    }
 
-        context.update(convert_json(upload_dir, upload_url, file_name, lib_cove_bods_config,
-                                    schema_url=schema_bods.pkg_schema_url, replace=True,
-                                    request=request, flatten=True))
+    return render(request, "cove_bods/index.html", {"forms": forms})
 
-    else:
 
-        schema_bods = SchemaBODS(lib_cove_bods_config=lib_cove_bods_config)
-        context.update(convert_spreadsheet(upload_dir, upload_url, file_name, file_type, lib_cove_bods_config,
-                                           schema_url=schema_bods.pkg_schema_url))
-        with open(context['converted_path'], encoding='utf-8') as fp:
-            json_data = json.load(fp, parse_float=Decimal)
-        # Create schema_bods again now that we have json_data (this will pick
-        # up the appropriate schema)
-        schema_bods = SchemaBODS(json_data=json_data, lib_cove_bods_config=lib_cove_bods_config)
-        # Run the conversion again now that we have the correct schema
-        context.update(convert_spreadsheet(upload_dir, upload_url, file_name, file_type, lib_cove_bods_config,
-                                           schema_url=schema_bods.pkg_schema_url,
-                                           cache=False, replace=True))
-        with open(context['converted_path'], encoding='utf-8') as fp:
-            json_data = json.load(fp, parse_float=Decimal)
+class ExploreBODSView(ExploreDataView):
+    explore_template = "cove_bods/explore.html"
+    processing_template = "cove_bods/processing.html"
+    error_template = "cove_bods/error.html"
 
-    context = common_checks_bods(context, upload_dir, json_data, schema_bods,
-                                 lib_cove_bods_config=lib_cove_bods_config)
-
-    if not db_data.rendered:
-        db_data.rendered = True
-    db_data.save()
-
-    # Some extra info from the Schema
-    context['schema_version_used'] = schema_bods.schema_version
-
-    # We need to calculate some stats for showing in the view
-    total_ownership_or_control_interest_statements = 0
-    for key, count in context['statistics']['count_ownership_or_control_statement_interest_statement_types'].items():
-        total_ownership_or_control_interest_statements += count
-    context['statistics']['count_ownership_or_control_interest_statement'] = total_ownership_or_control_interest_statements # noqa
-
-    # The use of r_e_type is to stop flake8 complaining about line length
-    r_e_type = 'registeredEntity'
-    context['statistics']['count_entities_registeredEntity_legalEntity_with_any_identifier'] = (
-        context['statistics']['count_entity_statements_types_with_any_identifier'][r_e_type] +
-        context['statistics']['count_entity_statements_types_with_any_identifier']['legalEntity'])
-    context['statistics']['count_entities_registeredEntity_legalEntity_with_any_identifier_with_id_and_scheme'] = (
-        context['statistics']['count_entity_statements_types_with_any_identifier_with_id_and_scheme'][r_e_type] +
-        context['statistics']['count_entity_statements_types_with_any_identifier_with_id_and_scheme']['legalEntity'])
-    context['statistics']['count_entities_registeredEntity_legalEntity'] = (
-        context['statistics']['count_entity_statements_types'][r_e_type] +
-        context['statistics']['count_entity_statements_types']['legalEntity'])
-    unknown_schema_version_used = \
-        [i for i in context['additional_checks'] if i['type'] == 'unknown_schema_version_used']
-    context['unknown_schema_version_used'] = unknown_schema_version_used[0] if unknown_schema_version_used else None
-    context['inconsistent_schema_version_used_count'] = \
-        len([i for i in context['additional_checks'] if i['type'] == 'inconsistent_schema_version_used'])
-
-    template = 'cove_bods/explore.html'
-
-    return render(request, template, context)
+    def default_explore_context(self, supplied_data):
+        return {
+            # Misc
+            "supplied_data_files": SuppliedDataFile.objects.filter(
+                supplied_data=supplied_data
+            ),
+        }
