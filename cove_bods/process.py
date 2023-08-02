@@ -1,3 +1,6 @@
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+
 from libcovebods.schema import SchemaBODS
 from libcovebods.config import LibCoveBODSConfig
 from libcovebods.jsonschemavalidate import JSONSchemaValidator
@@ -19,6 +22,30 @@ from libcoveweb2.process.common_tasks.task_with_state import TaskWithState
 # from libcove.lib.converters import convert_json, convert_spreadsheet
 from libcoveweb2.utils import get_file_type_for_flatten_tool
 from libcoveweb2.utils import group_data_list_by
+
+
+def create_error_file(name: str, id: str, data: dict):
+    """Create temporary error file"""
+    filename = f"{name}-{id}-error.json"
+    default_storage.save(filename, ContentFile(json.dumps(data).encode('utf-8')))
+
+
+def error_file_exists(name: str, id: str) -> bool:
+    """Test if error file exists"""
+    filename = f"{name}-{id}-error.json"
+    return default_storage.exists(filename)
+
+
+def read_error_file(name: str, id: str) -> dict:
+    """Read data from error file"""
+    filename = f"{name}-{id}-error.json"
+    return json.loads(default_storage.open(filename).read().decode('utf-8'))
+
+
+def delete_error_file(name: str, id: str):
+    """Delete temporary error file"""
+    filename = f"{name}-{id}-error.json"
+    default_storage.delete(filename)
 
 
 class Sample(ProcessDataTask):
@@ -248,12 +275,15 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
             CONVERT_JSON_INTO_SPREADSHEETS_DIR_NAME,
             "data.xlsx",
         )
+        self.data_id = str(self.supplied_data.id)
 
     def is_processing_applicable(self) -> bool:
         return True
 
     def is_processing_needed(self) -> bool:
-        return not os.path.exists(self.xlsx_filename)
+        if os.path.exists(self.xlsx_filename): return False
+        if error_file_exists("ConvertJSONIntoSpreadsheets", self.data_id): return False
+        return True
 
     def process(self, process_data: dict) -> dict:
 
@@ -276,7 +306,8 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
             flattentool.flatten(process_data["json_data_filename"], **flatten_kwargs)
         except Exception as err:
             capture_exception(err)
-            # TODO log and show to user. https://github.com/Open-Telecoms-Data/cove-ofds/issues/24
+            create_error_file("ConvertJSONIntoSpreadsheets", self.data_id,
+                              {"type": type(err).__name__, "filename": process_data["json_data_filename"].split('/')[-1]})
 
         return process_data
 
@@ -293,6 +324,11 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
             context["download_xlsx_size"] = os.stat(self.xlsx_filename).st_size
         else:
             context["can_download_xlsx"] = False
+            if error_file_exists("ConvertJSONIntoSpreadsheets", self.data_id):
+                context["xlsx_error"] = read_error_file("ConvertJSONIntoSpreadsheets", self.data_id)
+                delete_error_file("ConvertJSONIntoSpreadsheets", self.data_id)
+            else:
+                context["xlsx_error"] = False
         # done!
         return context
 
