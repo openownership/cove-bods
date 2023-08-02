@@ -281,8 +281,10 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
         return True
 
     def is_processing_needed(self) -> bool:
-        if os.path.exists(self.xlsx_filename): return False
-        if error_file_exists("ConvertJSONIntoSpreadsheets", self.data_id): return False
+        if os.path.exists(self.xlsx_filename):
+            return False
+        if error_file_exists("ConvertJSONIntoSpreadsheets", self.data_id):
+            return False
         return True
 
     def process(self, process_data: dict) -> dict:
@@ -307,7 +309,8 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
         except Exception as err:
             capture_exception(err)
             create_error_file("ConvertJSONIntoSpreadsheets", self.data_id,
-                              {"type": type(err).__name__, "filename": process_data["json_data_filename"].split('/')[-1]})
+                              {"type": type(err).__name__,
+                               "filename": process_data["json_data_filename"].split('/')[-1]})
 
         return process_data
 
