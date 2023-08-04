@@ -327,7 +327,8 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
         else:
             context["can_download_xlsx"] = False
             if error_file_exists(self.supplied_data.storage_dir(), "ConvertJSONIntoSpreadsheets"):
-                context["xlsx_error"] = read_error_file(self.supplied_data.storage_dir(), "ConvertJSONIntoSpreadsheets")
+                context["xlsx_error"] = read_error_file(self.supplied_data.storage_dir(),
+                                                            "ConvertJSONIntoSpreadsheets")
                 delete_error_file(self.supplied_data.storage_dir(), "ConvertJSONIntoSpreadsheets")
             else:
                 context["xlsx_error"] = False
