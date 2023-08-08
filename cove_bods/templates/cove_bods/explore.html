@@ -84,6 +84,13 @@
                                 <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
                                 <a href="{{ download_xlsx_url }}">Excel Spreadsheet <small>({% trans 'Converted from Original' %})</small> ({{ download_xlsx_size|filesizeformat }})</a>
                             </li>
+                        {% else %}
+                            {% if xlsx_error %}
+                            <li>
+                                <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                                <span>Excel Spreadsheet - Error ({{ xlsx_error.type }}) converting from JSON ({{ xlsx_error.filename }})</span>
+                            </li>
+                            {% endif %}
                         {% endif %}
 
                         {% if original_format != 'json' and can_download_json %}
