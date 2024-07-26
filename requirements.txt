@@ -8,8 +8,6 @@ amqp==5.1.1
     # via kombu
 asgiref==3.7.2
     # via django
-async-timeout==4.0.2
-    # via redis
 attrs==23.1.0
     # via jsonschema
 backports-datetime-fromisoformat==2.0.0
@@ -46,7 +44,7 @@ dealer==2.1.0
     # via -r requirements.in
 defusedxml==0.7.1
     # via odfpy
-django==3.2.19
+django==5.0.7
     # via
     #   -r requirements.in
     #   django-bootstrap3
@@ -106,7 +104,6 @@ python-dateutil==2.8.2
 pytz==2023.3
     # via
     #   celery
-    #   django
     #   flattentool
     #   libcovebods
 redis==4.5.5
