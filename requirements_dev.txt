@@ -126,7 +126,7 @@ jsonref==1.1.0
     # via
     #   -r requirements.txt
     #   flattentool
-jsonschema==4.9.1
+jsonschema==4.23.0
     # via
     #   -r requirements.txt
     #   libcovebods
@@ -134,11 +134,13 @@ kombu==5.2.4
     # via
     #   -r requirements.txt
     #   celery
-libcove2==0.1.0
+#libcove2==0.1.0
+libcove2 @ git+https://github.com/OpenDataServices/lib-cove-2.git@handle_new_jsonschema
     # via
     #   -r requirements.txt
     #   libcovebods
-libcovebods==0.15.0
+#libcovebods==0.15.0
+libcovebods @ git+https://github.com/openownership/lib-cove-bods.git@add_bods_0.4
     # via -r requirements.txt
 libcoveweb2==0.1.0
     # via -r requirements.txt

@@ -69,15 +69,17 @@ ijson==3.2.0.post0
     #   libcovebods
 jsonref==1.1.0
     # via flattentool
-jsonschema==4.9.1
+jsonschema==4.23.0
     # via
     #   -r requirements.in
     #   libcovebods
 kombu==5.2.4
     # via celery
-libcove2==0.1.0
+#libcove2==0.1.0
+libcove2 @ git+https://github.com/OpenDataServices/lib-cove-2.git@handle_new_jsonschema
     # via libcovebods
-libcovebods==0.15.0
+#libcovebods==0.15.0
+libcovebods @ git+https://github.com/openownership/lib-cove-bods.git@add_bods_0.4
     # via -r requirements.in
 libcoveweb2==0.1.0
     # via -r requirements.in
