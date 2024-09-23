@@ -236,7 +236,7 @@ schema==0.7.5
     #   flattentool
 selenium==4.8.0
     # via -r requirements_dev.in
-sentry-sdk==1.24.0
+sentry-sdk==2.14.0
     # via
     #   -r requirements.txt
     #   libcoveweb2
