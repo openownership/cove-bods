@@ -23,6 +23,9 @@ from libcoveweb2.process.common_tasks.task_with_state import TaskWithState
 from libcoveweb2.utils import get_file_type_for_flatten_tool
 from libcoveweb2.utils import group_data_list_by
 
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 def create_error_file(directory: str, name: str, data: dict):
     """Create temporary error file"""
@@ -235,6 +238,7 @@ class GetDataReaderAndConfigAndSchema(ProcessDataTask):
         )
         process_data['config'] = LibCoveBODSConfig()
         process_data['schema'] = SchemaBODS(process_data['data_reader'], process_data['config'])
+        logger.info("Schema version:", process_data['schema'].schema_version)
         # Save some to disk for templates
         if not os.path.exists(self.data_filename):
             save_data = {
