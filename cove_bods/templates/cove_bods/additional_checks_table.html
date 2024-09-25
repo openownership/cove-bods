@@ -396,10 +396,24 @@
             <tr>
                 <td>
                     {% if schema_version_used == '0.2' %}
-                        {% blocktrans %}This Person Statement has some PEP details with missing info but their status has been declared as True.{%endblocktrans%}
+                        {% blocktrans %}This Person Statement has some PEP details with missing info but
+ their status has been declared as True.{%endblocktrans%}
                     {% else %}
-                        {% blocktrans %}This Person Statement has a missingInfoReason for PEP status details, so PEP status should be declared as 'unknown'.{%endblocktrans%}
+                        {% blocktrans %}This Person Statement has a missingInfoReason for PEP status
+ details, so PEP status should be declared as 'unknown'.{%endblocktrans%}
                     {% endif %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_annotation_creation_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The creation date of an annotation on this Statement is in the future.{%endblocktrans%}
                 </td>
                 <td>
                 </td>
