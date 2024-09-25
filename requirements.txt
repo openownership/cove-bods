@@ -57,7 +57,8 @@ django-environ==0.10.0
     # via libcoveweb2
 et-xmlfile==1.1.0
     # via openpyxl
-flattentool==0.20.1
+#flattentool==0.20.1
+flattentool @ git+https://github.com/OpenDataServices/flatten-tool.git@handle_bods_0.4
     # via -r requirements.in
 gunicorn==20.1.0
     # via -r requirements.in
