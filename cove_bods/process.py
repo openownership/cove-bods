@@ -5,6 +5,7 @@ from libcovebods.schema import SchemaBODS
 from libcovebods.config import LibCoveBODSConfig
 from libcovebods.jsonschemavalidate import JSONSchemaValidator
 from libcovebods.additionalfields import AdditionalFields
+from libcovebods.schema_dir import schema_registry
 import libcovebods.run_tasks
 import libcovebods.data_reader
 from typing import List
@@ -298,13 +299,18 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
 
         os.makedirs(self.output_dir, exist_ok=True)
 
+        if os.path.isdir(process_data['schema'].pkg_schema_url):
+            schema = schema_registry(process_data['schema'].pkg_schema_url).contents("urn:statement")
+        else:
+            schema = process_data['schema'].pkg_schema_url
+
         flatten_kwargs = {
             "output_name": self.output_dir,
             "root_list_path": "there-is-no-root-list-path",
             "root_id": "statementID",
             "id_name": "statementID",
             "root_is_list": True,
-            "schema": process_data['schema'].pkg_schema_url,
+            "schema": schema,
         }
 
         try:
