@@ -416,6 +416,20 @@
                     {% blocktrans %}The creation date of an annotation on this Statement is in the future.{%endblocktrans%}
                 </td>
                 <td>
+                    {% trans 'Annotation creation date (creationDate)' %}: {{ additional_check.creation_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_publication_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Statement has a publication date in the future.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Publication date (publicationDetails.publicationDate)' %}: {{ additional_check.publication_date }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
