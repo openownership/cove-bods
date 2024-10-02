@@ -435,6 +435,19 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == "statement_entity_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statement is set as component of primary relationship statement. The record identifier of this Statement must be in the Component Statements array of the primary statement. Component Statements must be before the primary Relationship Statement in the statement series.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Statement identifier' %}: {{ additional_check.statement }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
         {% endif %}
     {% endfor %}
     {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
