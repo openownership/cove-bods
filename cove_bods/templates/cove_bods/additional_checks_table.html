@@ -448,6 +448,515 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == "statement_person_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statement is set as component of primary relationship statement. The record identifier of this Statement must be in the Component Statements array of the primary statement. Component Statements must be before the primary Relationship Statement in the statement series.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Statement identifier' %}: {{ additional_check.statement }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statement is set as component of primary relationship statement. The record identifier of this Statement must be in the Component Statements array of the primary statement. Component Statements must be before the primary Relationship Statement in the statement series.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Statement identifier' %}: {{ additional_check.statement }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_source_retrieved_at_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The information in this Statement has a retrieval date in the future.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Retrieval date' %}: {{ additional_check.retrieval_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The date of this Statement is in the future.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Statement date' %}: {{ additional_check.statement_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_birth_date_in_future" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Birth date is in the future.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Birth date (birthDate)' %}: {{ additional_check.birth_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_birth_date_too_far_in_past" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Birth date is before 1800.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Birth date (birthDate)' %}: {{ additional_check.birth_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_entity_dissolution_before_founding_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The founding date for the entity in this Statement is later than its dissolution date.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Entity founding date (foundingDate)' %}: {{ additional_check.founding_date }} {% trans 'Entity dissolution date (dissolutionDate)' %}: {{ additional_check.dissolution_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_death_date_not_sensible_value" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Death date is incorrect.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Death date (deathDate)' %}: {{ additional_check.death_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_start_after_end_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The start date of an interest in this Relationship statement is later than its end date.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Interest start date (startDate)' %}: {{ additional_check.start_date }} {% trans 'Interest end date endDate)' %}: {{ additional_check.end_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_entity_securities_listings_haspubliclisting_is_false" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}securitiesListings contains objects but hasPublicListing is false. hasPublicListing must be true if securitiesListings are present.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Securities listings (securitiesListings)' %}: {{ additional_check.securities_listings }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_exact_has_min_max" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Relationship statement contains an interest whose share value is exact. No minimum or maximum value should also be given.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Interest share (share)' %}: {{ additional_check.share }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_not_exact_max_greater_than_min" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. The maximum value is less than the minimum value.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans '(Exclusive)minimum value' %}: {{ additional_check.minval }}, {% trans '(Exclusive)maximum value' %}: {{ additional_check.maxval }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_exact_max_equals_min" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Relationship statement contains an interest whose share proportion is badly described. The (exclusive)maximum value is the same as the (exclusive)minimum value.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans '(Exclusive)minimum value' %}: {{ additional_check.minval }}, {% trans '(Exclusive)maximum value' %}: {{ additional_check.maxval }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_share_min_and_exclusivemin" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. Has both a minimum and exclusive minimum.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_share_max_and_exclusivemax" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. Has both a maximum and exclusive maximum.{%endblocktrans%}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_declaration_subject_not_exist" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Statement's declaration subject does not appear in the dataset.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Declaration subject (declarationSubject)' %}: {{ additional_check.declaration_subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type ==  "statement_declaration_subject_not_entity_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Statement relates to the subject of a declaration but a subject must be an entity or person.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier (recordId)' %}: {{ additional_check.record_id }}, {% trans 'Record type (recordType)' %}: {{ additional_check.record_type }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "multiple_statements_in_series_with_record_status_new" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}A record has multiple Statements with record status 'new'. Record status can only be ‘new’ the first time a Statement is published for a record.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier (recordId)' %}: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statement_with_record_status_new_must_be_first" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statement with recordStatus 'updated' or 'closed' cannot have statementDate earlier than corresponding statement with recordStatus 'new'.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier' %}: {{ additional_check.record_id }}, {% trans 'Statement identifier' %}: {{ additional_check.statement_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "multiple_statements_in_series_with_record_status_closed" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}A record has multiple Statements with record status 'closed.' Record status can be ‘closed’ only the final time a Statement is published for a record.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier' %}: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statement_with_record_status_closed_must_be_last" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statement with recordStatus 'new' or 'updated' cannot have statementDate later than corresponding statement with recordStatus 'closed'.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier' %}: {{ additional_check.record_id }}, {% trans 'Statement identifier' %}: {{ additional_check.statement_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statements_in_series_with_different_record_types" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Statements relating to the same record must all have the same record type.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Record identifier' %}: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "component_record_is_statement_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Component record entry is a statement Id. Component record entries must be record Ids.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Component record (componentRecords)' %}: {{ additional_check.component_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "component_record_id_not_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Component record entries must be record Ids present in the data set.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Component record (componentRecords)' %}: {{ additional_check.component_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "subject_must_be_record_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}subject must be a recordId for a statement in the data set or an UnspecifiedRecord object.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'subject' %}: {{ additional_check.subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "subject_can_only_refer_to_entity" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}subject is the recordId of a person or relationship statement. Subject can only refer to an entity statement.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'subject' %}: {{ additional_check.subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "subject_can_only_refer_to_entity" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}subject is the recordId of a person or relationship statement. Subject can only refer to an entity statement.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'subject' %}: {{ additional_check.subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interested_party_must_be_record_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Interested party must be a recordId for a statement in the data set or an UnspecifiedRecord object.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interested_party_can_only_refer_to_entity_or_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Interested party is the recordId of a relationship statement. Interested party can only refer to an entity statement or person statement.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interest_beneficial_ownership_interested_party_not_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}The interested party in this Relationship statement is flagged as a beneficial owner, but is not a person.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "annotation_statement_pointer_target_invalid"  %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}An annotation on this Statement does not have a valid JSON pointer in statementPointerTarget.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Statement pointer target (statementPointerTarget)' %}: {{ additional_check.pointer }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interests_subject_should_be_entity_nomination_arrangement" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Interests in this Relationship statement suggest that the subject of the relationship should be an entity representing a nomination arrangement.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Subject record type (recordType)' %}: {{ additional_check.subject_record_type }},
+                    {% trans 'Subject entity subtype (entityType.subtype)' %}: {{ additional_check.subject_record_subtype }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interests_subject_should_be_entity_trust" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Interests in this Relationship statement suggest that the subject of the relationship should be an entity representing a trust.
+{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Subject record type (recordType)' %}: {{ additional_check.subject_record_type }},
+                    {% trans 'Subject entity subtype (entityType.subtype)' %}: {{ additional_check.subject_record_subtype }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_subject_not_before_relationship_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}subject of Relationship must match recordId of at least one other prior Statement{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Subject identifier' %}: {{ additional_check.subject_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interested_party_not_before_relationship_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}Interested party of Relationship must match recordId of at least one other prior Statement{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Interested party identifier' %}: {{ additional_check.interested_party_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "person_identifiers_invalid_composition" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement has an incorrectly formatted identifier scheme.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Incorrect identifier scheme' %}: {{ additional_check.scheme }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type ==  "person_identifiers_no_valid_iso_3166_1_alpha_3_code" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised juristiction.{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "person_identifiers_not_passport_taxid_idcard" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised type{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "entity_identifiers_not_known_scheme" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised type{%endblocktrans%}
+                </td>
+                <td>
+                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+
         {% endif %}
     {% endfor %}
     {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
