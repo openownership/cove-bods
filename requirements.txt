@@ -82,7 +82,8 @@ libcove2 @ git+https://github.com/OpenDataServices/lib-cove-2.git@handle_new_jso
 #libcovebods==0.15.0
 libcovebods @ git+https://github.com/openownership/lib-cove-bods.git@add_bods_0.4
     # via -r requirements.in
-libcoveweb2==0.1.0
+#libcoveweb2==0.1.0
+libcoveweb2 @ git+https://github.com/OpenDataServices/lib-cove-web-2.git@handle_bods_0.4
     # via -r requirements.in
 lxml==4.9.2
     # via flattentool
