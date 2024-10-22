@@ -238,7 +238,10 @@ class GetDataReaderAndConfigAndSchema(ProcessDataTask):
             process_data["json_data_filename"], sample_mode=process_data['sample_mode']
         )
         process_data['config'] = LibCoveBODSConfig()
-        process_data['schema'] = SchemaBODS(process_data['data_reader'], process_data['config'])
+        try:
+            process_data['schema'] = SchemaBODS(process_data['data_reader'], process_data['config'])
+        except json.decoder.JSONDecodeError:
+            raise ValueError("JSON: Data parsing error")
         logger.info("Schema version:", process_data['schema'].schema_version)
         # Save some to disk for templates
         if not os.path.exists(self.data_filename):
