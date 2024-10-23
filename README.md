@@ -1,5 +1,7 @@
 # Open Ownership BODS Cove
 
+Checks data complies with the Beneficial Ownership Data Standard (BODS) versions 0.1-0.4.
+
 ## Dev installation
 
     git clone https://github.com/openownership/cove-bods.git openownership-cove-bods
