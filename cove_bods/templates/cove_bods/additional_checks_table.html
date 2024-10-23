@@ -13,10 +13,10 @@
         {% if additional_check.type == 'entity_identifier_scheme_not_known' %}
             <tr>
                 <td>
-                    {% trans 'The statement has an identifier scheme which is not valid.'  %}
+                    {% blocktrans %}<code>scheme</code> is not valid. Check the BODS documentation for guidance on identifiers. {%endblocktrans%}
                 </td>
                 <td>
-                    {% trans 'Invalid Scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: {{ additional_check.scheme }}
                 </td>
                 <td>
                     {{ additional_check.entity_statement }}
