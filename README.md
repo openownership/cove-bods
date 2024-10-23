@@ -1,4 +1,4 @@
-# openownership-cove-bods-alpha
+# Open Ownership BODS Cove
 
 ## Dev installation
 
