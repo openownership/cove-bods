@@ -13,7 +13,7 @@
         {% if additional_check.type == 'entity_identifier_scheme_not_known' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>scheme</code> is not valid. Check the BODS documentation for guidance on identifiers. {%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> is not valid. Check the BODS documentation for guidance on identifiers. {% endblocktrans %}
                 </td>
                 <td>
                     <code>scheme</code>: {{ additional_check.scheme }}
@@ -25,7 +25,7 @@
         {% elif additional_check.type == 'entity_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{%endblocktrans%}
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{% endblocktrans %}
                 </td>
                 <td>
                     <code>{% trans 'Entity statement' %}</code>: {{ additional_check.entity_statement_out_of_order }}
@@ -37,7 +37,7 @@
         {% elif additional_check.type == 'person_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{%endblocktrans%}
+                    {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{% endblocktrans %}
                 </td>
                 <td>
                     <code>{% trans 'Person statement' %}</code>: {{ additional_check.person_statement_out_of_order }}
@@ -49,7 +49,7 @@
         {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{%endblocktrans%}
+                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -60,7 +60,7 @@
         {% elif additional_check.type == 'person_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is not used in any ownership or control statements.' %}
+                    {% blocktrans %}<code>Person statement</code> is orphaned. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -71,10 +71,10 @@
         {% elif additional_check.type == 'entity_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% blocktrans %}<code>Entity statement</code> is missing. Check whether an Entity statement is incorrectly referenced from <code>interestedParty</code> or <code>subject</code>, or whether an Entity statement is missing.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Entity that is missing' %}: {{ additional_check.entity_statement_missing }}
+                    <code>{% trans 'Entity statement' %}</code>: {{ additional_check.entity_statement_missing }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -83,10 +83,10 @@
         {% elif additional_check.type == 'person_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% blocktrans %}<code>Person statement</code> is missing. Check whether a Person statement is incorrectly referenced from <code>interestedParty</code>, or whether a Person statement is missing.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Person that is missing' %}: {{ additional_check.person_statement_missing }}
+                    <code>{% trans 'Person statement' %}</code>: {{ additional_check.person_statement_missing }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -95,10 +95,10 @@
         {% elif additional_check.type == 'duplicate_statement_id' %}
             <tr>
                 <td>
-                    {% trans 'This statement ID has been used more than once.' %}
+                    {% blocktrans %}<code>statementId</code> value used in multiple statements. Different statements should not have the same <code>statementId</code> value.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Statement ID' %}: {{ additional_check.id }}
+                    <code>{% trans 'statementId' %}</code>: {{ additional_check.id }}
                 </td>
                 <td>
                     &nbsp;
