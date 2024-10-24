@@ -25,10 +25,10 @@
         {% elif additional_check.type == 'entity_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% trans 'This statement references an entity but that entity is defined after this statement.' %}
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{%endblocktrans%}
                 </td>
                 <td>
-                    {% trans 'Entity that is out of order' %}: {{ additional_check.entity_statement_out_of_order }}
+                    <code>{% trans 'Entity statement' %}</code>: {{ additional_check.entity_statement_out_of_order }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -37,10 +37,10 @@
         {% elif additional_check.type == 'person_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% trans 'This statement references a person but that person is defined after this statement.' %}
+                    {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{%endblocktrans%}
                 </td>
                 <td>
-                    {% trans 'Entity that is out of order' %}: {{ additional_check.person_statement_out_of_order }}
+                    <code>{% trans 'Person statement' %}</code>: {{ additional_check.person_statement_out_of_order }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -49,7 +49,7 @@
         {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is not used in any ownership or control statements.' %}
+                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{%endblocktrans%}
                 </td>
                 <td>
                 </td>
