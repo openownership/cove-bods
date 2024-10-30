@@ -155,7 +155,7 @@
         {% elif additional_check.type == 'alternative_address_with_no_other_address_types' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement has an alternate address but no other addresses.' %}
+                    {% blocktrans %}<code>type</code> of address is 'alternative' when no other addresses are published. Check that the category of address assigned is correct.{% endblocktrans %}
                 </td>
                 <td>
 
@@ -167,7 +167,7 @@
         {% elif additional_check.type == 'alternative_address_with_no_other_address_types' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has an alternate address but no other addresses.' %}
+                    {% blocktrans %}<code>type</code> of address is 'alternative' when no other addresses are published. Check that the category of address assigned is correct.{% endblocktrans %}
                 </td>
                 <td>
 
@@ -179,10 +179,10 @@
         {% elif additional_check.type == 'component_statement_id_not_in_package' %}
             <tr>
                 <td>
-                    {% trans 'This Ownership-or-control Statement has a component statement that is not in this package.' %}
+                    {% blocktrans %}<code>componentStatementIDs</code> contains a <code>statementID</code> not included in this dataset. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Component Statement ID' %}: {{ additional_check.component_statement_id }}
+                    <code>statementID</code>: {{ additional_check.component_statement_id }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -191,7 +191,7 @@
         {% elif additional_check.type == 'ownership_or_control_statement_has_is_compontent_and_component_statement_ids' %}
             <tr>
                 <td>
-                    {% trans 'An Ownership-or-control Statement cannot both be a component statement (isComponent) and have component statements (componentStatementIDs).' %}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value ('true') incompatible with having its own components in <code>componentStatementIDs</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
