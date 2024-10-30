@@ -304,10 +304,10 @@
         {% elif additional_check.type == 'unknown_schema_version_used' %}
             <tr>
                 <td>
-                    {% blocktrans %}This data attempted to use a schema version that was not recognised.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> not valid. Check that the value is correctly formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {{ additional_check.schema_version }}
+                    <code>bodsVersion</code>: {{ additional_check.schema_version }}
                 </td>
                 <td>
                 </td>
@@ -315,7 +315,7 @@
         {% elif additional_check.type == 'statement_is_beneficialOwnershipOrControl_but_no_person_specified' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement contains interests where beneficialOwnershipOrControl is true. Therefore interestedParty must reference a Person Statement.{%endblocktrans%}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> asserts <code>beneficialOwnershipOrControl</code> is 'true' but <code>interestedParty</code> does not reference a Person statement. Check that information is correctly represented.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -326,7 +326,7 @@
         {% elif additional_check.type == 'statement_entity_type_and_entity_sub_type_do_not_align' %}
             <tr>
                 <td>
-                    {% blocktrans %}The specified entitySubtype is not valid for the specified entityType.{%endblocktrans%}
+                    {% blocktrans %}<code>entitySubtype</code> is not valid for the specified <code>entityType</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -337,7 +337,7 @@
         {% elif additional_check.type == 'has_public_listing_information_but_has_public_listing_is_false' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement hasPublicListing that does not exist or is false. Information has been provided under companyFilingsURLs or securitiesListings so hasPublicListing must be true.{%endblocktrans%}
+                    {% blocktrans %}<code>hasPublicListing</code> has incorrect value. Value of <code>companyFilingsURLs</code> or <code>securitiesListings</code> suggests <code>hasPublicListing</code> must be 'true'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -348,7 +348,7 @@
         {% elif additional_check.type == 'entity_security_listing_market_identifier_code_set_but_not_operating_market_identifier_code' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement has a security listing where marketIdentifierCode is set but operatingMarketIdentifierCode is not set.{%endblocktrans%}
+                    {% blocktrans %}<code>operatingMarketIdentifierCode</code> should be set alongside <code>marketIdentifierCode</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -359,7 +359,7 @@
         {% elif additional_check.type == 'entity_security_listing_operating_market_identifier_code_set_but_not_market_identifier_code' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement has a security listing where operatingMarketIdentifierCode is set but marketIdentifierCode is not set.{%endblocktrans%}
+                    {% blocktrans %}<code>marketIdentifierCode</code> should be set alongside <code>operatingMarketIdentifierCode</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -371,7 +371,7 @@
             {# Currently this applies to 0.2 only #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement has some PEP details without missing info but their PEP status has not been declared as True.{%endblocktrans%}
+                    {% blocktrans %}<code>hasPepStatus</code> has incorrect value. <code>pepStatusDetails</code> are substantive, suggesting that <code>hasPepStatus</code> should be 'true'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -383,7 +383,7 @@
             {# Currently this applies to 0.3+ only #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement has some PEP details but their PEP status is missing or has been declared as 'isNotPep'.{%endblocktrans%}
+                    {% blocktrans %}<code>politicalExposure.status</code> has incorrect value. <code>politicalExposure.details</code> are substantive, suggesting that <code>politicalExposure.status</code> should be 'isPep'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -396,11 +396,9 @@
             <tr>
                 <td>
                     {% if schema_version_used == '0.2' %}
-                        {% blocktrans %}This Person Statement has some PEP details with missing info but
- their status has been declared as True.{%endblocktrans%}
+                        {% blocktrans %}<code>hasPepStatus</code> has incorrect value. <code>pepStatusDetails</code> contains <code>missingInfoReason</code>, suggesting that <code>hasPepStatus</code> should have no value.{% endblocktrans %}
                     {% else %}
-                        {% blocktrans %}This Person Statement has a missingInfoReason for PEP status
- details, so PEP status should be declared as 'unknown'.{%endblocktrans%}
+                        {% blocktrans %}<code>politicalExposure.status</code> has incorrect value. <code>politicalExposure.details</code> contains <code>missingInfoReason</code>, suggesting that <code>status</code> should be 'unknown'.{% endblocktrans %}
                     {% endif %}
                 </td>
                 <td>
