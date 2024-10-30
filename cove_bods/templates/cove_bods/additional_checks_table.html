@@ -202,7 +202,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'person'  %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Person statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -213,7 +213,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'entity'  %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Entity statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -224,7 +224,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'ownership_or_control'  %}
             <tr>
                 <td>
-                    {% trans 'This Ownership-or-control Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -235,7 +235,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'person'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Person statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -246,7 +246,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'entity'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -257,7 +257,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'ownership_or_control'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -268,10 +268,10 @@
      {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                    <code>bodsVersion</code>: {{ additional_check.schema_version }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -280,7 +280,7 @@
         {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
                     {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
@@ -292,7 +292,7 @@
         {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'ownership_or_control' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
                     {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
