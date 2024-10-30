@@ -98,7 +98,7 @@
                     {% blocktrans %}<code>statementId</code> value used in multiple statements. Different statements should not have the same <code>statementId</code> value.{% endblocktrans %}
                 </td>
                 <td>
-                    <code>{% trans 'statementId' %}</code>: {{ additional_check.id }}
+                    <code>statementId</code>: {{ additional_check.id }}
                 </td>
                 <td>
                     &nbsp;
@@ -107,10 +107,10 @@
         {% elif additional_check.type == 'person_birth_year_too_early' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has a birthday that is to early.' %}
+                    {% blocktrans %}<code>birthDate</code> value is invalid. The year is too far in the past. Check that the date is correct and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Year' %}: {{ additional_check.year }}
+                    <code>birthDate</code> {% trans 'year' %}: {{ additional_check.year }}
                 </td>
                 <td>
                     {{ additional_check.person_statement }}
@@ -119,10 +119,10 @@
         {% elif additional_check.type == 'person_birth_year_too_late' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has a birthday that is to late.' %}
+                    {% blocktrans %}<code>birthDate</code> value is invalid. The year is not far enough in the past. Check that the date is correct and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Year' %}: {{ additional_check.year }}
+                    <code>birthDate</code> {% trans 'year' %}: {{ additional_check.year }}
                 </td>
                 <td>
                     {{ additional_check.person_statement }}
@@ -131,10 +131,10 @@
         {% elif additional_check.type == 'wrong_address_type_used' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement has an address type that is not allowed in entity statements.' %}
+                    {% blocktrans %}<code>type</code> of address is invalid in an Entity statement. Check that the category of address assigned is correct.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Type' %}: {{ additional_check.address_type }}
+                    <code>type</code>: {{ additional_check.address_type }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -143,10 +143,10 @@
         {% elif additional_check.type == 'wrong_address_type_used' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has an address type that is not allowed in person statements.' %}
+                    {% blocktrans %}<code>type</code> of address is invalid in a Person statement. Check that the category of address assigned is correct.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Type' %}: {{ additional_check.address_type }}
+                    <code>type</code>: {{ additional_check.address_type }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
