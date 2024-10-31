@@ -525,10 +525,11 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}The founding date for the entity in this Statement is later than its dissolution date.{%endblocktrans%}
+                    {% blocktrans %}<code>foundingDate</code> is later than <code>dissolutionDate</code>. Check that dates are correctly generated and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Entity founding date (foundingDate)' %}: {{ additional_check.founding_date }} {% trans 'Entity dissolution date (dissolutionDate)' %}: {{ additional_check.dissolution_date }}
+                    <code>foundingDate</code>: {{ additional_check.founding_date }} <br>
+                    <code>dissolutionDate</code>: {{ additional_check.dissolution_date }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -538,10 +539,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Death date is incorrect.{%endblocktrans%}
+                    {% blocktrans %}<code>deathDate</code> is incorrect. Check that dates are correctly generated and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Death date (deathDate)' %}: {{ additional_check.death_date }}
+                    <code>deathDate</code>: {{ additional_check.death_date }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -551,10 +552,11 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}The start date of an interest in this Relationship statement is later than its end date.{%endblocktrans%}
+                    {% blocktrans %}<code>startDate</code> is later than <code>endDate</code> in an Interest. Check that dates are correctly generated and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Interest start date (startDate)' %}: {{ additional_check.start_date }} {% trans 'Interest end date endDate)' %}: {{ additional_check.end_date }}
+                    <code>startDate</code>: {{ additional_check.start_date }} <br>
+                    <code>endDate</code>: {{ additional_check.end_date }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -564,10 +566,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}securitiesListings contains objects but hasPublicListing is false. hasPublicListing must be true if securitiesListings are present.{%endblocktrans%}
+                    {% blocktrans %}<code>hasPublicListing</code> has incorrect value. Value of <code>securitiesListings</code> suggests <code>hasPublicListing</code> must be 'true'.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Securities listings (securitiesListings)' %}: {{ additional_check.securities_listings }}
+                    <code>securitiesListings</code>: {{ additional_check.securities_listings }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -577,10 +579,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Relationship statement contains an interest whose share value is exact. No minimum or maximum value should also be given.{%endblocktrans%}
+                    {% blocktrans %}<code>share.exact</code> is provided, alongside a range (minimum and maximum values). Provide either an exact value, or a range.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Interest share (share)' %}: {{ additional_check.share }}
+                    <code>share.exact</code>: {{ additional_check.share }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -590,10 +592,11 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. The maximum value is less than the minimum value.{%endblocktrans%}
+                    {% blocktrans %}<code>share</code> is an invalid range. The maximum value is less than the minimum value.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans '(Exclusive)minimum value' %}: {{ additional_check.minval }}, {% trans '(Exclusive)maximum value' %}: {{ additional_check.maxval }}
+                    <code>share</code> {% trans '(exclusive) minimum' %}: {{ additional_check.minval }} <br>
+                    <code>share</code> {% trans '(exclusive) maximum' %}: {{ additional_check.maxval }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -603,10 +606,11 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Relationship statement contains an interest whose share proportion is badly described. The (exclusive)maximum value is the same as the (exclusive)minimum value.{%endblocktrans%}
+                    {% blocktrans %}<code>share</code> is an invalid range. The maximum value is the same as the minimum value.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans '(Exclusive)minimum value' %}: {{ additional_check.minval }}, {% trans '(Exclusive)maximum value' %}: {{ additional_check.maxval }}
+                    <code>share</code> {% trans '(exclusive) minimum' %}: {{ additional_check.minval }} <br>
+                    <code>share</code> {% trans '(exclusive) maximum' %}: {{ additional_check.maxval }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -616,7 +620,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. Has both a minimum and exclusive minimum.{%endblocktrans%}
+                    {% blocktrans %}<code>share</code> is an invalid range. Only one of <code>minimum</code> and <code>exclusiveMinimum</code> must be provided.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -628,7 +632,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Relationship statement contains an interest whose share falls into a badly described range. Has both a maximum and exclusive maximum.{%endblocktrans%}
+                    {% blocktrans %}<code>share</code> is an invalid range. Only one of <code>maximum</code> and <code>exclusiveMaximum</code> must be provided.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -640,10 +644,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Statement's declaration subject does not appear in the dataset.{%endblocktrans%}
+                    {% blocktrans %}<code>declarationSubject</code> does not appear in the dataset. Check that the dataset is complete, or that this is expected.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Declaration subject (declarationSubject)' %}: {{ additional_check.declaration_subject }}
+                    <code>declarationSubject</code>: {{ additional_check.declaration_subject }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
