@@ -786,27 +786,14 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
-         {% elif additional_check.type == "subject_can_only_refer_to_entity" %}
-            {# Currently this applies to 0.4+ #}
-            <tr>
-                <td>
-                    {% blocktrans %}subject is the recordId of a person or relationship statement. Subject can only refer to an entity statement.{%endblocktrans%}
-                </td>
-                <td>
-                    {% trans 'subject' %}: {{ additional_check.subject }}
-                </td>
-                <td>
-                    {{ additional_check.statement }}
-                </td>
-            </tr>
         {% elif additional_check.type == "interested_party_must_be_record_id" %}
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Interested party must be a recordId for a statement in the data set or an UnspecifiedRecord object.{%endblocktrans%}
+                    {% blocktrans %}<code>interestedParty</code> not recognised. Check that the value matches a <code>recordId</code> in the dataset or is an Unspecified Record object.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -816,10 +803,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Interested party is the recordId of a relationship statement. Interested party can only refer to an entity statement or person statement.{%endblocktrans%}
+                    {% blocktrans %}<code>interestedParty</code> is invalid. The value should be a <code>recordId</code> for a person or an entity in the dataset (not a relationship).{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -829,10 +816,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}The interested party in this Relationship statement is flagged as a beneficial owner, but is not a person.{%endblocktrans%}
+                    {% blocktrans %}<code>beneficialOwnershipOrControl</code> is 'true' but <code>interestedParty</code> is not a person. Check that the interested party is correct and that <code>beneficialOwnershipOrControl</code> is used correctly.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'interestedParty' %}: {{ additional_check.interested_party }}
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -842,10 +829,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}An annotation on this Statement does not have a valid JSON pointer in statementPointerTarget.{%endblocktrans%}
+                    {% blocktrans %}<code>statementPointerTarget</code> is invalid. Check that it is a valid JSON pointer and that it points to an existing field in the Statement.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Statement pointer target (statementPointerTarget)' %}: {{ additional_check.pointer }}
+                    <code>statementPointerTarget</code>: {{ additional_check.pointer }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -855,11 +842,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Interests in this Relationship statement suggest that the subject of the relationship should be an entity representing a nomination arrangement.{%endblocktrans%}
+                    {% blocktrans %}<code>subject</code> has unexpected type. Interests in this Relationship statement suggest that the subject's <code>entityType.subtype</code> should be 'nomination'.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Subject record type (recordType)' %}: {{ additional_check.subject_record_type }},
-                    {% trans 'Subject entity subtype (entityType.subtype)' %}: {{ additional_check.subject_record_subtype }}
+                    <code>entityType.subtype</code>: {{ additional_check.subject_record_subtype }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -869,12 +855,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Interests in this Relationship statement suggest that the subject of the relationship should be an entity representing a trust.
-{%endblocktrans%}
+                    {% blocktrans %}<code>subject</code> has unexpected type. Interests in this Relationship statement suggest that the subject's <code>entityType.subtype</code> should be 'trust'.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Subject record type (recordType)' %}: {{ additional_check.subject_record_type }},
-                    {% trans 'Subject entity subtype (entityType.subtype)' %}: {{ additional_check.subject_record_subtype }}
+                    <code>entityType.subtype</code>: {{ additional_check.subject_record_subtype }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -884,10 +868,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}subject of Relationship must match recordId of at least one other prior Statement{%endblocktrans%}
+                    {% blocktrans %}<code>subject</code> not found. The subject must match the <code>recordId</code> of at least one prior Statement in the dataset. Check that Statements are ordered correctly.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Subject identifier' %}: {{ additional_check.subject_id }}
+                    <code>subject</code>: {{ additional_check.subject_id }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -897,10 +881,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}Interested party of Relationship must match recordId of at least one other prior Statement{%endblocktrans%}
+                    {% blocktrans %}<code>interestedParty</code> not found. The interested party must match the <code>recordId</code> of at least one prior Statement in the dataset. Check that Statements are ordered correctly.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Interested party identifier' %}: {{ additional_check.interested_party_id }}
+                    <code>interestedParty</code>: {{ additional_check.interested_party_id }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -910,10 +894,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement has an incorrectly formatted identifier scheme.{%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> has incorrect formatting. Check the field description for guidance.{%endblocktrans%}
                 </td>
                 <td>
-                    {% trans 'Incorrect identifier scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: {{ additional_check.scheme }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
