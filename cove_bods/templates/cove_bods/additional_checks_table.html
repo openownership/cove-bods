@@ -894,7 +894,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>scheme</code> has incorrect formatting. Check the field description for guidance.{%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> has incorrect formatting. Check the field description for guidance.{% endblocktrans %}
                 </td>
                 <td>
                     <code>scheme</code>: {{ additional_check.scheme }}
@@ -907,10 +907,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised juristiction.{%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> contains an unrecognised jurisdiction. An ISO 3166-1 3-digit country code is expected. Check the field description for guidance.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: {{ additional_check.scheme }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -920,10 +920,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised type{%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> has unrecognised type. 'PASSPORT', 'TAXID' or 'IDCARD' is expected. Check the field description for guidance.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: {{ additional_check.scheme }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -933,10 +933,10 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement's identifier scheme has an unrecognised type{%endblocktrans%}
+                    {% blocktrans %}<code>scheme</code> is unrecognised. A code from org-id.guide is expected. Check the field description for guidance.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Identifier scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: {{ additional_check.scheme }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -948,73 +948,93 @@
     {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
         <tr>
             <td>
-                {% blocktrans %}No individuals are disclosed as beneficial owners. beneficialOwnershipOrControl must be set to true within an Interest object to indicate that the interested party is a beneficial owner.{%endblocktrans%}
+                {% blocktrans %}<code>beneficialOwnershipOrControl</code> expected to be 'true' in at least one Statement. If this dataset contains beneficial owners, check that <code>beneficialOwnershipOrControl</code> is correctly used.{% endblocktrans %}
             </td>
             <td>
             </td>
             <td>
-                {% blocktrans %}All Ownership-or-control statements{%endblocktrans%}
+                {% blocktrans %}All Relationship statements.{% endblocktrans %}
             </td>
         </tr>
     {% endif %}
     {% for check_not_run_in_sample_mode in checks_not_run_in_sample_mode %}
         {% if  check_not_run_in_sample_mode == "entity_statement_missing" %}
             <tr>
-                <td>{% trans 'This Entity Statement is referenced from an ownership or control statement, but it is missing.' %}</td>
+                <td>
+                        {% blocktrans %}<code>Entity statement</code> is missing. Check whether an Entity statement is incorrectly referenced from <code>interestedParty</code> or <code>subject</code>, or whether an Entity statement is missing.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_out_of_order" %}
             <tr>
-                <td>{% trans 'This statement references a person but that person is defined after this statement.' %}</td>
+                <td>
+                        {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "statement_is_component_but_is_after_use_in_component_statement_id" %}
             <tr>
-                <td>{% trans 'This Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).' %}</td>
+                <td>
+                        {% blocktrans %}<code>Ownership-or-control statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "statement_is_component_but_not_used_in_component_statement_ids" %}
             <tr>
-                <td>{% trans 'This Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}</td>
+                <td>
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_missing" %}
             <tr>
-                <td>{% trans 'This Person Statement is referenced from an ownership or control statement, but it is missing.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Person statement</code> is missing. Check whether a Person statement is incorrectly referenced from <code>interestedParty</code>, or whether a Person statement is missing.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_not_used_in_ownership_or_control_statement" %}
             <tr>
-                <td>{% trans 'This Person Statement is not used in any ownership or control statements.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Person statement</code> is orphaned. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "entity_statement_not_used_in_ownership_or_control_statement" %}
             <tr>
-                <td>{% trans 'This Entity Statement is not used in any ownership or control statements.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "duplicate_statement_id" %}
             <tr>
-                <td>{% trans 'This statement ID has been used more than once.' %}</td>
+                <td>
+                    {% blocktrans %}<code>statementId</code> value used in multiple statements. Different statements should not have the same <code>statementId</code> value.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "entity_statement_out_of_order" %}
             <tr>
-                <td>{% trans 'This statement references an entity but that entity is defined after this statement.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "component_statement_id_not_in_package" %}
             <tr>
-                <td>{% trans 'This Ownership-or-control Statement has a component statement that is not in this package.' %}</td>
+                <td>
+                    {% blocktrans %}<code>componentStatementIDs</code> contains a <code>statementID</code> not included in this dataset. Check that this is expected.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
