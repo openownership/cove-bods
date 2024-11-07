@@ -461,7 +461,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Relationship statement</code> has an <code>isComponent</code> value of 'true' but appears in the <code>componentRecords</code> list of no later Relationship statement in the dataset. Check that component records are correctly listed and that statements are in the correct order.{% endblocktrans %}
+                    {% blocktrans %}<code>Relationship statement</code> has an <code>isComponent</code> value of 'true' but does not appear in the <code>componentRecords</code> list of a later Relationship statement in the dataset. Check that component records are correctly listed and that statements are in the correct order.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -657,7 +657,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>declarationSubject</code> must be an entity or person. Check that <code>recordId</code> values are being correctly generated and used.{% endblocktrans %}
+                    {% blocktrans %}<code>declarationSubject</code> must reference an entity or person. Check that <code>recordId</code> values are being correctly generated and used.{% endblocktrans %}
                 </td>
                 <td>
                     <code>declarationSubject</code>: {{ additional_check.record_id }} <br>
