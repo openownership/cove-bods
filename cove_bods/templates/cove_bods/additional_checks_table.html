@@ -49,7 +49,7 @@
         {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                    {% blocktrans %}<code>Entity statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -60,7 +60,7 @@
         {% elif additional_check.type == 'person_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Person statement</code> is orphaned. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                    {% blocktrans %}<code>Person statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -539,7 +539,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>deathDate</code> is incorrect. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                    {% blocktrans %}<code>deathDate</code> is incorrect. Check that the date is not before the <code>birthDate</code> or in the future.{% endblocktrans %}
                 </td>
                 <td>
                     <code>deathDate</code>: {{ additional_check.death_date }}
@@ -948,7 +948,7 @@
     {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
         <tr>
             <td>
-                {% blocktrans %}<code>beneficialOwnershipOrControl</code> expected to be 'true' in at least one Statement. If this dataset contains beneficial owners, check that <code>beneficialOwnershipOrControl</code> is correctly used.{% endblocktrans %}
+                {% blocktrans %}<code>beneficialOwnershipOrControl</code> expected to be 'true' in at least one Relationship statement with a person as an interested party. If this dataset contains beneficial owners, check that <code>beneficialOwnershipOrControl</code> is correctly used.{% endblocktrans %}
             </td>
             <td>
             </td>
