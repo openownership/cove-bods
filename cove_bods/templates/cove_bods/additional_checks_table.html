@@ -684,7 +684,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>statementDate</code> too early. <code>recordStatus</code> is 'updated' or 'closed' but <code>statementDate</code> is earlier than that of corresponding 'new' Statement.{% endblocktrans %}
+                    {% blocktrans %}<code>statementDate</code> is too early. The <code>recordStatus</code> is 'updated' or 'closed' but <code>statementDate</code> is earlier than that of the corresponding 'new' Statement.{% endblocktrans %}
                 </td>
                 <td>
                     <code>recordId</code>: {{ additional_check.record_id }} <br>
@@ -711,7 +711,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>statementDate</code> too late. <code>recordStatus</code> is 'new' or 'updated' but <code>statementDate</code> is later than that of corresponding 'closed' Statement.{% endblocktrans %}
+                    {% blocktrans %}<code>statementDate</code> is too late. <code>recordStatus</code> is 'new' or 'updated' but <code>statementDate</code> is later than that of the corresponding 'closed' Statement.{% endblocktrans %}
                 </td>
                 <td>
                     <code>recordId</code>:: {{ additional_check.record_id }} <br>
@@ -725,7 +725,7 @@
             {# Currently this applies to 0.4+ #}
             <tr>
                 <td>
-                    {% blocktrans %}<code>recordType</code> varies across Statements for the same record. Check that Statements relating to the same record must all have the same type.{%endblocktrans%}
+                    {% blocktrans %}<code>recordType</code> varies across Statements for the same record. Check that Statements relating to the same record all have the same type.{%endblocktrans%}
                 </td>
                 <td>
                     <code>recordId</code>: {{ additional_check.record_id }}
