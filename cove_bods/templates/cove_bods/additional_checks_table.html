@@ -1009,7 +1009,7 @@
         {% elif check_not_run_in_sample_mode == "entity_statement_not_used_in_ownership_or_control_statement" %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Entity statement</code> is orphaned. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                    {% blocktrans %}<code>Entity statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
