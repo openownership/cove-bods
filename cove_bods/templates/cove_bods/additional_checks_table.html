@@ -119,7 +119,7 @@
         {% elif additional_check.type == 'person_birth_year_too_late' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>birthDate</code> value is invalid. The year is not far enough in the past. Check that the date is correct and well formatted.{% endblocktrans %}
+                    {% blocktrans %}<code>birthDate</code> value is invalid. The date is in the future. Check that the date is correct and well formatted.{% endblocktrans %}
                 </td>
                 <td>
                     <code>birthDate</code> {% trans 'year' %}: {{ additional_check.year }}
