@@ -213,7 +213,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'entity'  %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Entity statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
+                    {% blocktrans %}<code>Entity statement</code> has an <code>isComponent</code> value of 'true' but does not appear in any <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
