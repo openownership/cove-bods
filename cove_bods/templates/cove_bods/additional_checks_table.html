@@ -235,7 +235,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'person'  %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>Person statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
+                    {% blocktrans %}<code>Person statement</code> not in the correct position. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
