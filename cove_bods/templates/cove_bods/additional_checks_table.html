@@ -131,7 +131,7 @@
         {% elif additional_check.type == 'wrong_address_type_used' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% blocktrans %}<code>type</code> of address is invalid in an Entity statement. Check that the category of address assigned is correct.{% endblocktrans %}
+                    {% blocktrans %}<code>type</code> of address is invalid in an Entity statement. Check that the address type is correct.{% endblocktrans %}
                 </td>
                 <td>
                     <code>type</code>: {{ additional_check.address_type }}
