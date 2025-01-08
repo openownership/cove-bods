@@ -5,19 +5,38 @@ from typing import List
 import flattentool
 import libcovebods.data_reader
 import libcovebods.run_tasks
+import pandas
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from libcovebods.additionalfields import AdditionalFields
 from libcovebods.config import LibCoveBODSConfig
 from libcovebods.jsonschemavalidate import JSONSchemaValidator
 from libcovebods.schema import SchemaBODS
+from libcovebods.schema_dir import schema_registry
 from libcoveweb2.models import SuppliedData, SuppliedDataFile
 from libcoveweb2.process.base import ProcessDataTask
 from libcoveweb2.process.common_tasks.task_with_state import TaskWithState
 
 # from libcove.lib.converters import convert_json, convert_spreadsheet
 from libcoveweb2.utils import get_file_type_for_flatten_tool, group_data_list_by
+from packaging import version as packaging_version
 from sentry_sdk import capture_exception
+
+
+def check_table_file_new(input_file):
+    if get_file_type_for_flatten_tool(input_file) == "xlsx":
+        data = pandas.read_excel(input_file.upload_dir_and_filename())
+        if "statementID" in data.head():
+            return False
+        else:
+            return True
+    else:
+        with open(input_file.upload_dir_and_filename()) as file:
+            head = file.readline()
+            if "statementID" in head:
+                return False
+            else:
+                return True
 
 
 def create_error_file(directory: str, name: str, data: dict):
@@ -179,14 +198,25 @@ class ConvertSpreadsheetIntoJSON(ProcessDataTask):
         # We don't know what schema version the spreadsheet is in. Use default schema.
         schema = SchemaBODS()
 
+        config = LibCoveBODSConfig().config
+
+        if check_table_file_new(supplied_data_json_file):
+            statement_id_name = "statementID"
+            schema = config["schema_versions"]["0.2"]["schema_url"]
+        else:
+            statement_id_name = "statementId"
+            schema = schema_registry(
+                config["schema_versions"][config["schema_latest_version"]]["schema_url"]
+            ).contents("urn:statement")
+
         unflatten_kwargs = {
             "output_name": os.path.join(output_dir, "unflattened.json"),
             "root_list_path": "there-is-no-root-list-path",
-            "root_id": "statementID",
-            "id_name": "statementID",
+            "root_id": statement_id_name,
+            "id_name": statement_id_name,
             "root_is_list": True,
             "input_format": get_file_type_for_flatten_tool(supplied_data_json_file),
-            "schema": schema.pkg_schema_url,
+            "schema": schema,
         }
 
         flattentool.unflatten(input_filename, **unflatten_kwargs)
@@ -232,12 +262,21 @@ class GetDataReaderAndConfigAndSchema(ProcessDataTask):
             process_data["json_data_filename"], sample_mode=process_data["sample_mode"]
         )
         process_data["config"] = LibCoveBODSConfig()
-        process_data["schema"] = SchemaBODS(
-            process_data["data_reader"], process_data["config"]
-        )
+        try:
+            process_data["schema"] = SchemaBODS(
+                process_data["data_reader"], process_data["config"]
+            )
+        except json.decoder.JSONDecodeError:
+            raise ValueError("JSON: Data parsing error")
         # Save some to disk for templates
         if not os.path.exists(self.data_filename):
             save_data = {"schema_version_used": process_data["schema"].schema_version}
+            if packaging_version.parse(
+                process_data["schema"].schema_version
+            ) < packaging_version.parse("0.4"):
+                save_data["record_schema_used"] = False
+            else:
+                save_data["record_schema_used"] = True
             with open(self.data_filename, "w") as fp:
                 json.dump(save_data, fp, indent=4)
         # return
@@ -294,13 +333,27 @@ class ConvertJSONIntoSpreadsheets(ProcessDataTask):
 
         os.makedirs(self.output_dir, exist_ok=True)
 
+        if os.path.isdir(process_data["schema"].pkg_schema_url):
+            schema = schema_registry(process_data["schema"].pkg_schema_url).contents(
+                "urn:statement"
+            )
+        else:
+            schema = process_data["schema"].pkg_schema_url
+
+        if packaging_version.parse(
+            process_data["schema"].schema_version
+        ) < packaging_version.parse("0.4"):
+            statement_id_name = "statementID"
+        else:
+            statement_id_name = "statementId"
+
         flatten_kwargs = {
             "output_name": self.output_dir,
             "root_list_path": "there-is-no-root-list-path",
-            "root_id": "statementID",
-            "id_name": "statementID",
+            "root_id": statement_id_name,
+            "id_name": statement_id_name,
             "root_is_list": True,
-            "schema": process_data["schema"].pkg_schema_url,
+            "schema": schema,
         }
 
         try:

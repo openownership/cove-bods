@@ -1,4 +1,8 @@
-# openownership-cove-bods-alpha
+# Open Ownership BODS Cove
+
+Checks data complies with the Beneficial Ownership Data Standard (BODS) versions 0.1-0.4,
+and displays any errors. Also converts uploaded data between JSON and XLSX formats.
+Based on: https://github.com/OpenDataServices/cove
 
 ## Dev installation
 

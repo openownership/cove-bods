@@ -26,11 +26,11 @@
       {% elif errors.0.validator == "pattern" %}
         <strong><code>{{ errors.0.path_ending }}</code> does not match the regex <code>{{ errors.0.validator_value }}</code></strong>
       {% elif errors.0.validator == "format" and errors.0.validator_value == "date" %}
-        <strong>Date is not in the correct format. The correct format is YYYY-MM-DD.</strong>
+        <strong><code>{{ errors.0.path_ending }}</code> is not a valid date. The correct format is YYYY-MM-DD.</strong>
       {% elif errors.0.validator == "format" and errors.0.validator_value == "date-time" %}
-        <strong>Date is not in the correct format. The correct format is YYYY-MM-DDT00:00:00Z.</strong>
+        <strong><code>{{ errors.0.path_ending }}</code> is not a valid date-time.</strong>
       {% elif errors.0.validator == "format" and errors.0.validator_value == "uri" %}
-        <strong>Invalid uri found</strong>
+        <strong><code>{{ errors.0.path_ending }}</code> is not a valid uri.</strong>
       {% elif errors.0.validator == "minLength" %}
         <strong><code>{{ errors.0.path_ending }}</code> is too short. It should be at least {{ errors.0.validator_value }} characters.</strong>
       {% elif errors.0.validator == "maxLength" %}
@@ -38,7 +38,11 @@
       {% elif errors.0.validator == "type" and errors.0.validator_value == "number" %}
         <strong><code>{{ errors.0.path_ending }}</code> should be a number. Check that the value is not null, and doesn’t contain any characters other than 0-9 and dot (<code>.</code>). Number values should not be in quotes.</strong>
       {% elif errors.0.validator == "type" and errors.0.validator_value == "array" %}
-        <strong><code>{{ errors.0.path_ending }}</code> should be a JSON array. Check that value(s) appear within square brackets, [...]</strong>
+        {% if errors.0.path_ending == "$" %}
+            <strong>The dataset should be a JSON array. Check that the object(s) appear within square brackets, [...]</strong>
+        {% else %}
+            <strong><code>{{ errors.0.path_ending }}</code> should be a JSON array. Check that value(s) appear within square brackets, [...]</strong>
+        {% endif %}
       {% elif errors.0.validator == "type" and errors.0.validator_value == "string" %}
         <strong><code>{{ errors.0.path_ending }}</code> should be a string. Check that the value is not null, and has quotes at the start and end. Escape any quotes in the value with <code>\</code></strong>
       {% elif errors.0.validator == "type" and errors.0.validator_value == "boolean" %}
@@ -48,7 +52,11 @@
       {% elif errors.0.validator == "dependencies" %}
         <strong>{{ errors.0.message  }}</strong>
       {% elif errors.0.validator == "anyOf" %}
-        <strong>{{ errors.0.message  }}</strong>
+        <strong><code>{{ errors.0.path_ending }}</code> is not a valid value. Check the description of this field in the schema documentation for details.</strong>
+      {% elif errors.0.validator == "oneOf" %}
+        <strong><code>{{ errors.0.path_ending }}</code> is not a valid value. Check the description of this field in the schema documentation for details.</strong>
+      {% elif errors.0.validator == "const" %}
+        <strong><code>{{ errors.0.path_ending }}</code> is expected to be <q>{{ errors.0.validator_value }}</q> in this Statement.</strong>
       {% else %}
         <strong>{{ errors.0.validator  }} = {{ errors.0.message  }}</strong>
       {% endif %}
