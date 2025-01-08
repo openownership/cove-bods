@@ -142,7 +142,7 @@
 
     <div class="row">
 
-        {% if additional_fields_count %}
+        {% if additional_fields_count or any_additional_fields_exist %}
 
               <a name="additional-fields" class="anchor"></a>
               <div class="panel panel-danger">
@@ -152,7 +152,7 @@
                   </h4>
                 </div>
                 <div id="additionalFieldsTable" class="collapse in panel-body">
-                  {% include "additional_fields_table.html" %}
+                  {% include "cove_bods/additional_fields_table.html" %}
                 </div>
               </div>
         {% else %}
@@ -259,7 +259,11 @@
                     {% endif %}
                 {% endfor %}
 
+                {% if record_schema_used %}
+                <h4>{% trans 'Relationship Statements' %}</h4>
+                {% else %}
                 <h4>{% trans 'Ownership or Control Statements' %}</h4>
+                {% endif %}
 
                 <p>{% trans 'Total Statements' %}: {{ statistics.count_ownership_or_control_statement }}</p>
 

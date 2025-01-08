@@ -1,0 +1,84 @@
+{% load i18n %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th class="">{% trans 'Field Name' %}</th>
+        <th class="">{% trans 'Field Path' %}</th>
+        <th class="">{% trans 'Usage Count' %}</th> 
+        <th class="">{% trans 'First 3 Values' %}</th>
+        <th class="">{% trans 'Child Fields' %}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for full_path, info in additional_fields.items %}
+        {% if info.root_additional_field %}
+            <tr>
+                <td>
+                    {{ info.field_name }}
+                </td>
+                <td>
+                    {{ full_path }}
+                </td>
+                <td>
+                    {{ info.count }}
+                </td>
+                <td>
+                    <ul class="list-unstyled">
+                    {% for example in info.examples|slice:":3" %}
+                    <li>
+                        {{ example }}
+                    </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    {% if info.additional_field_descendance %}
+                        {{info.additional_field_descendance|length}}
+                        <a data-toggle="modal" data-target="#additional-field-{{full_path|slugify}}">{% trans "(See child fields)" %}</a>
+                    {% endif %}
+                </td>
+            </tr>
+         {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+{% for parent_full_path, parent_info in additional_fields.items %}
+  {% if parent_info.root_additional_field and parent_info.additional_field_descendance %}
+    <div class="modal fade" id="additional-field-{{parent_full_path|slugify}}" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4>{% blocktrans %}Child fields of {{parent_full_path}}{% endblocktrans %} </h4>
+
+          </div>
+          <div class="modal-body">
+            <table class="table">
+               <thead>
+                 <tr>
+                   <th> {% trans 'Field' %}</th>
+                   <th> {% trans 'Path to Field' %}</th>
+                   <th> {% trans 'Value' %}</th>
+                 </tr>
+               </thead>
+               <tbody>
+               {% for full_path, info in parent_info.additional_field_descendance.items %}
+                 <tr>
+                    <td>{{info.field_name}}</td>
+                    <td>{{info.path}}</td>
+                    <td>
+                        {{ info.examples|first }}
+                    </td>
+                 </tr>
+               {% endfor %}
+               </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
