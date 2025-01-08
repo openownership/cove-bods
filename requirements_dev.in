@@ -2,7 +2,9 @@
 pytest
 pytest-django
 flake8
+black==22.3.0
+isort
 pytest-localserver
-selenium
+selenium<4.10 # to work with libcoveweb2
 transifex-client
 pip-tools

@@ -17,16 +17,22 @@ class NewUploadForm(forms.Form):
         ),
         label="",
     )
-    sample_mode = forms.BooleanField(label="Process using Sample mode (see information above)", required=False)
+    sample_mode = forms.BooleanField(
+        label="Process using Sample mode (see information above)", required=False
+    )
 
 
 class NewTextForm(forms.Form):
     file_field_names = []
     paste = forms.CharField(label="Paste (JSON only)", widget=forms.Textarea)
-    sample_mode = forms.BooleanField(label="Process using Sample mode (see information above)", required=False)
+    sample_mode = forms.BooleanField(
+        label="Process using Sample mode (see information above)", required=False
+    )
 
 
 class NewURLForm(forms.Form):
     file_field_names = []
     url = forms.URLField(label="URL")
-    sample_mode = forms.BooleanField(label="Process using Sample mode (see information above)", required=False)
+    sample_mode = forms.BooleanField(
+        label="Process using Sample mode (see information above)", required=False
+    )

@@ -1,31 +1,32 @@
 import logging
 
-from cove_project import settings
 from django.shortcuts import render
-from libcoveweb2.views import (
-    ExploreDataView,
-    InputDataView
-)
 from libcoveweb2.models import SuppliedDataFile
-from cove_bods.forms import NewTextForm, NewUploadForm, NewURLForm
+from libcoveweb2.views import ExploreDataView, InputDataView
 
+from cove_bods.forms import NewTextForm, NewUploadForm, NewURLForm
+from cove_project import settings
 
 logger = logging.getLogger(__name__)
 
 
 JSON_FORM_CLASSES = {
-        "upload_form": NewUploadForm,
-        "text_form": NewTextForm,
-        "url_form": NewURLForm,
-    }
+    "upload_form": NewUploadForm,
+    "text_form": NewTextForm,
+    "url_form": NewURLForm,
+}
 
 
 class NewInput(InputDataView):
     form_classes = JSON_FORM_CLASSES
     input_template = "cove_bods/index.html"
-    allowed_content_types = settings.ALLOWED_JSON_CONTENT_TYPES + settings.ALLOWED_SPREADSHEET_CONTENT_TYPES
+    allowed_content_types = (
+        settings.ALLOWED_JSON_CONTENT_TYPES + settings.ALLOWED_SPREADSHEET_CONTENT_TYPES
+    )
     content_type_incorrect_message = "This does not appear to be a supported file."
-    allowed_file_extensions = settings.ALLOWED_JSON_EXTENSIONS + settings.ALLOWED_SPREADSHEET_EXTENSIONS
+    allowed_file_extensions = (
+        settings.ALLOWED_JSON_EXTENSIONS + settings.ALLOWED_SPREADSHEET_EXTENSIONS
+    )
     file_extension_incorrect_message = "This does not appear to be a supported file."
     supplied_data_format = "unknown"
 
@@ -47,10 +48,7 @@ class NewInput(InputDataView):
             supplied_data.save_file(request.FILES["file_upload"])
         elif form_name == "text_form":
             supplied_data.save_file_contents(
-                "input.json",
-                form.cleaned_data["paste"],
-                "application/json",
-                None
+                "input.json", form.cleaned_data["paste"], "application/json", None
             )
         elif form_name == "url_form":
             supplied_data.save_file_from_source_url(

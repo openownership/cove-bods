@@ -1,9 +1,11 @@
 dealer
 sentry-sdk
-Django>3.2,<3.3
+Django>5.0,<5.1
 jsonschema
-libcovebods>=0.15.0
-libcoveweb2>=0.1.0
+libcovebods>=0.16.0
+libcoveweb2>=0.4.0
 gunicorn
 django-bootstrap3
-flattentool
+flattentool>=0.27.0
+pandas
+urllib3<2 # selenium (requirements_dev.in) does not support v2 

@@ -13,10 +13,10 @@
         {% if additional_check.type == 'entity_identifier_scheme_not_known' %}
             <tr>
                 <td>
-                    {% trans 'The statement has an identifier scheme which is not valid.'  %}
+                    {% blocktrans %}<code>scheme</code> is not valid. Check the BODS documentation for guidance on identifiers. {% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Invalid Scheme' %}: {{ additional_check.scheme }}
+                    <code>scheme</code>: <q>{{ additional_check.scheme }}</q>
                 </td>
                 <td>
                     {{ additional_check.entity_statement }}
@@ -25,10 +25,10 @@
         {% elif additional_check.type == 'entity_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% trans 'This statement references an entity but that entity is defined after this statement.' %}
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Entity that is out of order' %}: {{ additional_check.entity_statement_out_of_order }}
+                    <code>{% trans 'Entity statement' %}</code>: {{ additional_check.entity_statement_out_of_order }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -37,10 +37,10 @@
         {% elif additional_check.type == 'person_statement_out_of_order' %}
             <tr>
                 <td>
-                    {% trans 'This statement references a person but that person is defined after this statement.' %}
+                    {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Entity that is out of order' %}: {{ additional_check.person_statement_out_of_order }}
+                    <code>{% trans 'Person statement' %}</code>: {{ additional_check.person_statement_out_of_order }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -49,7 +49,7 @@
         {% elif additional_check.type == 'entity_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is not used in any ownership or control statements.' %}
+                    {% blocktrans %}<code>Entity statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -60,7 +60,7 @@
         {% elif additional_check.type == 'person_statement_not_used_in_ownership_or_control_statement' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is not used in any ownership or control statements.' %}
+                    {% blocktrans %}<code>Person statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -71,10 +71,10 @@
         {% elif additional_check.type == 'entity_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% blocktrans %}<code>Entity statement</code> is missing. Check whether an Entity statement is incorrectly referenced from <code>interestedParty</code> or <code>subject</code>, or whether an Entity statement is missing.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Entity that is missing' %}: {{ additional_check.entity_statement_missing }}
+                    <code>{% trans 'Entity statement' %}</code>: {{ additional_check.entity_statement_missing }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -83,10 +83,10 @@
         {% elif additional_check.type == 'person_statement_missing' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is referenced from an ownership or control statement, but it is missing.' %}
+                    {% blocktrans %}<code>Person statement</code> is missing. Check whether a Person statement is incorrectly referenced from <code>interestedParty</code>, or whether a Person statement is missing.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Person that is missing' %}: {{ additional_check.person_statement_missing }}
+                    <code>{% trans 'Person statement' %}</code>: {{ additional_check.person_statement_missing }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -95,10 +95,10 @@
         {% elif additional_check.type == 'duplicate_statement_id' %}
             <tr>
                 <td>
-                    {% trans 'This statement ID has been used more than once.' %}
+                    {% blocktrans %}<code>statementId</code> value used in multiple statements. Different statements should not have the same <code>statementId</code> value.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Statement ID' %}: {{ additional_check.id }}
+                    <code>statementId</code>: {{ additional_check.id }}
                 </td>
                 <td>
                     &nbsp;
@@ -107,10 +107,10 @@
         {% elif additional_check.type == 'person_birth_year_too_early' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has a birthday that is to early.' %}
+                    {% blocktrans %}<code>birthDate</code> value is invalid. The year is too far in the past. Check that the date is correct and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Year' %}: {{ additional_check.year }}
+                    <code>birthDate</code> {% trans 'year' %}: {{ additional_check.year }}
                 </td>
                 <td>
                     {{ additional_check.person_statement }}
@@ -119,10 +119,10 @@
         {% elif additional_check.type == 'person_birth_year_too_late' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has a birthday that is to late.' %}
+                    {% blocktrans %}<code>birthDate</code> value is invalid. The date is in the future. Check that the date is correct and well formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Year' %}: {{ additional_check.year }}
+                    <code>birthDate</code> {% trans 'year' %}: {{ additional_check.year }}
                 </td>
                 <td>
                     {{ additional_check.person_statement }}
@@ -131,10 +131,10 @@
         {% elif additional_check.type == 'wrong_address_type_used' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement has an address type that is not allowed in entity statements.' %}
+                    {% blocktrans %}<code>type</code> of address is invalid in an Entity statement. Check that the address type is correct.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Type' %}: {{ additional_check.address_type }}
+                    <code>type</code>: {{ additional_check.address_type }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -143,10 +143,10 @@
         {% elif additional_check.type == 'wrong_address_type_used' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has an address type that is not allowed in person statements.' %}
+                    {% blocktrans %}<code>type</code> of address is invalid in a Person statement. Check that the address type is correct.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Type' %}: {{ additional_check.address_type }}
+                    <code>type</code>: {{ additional_check.address_type }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -155,7 +155,7 @@
         {% elif additional_check.type == 'alternative_address_with_no_other_address_types' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement has an alternate address but no other addresses.' %}
+                    {% blocktrans %}<code>type</code> of address is 'alternative' when no other addresses are published. Check that the address type is correct.{% endblocktrans %}
                 </td>
                 <td>
 
@@ -167,7 +167,7 @@
         {% elif additional_check.type == 'alternative_address_with_no_other_address_types' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement has an alternate address but no other addresses.' %}
+                    {% blocktrans %}<code>type</code> of address is 'alternative' when no other addresses are published. Check that the address type is correct.{% endblocktrans %}
                 </td>
                 <td>
 
@@ -179,10 +179,10 @@
         {% elif additional_check.type == 'component_statement_id_not_in_package' %}
             <tr>
                 <td>
-                    {% trans 'This Ownership-or-control Statement has a component statement that is not in this package.' %}
+                    {% blocktrans %}<code>componentStatementIDs</code> contains a <code>statementID</code> not included in this dataset. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Component Statement ID' %}: {{ additional_check.component_statement_id }}
+                    <code>statementID</code>: {{ additional_check.component_statement_id }}
                 </td>
                 <td>
                     {{ additional_check.seen_in_ownership_or_control_statement }}
@@ -191,7 +191,7 @@
         {% elif additional_check.type == 'ownership_or_control_statement_has_is_compontent_and_component_statement_ids' %}
             <tr>
                 <td>
-                    {% trans 'An Ownership-or-control Statement cannot both be a component statement (isComponent) and have component statements (componentStatementIDs).' %}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value ('true') incompatible with having its own components in <code>componentStatementIDs</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -202,7 +202,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'person'  %}
             <tr>
                 <td>
-                    {% trans 'This Person Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Person statement</code> has an <code>isComponent</code> value of 'true' but does not appear in any <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -213,7 +213,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'entity'  %}
             <tr>
                 <td>
-                    {% trans 'This Entity Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Entity statement</code> has an <code>isComponent</code> value of 'true' but does not appear in any <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -224,7 +224,7 @@
         {% elif additional_check.type == 'statement_is_component_but_not_used_in_component_statement_ids' and additional_check.statement_type == 'ownership_or_control'  %}
             <tr>
                 <td>
-                    {% trans 'This Ownership-or-control Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value of 'true' but does not appear in any <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -235,7 +235,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'person'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Person statement</code> not in the correct position. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -246,7 +246,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'entity'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Entity statement</code> not in the correct position. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -257,7 +257,7 @@
         {% elif additional_check.type == 'statement_is_component_but_is_after_use_in_component_statement_id' and additional_check.statement_type == 'ownership_or_control'  %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).{%endblocktrans%}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -268,10 +268,10 @@
      {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'person' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
-                    {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
+                    <code>bodsVersion</code>: {{ additional_check.schema_version }}
                 </td>
                 <td>
                     {{ additional_check.statement }}
@@ -280,7 +280,7 @@
         {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'entity' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
                     {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
@@ -292,7 +292,7 @@
         {% elif additional_check.type == 'inconsistent_schema_version_used' and additional_check.statement_type == 'ownership_or_control' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement and the first statement of the submitted data reference different BODS versions.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> is different than that in the first statement of the dataset. Check that the schema versions are compatible.{% endblocktrans %}
                 </td>
                 <td>
                     {% trans 'Schema Version Used' %}: {{ additional_check.schema_version }}
@@ -304,10 +304,10 @@
         {% elif additional_check.type == 'unknown_schema_version_used' %}
             <tr>
                 <td>
-                    {% blocktrans %}This data attempted to use a schema version that was not recognised.{%endblocktrans%}
+                    {% blocktrans %}<code>bodsVersion</code> not valid. Check that the value is correctly formatted.{% endblocktrans %}
                 </td>
                 <td>
-                    {{ additional_check.schema_version }}
+                    <code>bodsVersion</code>: {{ additional_check.schema_version }}
                 </td>
                 <td>
                 </td>
@@ -315,7 +315,7 @@
         {% elif additional_check.type == 'statement_is_beneficialOwnershipOrControl_but_no_person_specified' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Ownership-or-control Statement contains interests where beneficialOwnershipOrControl is true. Therefore interestedParty must reference a Person Statement.{%endblocktrans%}
+                    {% blocktrans %}<code>Ownership-or-control statement</code> asserts <code>beneficialOwnershipOrControl</code> is 'true' but <code>interestedParty</code> does not reference a Person statement. Check that information is correctly represented.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -326,7 +326,7 @@
         {% elif additional_check.type == 'statement_entity_type_and_entity_sub_type_do_not_align' %}
             <tr>
                 <td>
-                    {% blocktrans %}The specified entitySubtype is not valid for the specified entityType.{%endblocktrans%}
+                    {% blocktrans %}<code>entitySubtype</code> is not valid for the specified <code>entityType</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -337,7 +337,7 @@
         {% elif additional_check.type == 'has_public_listing_information_but_has_public_listing_is_false' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement hasPublicListing that does not exist or is false. Information has been provided under companyFilingsURLs or securitiesListings so hasPublicListing must be true.{%endblocktrans%}
+                    {% blocktrans %}<code>hasPublicListing</code> has incorrect value. Value of <code>companyFilingsURLs</code> or <code>securitiesListings</code> suggests <code>hasPublicListing</code> must be 'true'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -348,7 +348,7 @@
         {% elif additional_check.type == 'entity_security_listing_market_identifier_code_set_but_not_operating_market_identifier_code' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement has a security listing where marketIdentifierCode is set but operatingMarketIdentifierCode is not set.{%endblocktrans%}
+                    {% blocktrans %}<code>operatingMarketIdentifierCode</code> should be set alongside <code>marketIdentifierCode</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -359,7 +359,7 @@
         {% elif additional_check.type == 'entity_security_listing_operating_market_identifier_code_set_but_not_market_identifier_code' %}
             <tr>
                 <td>
-                    {% blocktrans %}This Entity Statement has a security listing where operatingMarketIdentifierCode is set but marketIdentifierCode is not set.{%endblocktrans%}
+                    {% blocktrans %}<code>marketIdentifierCode</code> should be set alongside <code>operatingMarketIdentifierCode</code>.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -371,7 +371,7 @@
             {# Currently this applies to 0.2 only #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement has some PEP details without missing info but their PEP status has not been declared as True.{%endblocktrans%}
+                    {% blocktrans %}<code>hasPepStatus</code> has incorrect value. <code>pepStatusDetails</code> are substantive, suggesting that <code>hasPepStatus</code> should be 'true'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -383,7 +383,7 @@
             {# Currently this applies to 0.3+ only #}
             <tr>
                 <td>
-                    {% blocktrans %}This Person Statement has some PEP details but their PEP status is missing or has been declared as 'isNotPep'.{%endblocktrans%}
+                    {% blocktrans %}<code>politicalExposure.status</code> has incorrect value. <code>politicalExposure.details</code> are substantive, suggesting that <code>politicalExposure.status</code> should be 'isPep'.{% endblocktrans %}
                 </td>
                 <td>
                 </td>
@@ -396,9 +396,9 @@
             <tr>
                 <td>
                     {% if schema_version_used == '0.2' %}
-                        {% blocktrans %}This Person Statement has some PEP details with missing info but their status has been declared as True.{%endblocktrans%}
+                        {% blocktrans %}<code>hasPepStatus</code> has incorrect value. <code>pepStatusDetails</code> contains <code>missingInfoReason</code>, suggesting that <code>hasPepStatus</code> should have no value.{% endblocktrans %}
                     {% else %}
-                        {% blocktrans %}This Person Statement has a missingInfoReason for PEP status details, so PEP status should be declared as 'unknown'.{%endblocktrans%}
+                        {% blocktrans %}<code>politicalExposure.status</code> has incorrect value. <code>politicalExposure.details</code> contains <code>missingInfoReason</code>, suggesting that <code>status</code> should be 'unknown'.{% endblocktrans %}
                     {% endif %}
                 </td>
                 <td>
@@ -407,78 +407,634 @@
                     {{ additional_check.statement }}
                 </td>
             </tr>
+        {% elif additional_check.type == "statement_annotation_creation_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>creationDate</code> of an annotation is in the future. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>creationDate</code>: {{ additional_check.creation_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_publication_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>publicationDate</code> is in the future. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>publicationDate</code>: {{ additional_check.publication_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_entity_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>Entity statement</code> has an <code>isComponent</code> value of 'true' but does not appear in the <code>componentRecords</code> list of a later Relationship statement in the dataset. Check that component records are correctly listed and that statements are in the correct order.{% endblocktrans %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>Person statement</code> has an <code>isComponent</code> value of 'true' but appears in the <code>componentRecords</code> list of no later Relationship statement in the dataset. Check that component records are correctly listed and that statements are in the correct order.{% endblocktrans %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_is_component_not_in_component_details" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>Relationship statement</code> has an <code>isComponent</code> value of 'true' but does not appear in the <code>componentRecords</code> list of a later Relationship statement in the dataset. Check that component records are correctly listed and that statements are in the correct order.{% endblocktrans %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_source_retrieved_at_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>retrievedAt</code> is in the future. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>retrievedAt</code>: {{ additional_check.retrieval_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_date_is_future_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>statementDate</code> is in the future. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>statementDate</code>: {{ additional_check.statement_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_birth_date_in_future" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>birthDate</code> is in the future. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>birthDate</code>: {{ additional_check.birth_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_birth_date_too_far_in_past" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>birthDate</code> is before 1800. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>birthDate</code>: {{ additional_check.birth_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_entity_dissolution_before_founding_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>foundingDate</code> is later than <code>dissolutionDate</code>. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>foundingDate</code>: {{ additional_check.founding_date }} <br>
+                    <code>dissolutionDate</code>: {{ additional_check.dissolution_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_person_death_date_not_sensible_value" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>deathDate</code> is incorrect. Check that the date is not before the <code>birthDate</code>,in the future or more than 120 years after birth date.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>deathDate</code>: {{ additional_check.death_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_start_after_end_date" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>startDate</code> is later than <code>endDate</code> in an Interest. Check that dates are correctly generated and well formatted.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>startDate</code>: {{ additional_check.start_date }} <br>
+                    <code>endDate</code>: {{ additional_check.end_date }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_entity_securities_listings_haspubliclisting_is_false" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>hasPublicListing</code> has incorrect value. Value of <code>securitiesListings</code> suggests <code>hasPublicListing</code> must be 'true'.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>securitiesListings</code>: {{ additional_check.securities_listings }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_exact_has_min_max" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>share.exact</code> is provided, alongside a range (minimum and maximum values). Provide either an exact value, or a range.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>share.exact</code>: <q>{{ additional_check.share_exact }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_not_exact_max_greater_than_min" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>share</code> is an invalid range. The maximum value is less than the minimum value.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>share</code> {% trans '(exclusive) minimum' %}: <q>{{ additional_check.minval }}</q> <br>
+                    <code>share</code> {% trans '(exclusive) maximum' %}: <q>{{ additional_check.maxval }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_exact_max_equals_min" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>share</code> is an invalid range. The maximum value is the same as the minimum value.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>share</code> {% trans '(exclusive) minimum' %}: <q>{{ additional_check.minval }}</q> <br>
+                    <code>share</code> {% trans '(exclusive) maximum' %}: <q>{{ additional_check.maxval }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_share_min_and_exclusivemin" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>share</code> is an invalid range. Only one of <code>minimum</code> and <code>exclusiveMinimum</code> must be provided.{% endblocktrans %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_relationship_interests_share_max_and_exclusivemax" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>share</code> is an invalid range. Only one of <code>maximum</code> and <code>exclusiveMaximum</code> must be provided.{% endblocktrans %}
+                </td>
+                <td>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "statement_declaration_subject_not_exist" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>declarationSubject</code> does not appear in the dataset. Check that the dataset is complete, or that this is expected.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>declarationSubject</code>: {{ additional_check.declaration_subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type ==  "statement_declaration_subject_not_entity_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>declarationSubject</code> must reference an entity or person. Check that <code>recordId</code> values are being correctly generated and used.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>declarationSubject</code>: {{ additional_check.record_id }} <br>
+                    <code>recordType</code> of {{ additional_check.record_id }}: {{ additional_check.record_type }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "multiple_statements_in_series_with_record_status_new" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>recordStatus</code> reported as 'new' in multiple Statements for a single Record. Check that <code>recordStatus</code> is ‘new’ only the first time a Statement is published for the record.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>recordId</code>: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statement_with_record_status_new_must_be_first" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>statementDate</code> is too early. The <code>recordStatus</code> is 'updated' or 'closed' but <code>statementDate</code> is earlier than that of the corresponding 'new' Statement.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>recordId</code>: {{ additional_check.record_id }} <br>
+                    <code>statementId</code>: {{ additional_check.statement_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "multiple_statements_in_series_with_record_status_closed" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>recordStatus</code> reported as 'closed' in multiple Statements for a single Record. Check that <code>recordStatus</code> is 'closed' only the final time a Statement is published for a record.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>recordId</code>: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statement_with_record_status_closed_must_be_last" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>statementDate</code> is too late. <code>recordStatus</code> is 'new' or 'updated' but <code>statementDate</code> is later than that of the corresponding 'closed' Statement.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>recordId</code>:: {{ additional_check.record_id }} <br>
+                    <code>statementId</code>:: {{ additional_check.statement_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "statements_in_series_with_different_record_types" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>recordType</code> varies across Statements for the same record. Check that Statements relating to the same record all have the same type.{%endblocktrans%}
+                </td>
+                <td>
+                    <code>recordId</code>: {{ additional_check.record_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "component_record_is_statement_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>componentRecords</code> contains a statement ID value. <code>componentRecords</code> entries must be record IDs.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>componentRecords</code>: {{ additional_check.component_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "component_record_id_not_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>componentRecords</code> contains a <code>recordId</code> not included in this dataset. Check that this is expected.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>componentRecords</code>: {{ additional_check.component_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "subject_must_be_record_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>subject</code> has unexpected value. <code>subject</code> must be either a record ID for a Statement in the dataset or an Unspecified Record object.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>subject</code>: {{ additional_check.subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+         {% elif additional_check.type == "subject_can_only_refer_to_entity" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>subject</code> must be the <code>recordId</code> of an entity (not a person or relationship). Check that <code>recordId</code> values are being correctly generated and used.{% endblocktrans %}
+               </td>
+                <td>
+                    <code>subject</code>: {{ additional_check.subject }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interested_party_must_be_record_id" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>interestedParty</code> not recognised. Check that the value matches a <code>recordId</code> in the dataset or is an Unspecified Record object.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interested_party_can_only_refer_to_entity_or_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>interestedParty</code> is invalid. The value should be a <code>recordId</code> for a person or an entity in the dataset (not a relationship).{% endblocktrans %}
+                </td>
+                <td>
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "interest_beneficial_ownership_interested_party_not_person" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>beneficialOwnershipOrControl</code> is 'true' but <code>interestedParty</code> is not a person. Check that the interested party is correct and that <code>beneficialOwnershipOrControl</code> is used correctly.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>interestedParty</code>: {{ additional_check.interested_party }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "annotation_statement_pointer_target_invalid"  %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>statementPointerTarget</code> is invalid. Check that it is a valid JSON pointer and that it points to an existing field in the Statement.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>statementPointerTarget</code>: {{ additional_check.pointer }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interests_subject_should_be_entity_nomination_arrangement" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>subject</code> has unexpected type. Interests in this Relationship statement suggest that the subject's <code>entityType.subtype</code> should be 'nomination'.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>entityType.subtype</code>: {{ additional_check.subject_record_subtype }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interests_subject_should_be_entity_trust" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>subject</code> has unexpected type. Interests in this Relationship statement suggest that the subject's <code>entityType.subtype</code> should be 'trust'.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>entityType.subtype</code>: {{ additional_check.subject_record_subtype }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_subject_not_before_relationship_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>subject</code> not found. The subject must match the <code>recordId</code> of at least one prior Statement in the dataset. Check that Statements are ordered correctly.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>subject</code>: {{ additional_check.subject_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "relationship_interested_party_not_before_relationship_in_dataset" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>interestedParty</code> not found. The interested party must match the <code>recordId</code> of at least one prior Statement in the dataset. Check that Statements are ordered correctly.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>interestedParty</code>: {{ additional_check.interested_party_id }}
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "person_identifiers_invalid_composition" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>scheme</code> has incorrect formatting. Check the field description for guidance.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>scheme</code>: <q>{{ additional_check.scheme }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type ==  "person_identifiers_no_valid_iso_3166_1_alpha_3_code" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>scheme</code> contains an unrecognised jurisdiction. An ISO 3166-1 3-digit country code is expected. Check the field description for guidance.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>scheme</code>: <q>{{ additional_check.scheme }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "person_identifiers_not_passport_taxid_idcard" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>scheme</code> has unrecognised type. 'PASSPORT', 'TAXID' or 'IDCARD' is expected. Check the field description for guidance.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>scheme</code>: <q>{{ additional_check.scheme }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+        {% elif additional_check.type == "entity_identifiers_not_known_scheme" %}
+            {# Currently this applies to 0.4+ #}
+            <tr>
+                <td>
+                    {% blocktrans %}<code>scheme</code> is unrecognised. A code from org-id.guide is expected. Check the field description for guidance.{% endblocktrans %}
+                </td>
+                <td>
+                    <code>scheme</code>: <q>{{ additional_check.scheme }}</q>
+                </td>
+                <td>
+                    {{ additional_check.statement }}
+                </td>
+            </tr>
+
         {% endif %}
     {% endfor %}
     {% if not statistics.count_ownership_or_control_statement_with_at_least_one_interest_beneficial %}
         <tr>
             <td>
-                {% blocktrans %}No individuals are disclosed as beneficial owners. beneficialOwnershipOrControl must be set to true within an Interest object to indicate that the interested party is a beneficial owner.{%endblocktrans%}
+                {% blocktrans %}<code>beneficialOwnershipOrControl</code> expected to be 'true' in at least one Relationship statement with a person as an interested party. If this dataset contains beneficial owners, check that <code>beneficialOwnershipOrControl</code> is correctly used.{% endblocktrans %}
             </td>
             <td>
             </td>
             <td>
-                {% blocktrans %}All Ownership-or-control statements{%endblocktrans%}
+                {% blocktrans %}All Relationship statements.{% endblocktrans %}
             </td>
         </tr>
     {% endif %}
     {% for check_not_run_in_sample_mode in checks_not_run_in_sample_mode %}
         {% if  check_not_run_in_sample_mode == "entity_statement_missing" %}
             <tr>
-                <td>{% trans 'This Entity Statement is referenced from an ownership or control statement, but it is missing.' %}</td>
+                <td>
+                        {% blocktrans %}<code>Entity statement</code> is missing. Check whether an Entity statement is incorrectly referenced from <code>interestedParty</code> or <code>subject</code>, or whether an Entity statement is missing.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_out_of_order" %}
             <tr>
-                <td>{% trans 'This statement references a person but that person is defined after this statement.' %}</td>
+                <td>
+                        {% blocktrans %}<code>Person statement</code> not in correct order. Check that the Person statement is placed in the array before any statement referencing it.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "statement_is_component_but_is_after_use_in_component_statement_id" %}
             <tr>
-                <td>{% trans 'This Statement is a component (isComponent) and should appear <strong>before</strong> the primary Ownership-or-control Statement that references it (from componentStatementIDs).' %}</td>
+                <td>
+                        {% blocktrans %}<code>Ownership-or-control statement</code> not in correct order. As a component (<code>isComponent</code> 'true'), it must appear <strong>before</strong> the primary Ownership-or-control statement that references it (from <code>componentStatementIDs</code></).{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "statement_is_component_but_not_used_in_component_statement_ids" %}
             <tr>
-                <td>{% trans 'This Statement is a component (isComponent) but no primary Ownership-or-control Statement references it (from componentStatementIDs)' %}</td>
+                <td>
+                    {% blocktrans %}<code>Ownership-or-control statement</code> has an <code>isComponent</code> value of 'true' but appears in no <code>componentStatementIDs</code> list. Check that this is expected.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_missing" %}
             <tr>
-                <td>{% trans 'This Person Statement is referenced from an ownership or control statement, but it is missing.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Person statement</code> is missing. Check whether a Person statement is incorrectly referenced from <code>interestedParty</code>, or whether a Person statement is missing.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "person_statement_not_used_in_ownership_or_control_statement" %}
             <tr>
-                <td>{% trans 'This Person Statement is not used in any ownership or control statements.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Person statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "entity_statement_not_used_in_ownership_or_control_statement" %}
             <tr>
-                <td>{% trans 'This Entity Statement is not used in any ownership or control statements.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Entity statement</code> is not referenced from any Relationship statements. Check whether it should be the <code>subject</code> or <code>interestedParty</code> of a relationship.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "duplicate_statement_id" %}
             <tr>
-                <td>{% trans 'This statement ID has been used more than once.' %}</td>
+                <td>
+                    {% blocktrans %}<code>statementId</code> value used in multiple statements. Different statements should not have the same <code>statementId</code> value.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "entity_statement_out_of_order" %}
             <tr>
-                <td>{% trans 'This statement references an entity but that entity is defined after this statement.' %}</td>
+                <td>
+                    {% blocktrans %}<code>Entity statement</code> not in correct order. Check that the Entity statement is placed in the array before any statement referencing it.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
         {% elif check_not_run_in_sample_mode == "component_statement_id_not_in_package" %}
             <tr>
-                <td>{% trans 'This Ownership-or-control Statement has a component statement that is not in this package.' %}</td>
+                <td>
+                    {% blocktrans %}<code>componentStatementIDs</code> contains a <code>statementID</code> not included in this dataset. Check that this is expected.{% endblocktrans %}
+                </td>
                 <td>This check is not carried out in Sample mode.</td>
                 <td></td>
             </tr>
